@@ -1,3 +1,4 @@
+
 package OnBoard.example.OnBoard.Model;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -19,30 +20,27 @@ public class ApplicationUser implements UserDetails {
     private String username;
     private String firstName;
     private String lastName;
-    private String isBusiness;
     private String location;
     private String placeName;
     private String workingHour;
     private String authority;
 
-    public ApplicationUser(String password, String username, String firstName, String lastName, String isBusiness, String location, String placeName, String workingHour, String authority) {
+    public ApplicationUser(String password, String username, String firstName, String lastName, String location, String placeName, String workingHour, String authority) {
         this.password = password;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.isBusiness = isBusiness;
         this.location = location;
         this.placeName = placeName;
         this.workingHour = workingHour;
         this.authority = authority;
     }
 
-    public ApplicationUser(String password, String username, String firstName, String lastName, String isBusiness, String authority) {
+    public ApplicationUser(String password, String username, String firstName, String lastName, String authority) {
         this.password = password;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.isBusiness = isBusiness;
         this.authority = authority;
     }
 
@@ -80,14 +78,6 @@ public class ApplicationUser implements UserDetails {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String isBusiness() {
-        return isBusiness;
-    }
-
-    public void setBusiness(String business) {
-        isBusiness = business;
     }
 
     public String getLocation() {

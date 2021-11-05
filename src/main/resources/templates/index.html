@@ -13,12 +13,13 @@
             <a class="navbar-brand" href="/">Home page</a>
         </div>
         <ul class="nav navbar-nav">
-            <li ><a href="#" >profile</a></li>
+            <li ><a th:if="${authUser}" th:href="${'/profile'}" >profile</a></li>
             <li ><a href="#" >All users</a></li>
             <li ><a href="#" >feed</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li sec:authorize="!isAuthenticated()"><a href="/signup" ><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li sec:authorize="!isAuthenticated()"><a href="/signup" ><span class="glyphicon glyphicon-user"></span> Sign Up Business</a></li>
+            <li sec:authorize="!isAuthenticated()"><a href="/signupNormal" ><span class="glyphicon glyphicon-user"></span> Sign Up Normal</a></li>
             <li sec:authorize="!isAuthenticated()"><a href="/login"  ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <li ><p  id="text"></li>
             <li sec:authorize="isAuthenticated()"><a href="/perform_logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
