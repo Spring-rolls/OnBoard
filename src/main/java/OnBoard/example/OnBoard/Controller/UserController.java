@@ -33,6 +33,7 @@ public class UserController {
             ApplicationUser authUser = appUserRepository.findByUsername(p.getName());
             m.addAttribute("authUser", authUser);
         }
+        m.addAttribute("userList",appUserRepository.findAll());
         return "index";
     }
 
@@ -45,8 +46,6 @@ public class UserController {
     public String getSignUpPage() {
         return "signup";
     }
-
-
 
 
     @GetMapping("/signupNormal")
@@ -66,7 +65,7 @@ public class UserController {
          * we have to create if condition if the condition isBusiness we implement the full constructor else we implement
          * the other constructor that will be without the business.
          */
-        ApplicationUser applicationUser = new ApplicationUser(encoder.encode(password), username, firstName, lastName, location, placeName, workingHour, "ROLE_USER");
+        ApplicationUser applicationUser = new ApplicationUser(encoder.encode(password), username, firstName, lastName, location, placeName, workingHour, "ROLE_USER","business");
         appUserRepository.save(applicationUser);
         Authentication authentication = new UsernamePasswordAuthenticationToken(applicationUser, null, applicationUser.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -81,13 +80,12 @@ public class UserController {
          * we have to create if condition if the condition isBusiness we implement the full constructor else we implement
          * the other constructor that will be without the business.
          */
-        ApplicationUser applicationUser = new ApplicationUser(encoder.encode(password), username, firstName, lastName, "ROLE_USER");
+        ApplicationUser applicationUser = new ApplicationUser(encoder.encode(password), username, firstName, lastName, "ROLE_USER","normal");
         appUserRepository.save(applicationUser);
         Authentication authentication = new UsernamePasswordAuthenticationToken(applicationUser, null, applicationUser.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new RedirectView("/");
     }
-
 
     @GetMapping("/profile")
     public String profilePage(Model model,Principal principal){

@@ -14,6 +14,7 @@
         </div>
         <ul class="nav navbar-nav">
             <li ><a th:if="${authUser}" th:href="${'/profile'}" >profile</a></li>
+            <li ><a th:if="${authUser}" th:href="${'/event'}" >Create event</a></li>
             <li ><a href="#" >All users</a></li>
             <li ><a href="#" >feed</a></li>
         </ul>
@@ -26,5 +27,16 @@
         </ul>
     </div>
 </nav>
+<main>
+    <div th:if="${userList}" th:each="user:${userList}">
+        <p th:text="${user.getFirstName()} +${user.getLastName()}"></p>
+        <div th:each="event:${user.getEvents()}">
+            <p th:text="'gameName '+${event.getGameName()}"></p>
+            <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>
+            <p th:text="'DateTime '+${event.getDateTime()}"></p>
+            <p th:text="'Place '+${event.getPlace()}"></p>
+        </div>
+    </div>
+</main>
 </body>
 </html>

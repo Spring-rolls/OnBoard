@@ -5,11 +5,20 @@
     <title>Title</title>
 </head>
 <body>
-<p th:text="${authUser.getFirstName()}"> </p>
-<p th:text="${authUser.getLastName()}"> </p>
-<p th:if="${authUser.getLocation()}" th:text="${authUser.getLocation()}"> </p>
-<p th:if="${authUser.getPlaceName()}" th:text="${authUser.getPlaceName()}"> </p>
-<p th:if="${authUser.getWorkingHour()}" th:text="${authUser.getWorkingHour()}"> </p>
 
+<p th:text="' firstName: ' +${authUser.getFirstName()} +' '+${authUser.getLastName()}"> </p>
+<p th:text="' type: ' + ${authUser.getUserType()}"> </p>
+<p th:if="${authUser.getUserType() == 'business'}" th:text="${authUser.getLocation()}"> </p>
+<p th:if="${authUser.getUserType() == 'business'}" th:text="${authUser.getPlaceName()}"> </p>
+<p th:if="${authUser.getUserType() == 'business'}" th:text="${authUser.getWorkingHour()}"> </p>
+
+<main>
+        <div th:each="event:${authUser.getEvents()}">
+            <p th:text="'gameName '+${event.getGameName()}"></p>
+            <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>
+            <p th:text="'DateTime '+${event.getDateTime()}"></p>
+            <p th:text="'Place '+${event.getPlace()}"></p>
+        </div>
+</main>
 </body>
 </html>
