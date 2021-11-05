@@ -24,8 +24,15 @@ public class ApplicationUser implements UserDetails {
     private String placeName;
     private String workingHour;
     private String authority;
+    private String userType;
+    @ManyToMany
+    @JoinTable(
+            name = "user_event",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id"))
+    List<Event> events;
 
-    public ApplicationUser(String password, String username, String firstName, String lastName, String location, String placeName, String workingHour, String authority) {
+    public ApplicationUser(String password, String username, String firstName, String lastName, String location, String placeName, String workingHour, String authority,String userType) {
         this.password = password;
         this.username = username;
         this.firstName = firstName;
@@ -34,18 +41,36 @@ public class ApplicationUser implements UserDetails {
         this.placeName = placeName;
         this.workingHour = workingHour;
         this.authority = authority;
+        this.userType = userType;
     }
 
-    public ApplicationUser(String password, String username, String firstName, String lastName, String authority) {
+    public ApplicationUser(String password, String username, String firstName, String lastName, String authority,String userType) {
         this.password = password;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.authority = authority;
+        this.userType = userType;
     }
 
     public ApplicationUser() {
 
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public void setPassword(String password) {
