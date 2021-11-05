@@ -11,12 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig   extends WebSecurityConfigurerAdapter {
-
 
     @Autowired
     UserDetailsService userDetailsService;
@@ -37,7 +34,7 @@ public class WebSecurityConfig   extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login*").permitAll()
                 .antMatchers("/signup*").permitAll()
-                .antMatchers("/index*").permitAll()
+//                .antMatchers("/index*").permitAll()
                 .antMatchers("/style.css").permitAll()
                 .antMatchers("/styles/style.css").permitAll()
                 .antMatchers("/styles/login.css").permitAll()
