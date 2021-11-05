@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p th:text="${authUser.getFirstName()}"> </p>
+<p th:text="${authUser.getLastName()}"> </p>
+<p th:if="${authUser.getLocation()}" th:text="${authUser.getLocation()}"> </p>
+<p th:if="${authUser.getPlaceName()}" th:text="${authUser.getPlaceName()}"> </p>
+<p th:if="${authUser.getWorkingHour()}" th:text="${authUser.getWorkingHour()}"> </p>
+
+</body>
+</html>
