@@ -35,12 +35,13 @@
 
 <main>
     <h1>Host events</h1>
-    <div th:if="${authUser.getUserType() == 'noraml'}">
+    <div th:if="${authUser.getUserType() == 'normal'}">
         <div th:each="event:${authUser.getEventList()}">
             <p th:text="'gameName '+${event.getGameName()}"></p>
             <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>
             <p th:text="'DateTime '+${event.getDateTime()}"></p>
             <p th:text="'Place '+${event.getPlace()}"></p>
+            <a href="#" class="btn btn-danger" th:href="@{/deleted/{id}(id=${event.getId()})}">delete</a>
         </div>
     </div>
     <div th:if="${authUser.getUserType() == 'business'}">
@@ -49,20 +50,10 @@
             <p th:text="'Description '+${event.getDescription()}"></p>
             <p th:text="'DateTime '+${event.getDateTime()}"></p>
             <p th:text="'Place '+${event.getPlace()}"></p>
+            <a href="#" class="btn btn-danger" th:href="@{/deleted/{id}(id=${event.getId()})}">delete</a>
         </div>
     </div>
-    <h1>join event</h1>
-<!--    <div th:each="event:${authUser.getEvents()}">-->
-<!--        <p th:text="'gameName '+${event.getGameName()}"></p>-->
-<!--        <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>-->
-<!--        <p th:text="'DateTime '+${event.getDateTime()}"></p>-->
-<!--        <p th:text="'Place '+${event.getPlace()}"></p>-->
-<!--        <div th:if="${authUser}">-->
-<!--            <div th:if="!${event.getApplicationUser() == authUser}">-->
-<!--                <a th:if="${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/unjoins/{id}(id=${event.getId()})}">unjoin</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+    <h1 th:if="${authUser.getUserType() == 'normal'}">join event</h1>
     <div th:each="event:${authUser.getEvents()}">
         <div th:if="${event.getApplicationUser().getUserType() == 'normal'}">
             <p th:text="'Host Name ...!: '+${event.getApplicationUser().getFirstName()}"></p>

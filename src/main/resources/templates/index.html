@@ -39,6 +39,7 @@
                 <p th:text="${userJoin.getFirstName()}"></p>
             </div>
             <div th:if="${authUser}">
+                <a th:if="${event.getApplicationUser() == authUser}" href="#" class="btn btn-danger" th:href="@{/delete/{id}(id=${event.getId()})}">delete</a>
                 <div th:if="!${event.getApplicationUser() == authUser}">
                     <div th:if="!${authUser.getUserType() == 'business'}">
             <a  th:if="!${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/join/{id}(id=${event.getId()})}">join</a>
@@ -57,6 +58,7 @@
                     <p th:text="${userJoin.getFirstName()}"></p>
                 </div>
                 <div th:if="${authUser}">
+                    <a th:if="${event.getApplicationUser() == authUser}" href="#" class="btn btn-danger" th:href="@{/delete/{id}(id=${event.getId()})}">delete</a>
                     <div th:if="!${event.getApplicationUser() == authUser}">
                         <div th:if="!${authUser.getUserType() == 'business'}">
                         <a  th:if="!${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/join/{id}(id=${event.getId()})}">interested</a>
