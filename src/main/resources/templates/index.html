@@ -28,15 +28,44 @@
     </div>
 </nav>
 <main>
-    <div th:if="${userList}" th:each="user:${userList}">
-        <p th:text="${user.getFirstName()} +${user.getLastName()}"></p>
-        <div th:each="event:${user.getEvents()}">
+        <div th:each="event:${eventlist}">
+            <div th:if="${event.getApplicationUser().getUserType() == 'normal'}">
+            <p th:text="'Host Name ...!: '+${event.getApplicationUser().getFirstName()}"></p>
             <p th:text="'gameName '+${event.getGameName()}"></p>
             <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>
             <p th:text="'DateTime '+${event.getDateTime()}"></p>
             <p th:text="'Place '+${event.getPlace()}"></p>
+            <div th:each="userJoin:${event.getApplicationUserList()}">
+                <p th:text="${userJoin.getFirstName()}"></p>
+            </div>
+            <div th:if="${authUser}">
+                <div th:if="!${event.getApplicationUser() == authUser}">
+                    <div th:if="!${authUser.getUserType() == 'business'}">
+            <a  th:if="!${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/join/{id}(id=${event.getId()})}">join</a>
+            <a th:if="${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/unjoin/{id}(id=${event.getId()})}">unjoin</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div th:if="${event.getApplicationUser().getUserType() == 'business'}">
+                <p th:text="'Host Name ...!: '+${event.getApplicationUser().getFirstName()}"></p>
+                <p th:text="'gameName '+${event.getGameName()}"></p>
+                <p th:text="'Description '+${event.getDescription()}"></p>
+                <p th:text="'DateTime '+${event.getDateTime()}"></p>
+                <p th:text="'Place '+${event.getPlace()}"></p>
+                <div th:each="userJoin:${event.getApplicationUserList()}">
+                    <p th:text="${userJoin.getFirstName()}"></p>
+                </div>
+                <div th:if="${authUser}">
+                    <div th:if="!${event.getApplicationUser() == authUser}">
+                        <div th:if="!${authUser.getUserType() == 'business'}">
+                        <a  th:if="!${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/join/{id}(id=${event.getId()})}">interested</a>
+                        <a th:if="${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/unjoin/{id}(id=${event.getId()})}">uninterested</a>
+                        </div>
+                        </div>
+                </div>
+            </div>
         </div>
-    </div>
 </main>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,7 +7,27 @@
 </head>
 <body>
 <main>
-    <form th:if="${authUser.getUserType() == 'normal'}" action="/event" method="post">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Home page</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li ><a th:if="${authUser}" th:href="${'/profile'}" >profile</a></li>
+                <li ><a th:if="${authUser}" th:href="${'/event'}" >Create event</a></li>
+                <li ><a href="#" >All users</a></li>
+                <li ><a href="#" >feed</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li sec:authorize="!isAuthenticated()"><a href="/signup" ><span class="glyphicon glyphicon-user"></span> Sign Up Business</a></li>
+                <li sec:authorize="!isAuthenticated()"><a href="/signupNormal" ><span class="glyphicon glyphicon-user"></span> Sign Up Normal</a></li>
+                <li sec:authorize="!isAuthenticated()"><a href="/login"  ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li ><p  id="text"></li>
+                <li sec:authorize="isAuthenticated()"><a href="/perform_logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    <form th:if="${authUser.getUserType() == 'normal'}" action="/eventfornormal" method="post">
         <label for="gameName">gameName</label>
         <input type="text" class="form-control" name="gameName" id="gameName"></br>
 
@@ -23,12 +43,12 @@
         <input type="submit" class="btn btn-primary">
 
     </form>
-    <form th:if="${authUser.getUserType() == 'business'}" action="/event" method="post">
+    <form th:if="${authUser.getUserType() == 'business'}" action="/eventforbusiness" method="post">
         <label for="gameName">gameName</label>
         <input type="text" class="form-control" name="gameName" id="gameName"></br>
 
-        <label for="numberOfPlayer">numberOfPlayer</label>
-        <input type="number" class="form-control" name="numberOfPlayer" id="numberOfPlayer"></br>
+        <label for="description">description</label>
+        <input type="text" class="form-control" name="description" id="description"></br>
 
         <label for="dateTime">dateTime</label>
         <input type="datetime-local" class="form-control" name="dateTime" id="dateTime"></br>

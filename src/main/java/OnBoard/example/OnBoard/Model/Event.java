@@ -14,19 +14,52 @@ public class Event {
     private int numberOfPlayer;
     private String dateTime;
     private String place;
+    private String description;
 
     @ManyToMany(mappedBy = "events")
     List<ApplicationUser> applicationUserList;
 
-    public Event(String gameName, int numberOfPlayer, String dateTime, String place) {
+    @ManyToOne
+    private ApplicationUser applicationUser;
+
+    public Event(String gameName, int numberOfPlayer, String dateTime, String place,ApplicationUser applicationUser) {
         this.gameName = gameName;
         this.numberOfPlayer = numberOfPlayer;
         this.dateTime = dateTime;
         this.place = place;
+        this.applicationUser=applicationUser;
+    }
+
+    public Event(String gameName, String dateTime, String place, String description, ApplicationUser applicationUser) {
+        this.gameName = gameName;
+        this.dateTime = dateTime;
+        this.place = place;
+        this.description = description;
+        this.applicationUser = applicationUser;
     }
 
     public Event() {
 
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public ApplicationUser getApplicationUser() {
+        return applicationUser;
+    }
+
+    public void setApplicationUser(ApplicationUser applicationUser) {
+        this.applicationUser = applicationUser;
     }
 
     public String getGameName() {

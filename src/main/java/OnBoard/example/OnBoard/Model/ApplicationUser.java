@@ -31,6 +31,8 @@ public class ApplicationUser implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id"))
     List<Event> events;
+    @OneToMany(mappedBy = "applicationUser")
+    private List<Event> eventList;
 
     public ApplicationUser(String password, String username, String firstName, String lastName, String location, String placeName, String workingHour, String authority,String userType) {
         this.password = password;
@@ -55,6 +57,14 @@ public class ApplicationUser implements UserDetails {
 
     public ApplicationUser() {
 
+    }
+
+    public List<Event> getEventList() {
+        return eventList;
+    }
+
+    public void setEventList(List<Event> eventList) {
+        this.eventList = eventList;
     }
 
     public List<Event> getEvents() {

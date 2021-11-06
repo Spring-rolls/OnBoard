@@ -2,6 +2,7 @@ package OnBoard.example.OnBoard.Controller;
 
 import OnBoard.example.OnBoard.Model.ApplicationUser;
 import OnBoard.example.OnBoard.Repository.AppUserRepository;
+import OnBoard.example.OnBoard.Repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,6 +27,8 @@ public class UserController {
     @Autowired
     AppUserRepository appUserRepository;
 
+    @Autowired
+    EventRepository eventRepository;
     //endpoin from the home page
     @GetMapping("/")
     public String homePage(Principal p, Model m) {
@@ -33,7 +36,7 @@ public class UserController {
             ApplicationUser authUser = appUserRepository.findByUsername(p.getName());
             m.addAttribute("authUser", authUser);
         }
-        m.addAttribute("userList",appUserRepository.findAll());
+        m.addAttribute("eventlist",eventRepository.findAll());
         return "index";
     }
 
