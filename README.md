@@ -39,3 +39,8 @@ There are two type of users:
 * Normal user who can create a individual gaming events.
 * Business user who can create a big gaming events in his place or his coffeeshop.
   The users can join to many events with different time and the can create more than one event
+
+
+### - Wireframe
+
+![wire](https://i.imgur.com/vB5DyjQ.png)

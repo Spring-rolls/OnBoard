@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<main>
+
+    <form th:if="${authUser.getUserType() == 'normal'}" th:action="${'/updateformprofile/'+event.getId()}" method="post">
+        <label for="gameName">gameName</label>
+        <input type="text" class="form-control" name="gameName" id="gameName" th:value="${event.getGameName()}"></br>
+
+        <label for="numberOfPlayer">numberOfPlayer</label>
+        <input type="number" class="form-control" name="numberOfPlayer" id="numberOfPlayer" th:value="${event.getNumberOfPlayer()}"></br>
+
+        <label for="dateTime">dateTime</label>
+        <input type="datetime-local" class="form-control" name="dateTime" id="dateTime" th:value="${event.getDateTime()}"></br>
+
+        <label for="place">place</label>
+        <input type="text" class="form-control" name="place" id="place"  th:value="${event.getPlace()}"></br>
+
+        <input type="submit" class="btn btn-primary">
+
+    </form>
+    <form th:if="${authUser.getUserType() == 'business'}" th:action="${'/updateformbusinessprofile/'+event.getId()}" method="post">
+        <label for="gameName">gameName</label>
+        <input type="text" class="form-control" name="gameName" id="gameName" th:value="${event.getGameName()}"></br>
+
+        <label for="description">description</label>
+        <input type="text" class="form-control" name="description" id="description"th:value="${event.getDescription()}"></br>
+
+        <label for="dateTime">dateTime</label>
+        <input type="datetime-local" class="form-control" name="dateTime" id="dateTime" th:value="${event.getDateTime()}"></br>
+
+        <input type="hidden" class="form-control"  name="place"  id="place" th:value="${event.getPlace()}"></br>
+
+        <input type="submit" class="btn btn-primary">
+
+    </form>
+</main>
+</body>
+</html>

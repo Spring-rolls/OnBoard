@@ -7,10 +7,7 @@ import OnBoard.example.OnBoard.Repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
@@ -91,4 +88,79 @@ public class EventController {
         eventRepository.deleteById(id);
         return new RedirectView("/profile");
     }
+
+    @GetMapping("/update/{id}")
+    public String updateEvent(@PathVariable Integer id,Model model,Principal principal){
+        Event event =eventRepository.findById(id).get();
+        model.addAttribute("event",event);
+        ApplicationUser authUser=appUserRepository.findByUsername(principal.getName());
+        model.addAttribute("authUser",authUser);
+        return "update";
+    }
+    @PostMapping("/updateform/{id}")
+    public RedirectView updateNormal(@RequestParam String gameName,
+                                       @RequestParam int numberOfPlayer,
+                                       @RequestParam String dateTime,
+                                       @RequestParam String place,
+                                     @PathVariable Integer id){
+        Event event=eventRepository.findById(id).get();
+        event.setGameName(gameName);
+        event.setNumberOfPlayer(numberOfPlayer);
+        event.setDateTime(dateTime);
+        event.setPlace(place);
+        eventRepository.save(event);
+        return new RedirectView("/");
+    }
+    @PostMapping("/updateformbusiness/{id}")
+    public RedirectView updateBusiness(@RequestParam String gameName,
+                                     @RequestParam String description,
+                                     @RequestParam String dateTime,
+                                     @RequestParam String place,
+                                     @PathVariable Integer id){
+        Event event=eventRepository.findById(id).get();
+        event.setGameName(gameName);
+        event.setDescription(description);
+        event.setDateTime(dateTime);
+        event.setPlace(place);
+        eventRepository.save(event);
+        return new RedirectView("/");
+    }
+    @GetMapping("/updatefromprofile/{id}")
+    public String updateFromEvent(@PathVariable Integer id,Model model,Principal principal){
+        Event event =eventRepository.findById(id).get();
+        model.addAttribute("event",event);
+        ApplicationUser authUser=appUserRepository.findByUsername(principal.getName());
+        model.addAttribute("authUser",authUser);
+        return "updateProfile";
+    }
+    @PostMapping("/updateformprofile/{id}")
+    public RedirectView updateNormalFromProfile(@RequestParam String gameName,
+                                       @RequestParam int numberOfPlayer,
+                                       @RequestParam String dateTime,
+                                       @RequestParam String place,
+                                     @PathVariable Integer id){
+        Event event=eventRepository.findById(id).get();
+        event.setGameName(gameName);
+        event.setNumberOfPlayer(numberOfPlayer);
+        event.setDateTime(dateTime);
+        event.setPlace(place);
+        eventRepository.save(event);
+        return new RedirectView("/profile");
+    }
+    @PostMapping("/updateformbusinessprofile/{id}")
+    public RedirectView updateBusinessFromProfile(@RequestParam String gameName,
+                                     @RequestParam String description,
+                                     @RequestParam String dateTime,
+                                     @RequestParam String place,
+                                     @PathVariable Integer id){
+        Event event=eventRepository.findById(id).get();
+        event.setGameName(gameName);
+        event.setDescription(description);
+        event.setDateTime(dateTime);
+        event.setPlace(place);
+        eventRepository.save(event);
+        return new RedirectView("/profile");
+    }
+
+
 }

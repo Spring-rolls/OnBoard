@@ -42,6 +42,8 @@
             <p th:text="'DateTime '+${event.getDateTime()}"></p>
             <p th:text="'Place '+${event.getPlace()}"></p>
             <a href="#" class="btn btn-danger" th:href="@{/deleted/{id}(id=${event.getId()})}">delete</a>
+            <a href="#" class="btn btn-primary" th:href="@{/updatefromprofile/{id}(id=${event.getId()})}">update</a>
+
         </div>
     </div>
     <div th:if="${authUser.getUserType() == 'business'}">
@@ -50,6 +52,7 @@
             <p th:text="'Description '+${event.getDescription()}"></p>
             <p th:text="'DateTime '+${event.getDateTime()}"></p>
             <p th:text="'Place '+${event.getPlace()}"></p>
+            <a  href="#" class="btn btn-primary" th:href="@{/updatefromprofile/{id}(id=${event.getId()})}">update</a>
             <a href="#" class="btn btn-danger" th:href="@{/deleted/{id}(id=${event.getId()})}">delete</a>
         </div>
     </div>
