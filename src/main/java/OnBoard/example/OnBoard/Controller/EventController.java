@@ -79,4 +79,16 @@ public class EventController {
         appUserRepository.save(applicationUser);
         return new RedirectView("/profile");
     }
+    @GetMapping("/delete/{id}")
+    public RedirectView deleteEventFromHomePage(@PathVariable Integer id,Principal p){
+        Event event =eventRepository.findById(id).get();
+        eventRepository.deleteById(id);
+        return new RedirectView("/");
+    }
+    @GetMapping("/deleted/{id}")
+    public RedirectView deleteEventFromProfile(@PathVariable Integer id,Principal p){
+        Event event =eventRepository.findById(id).get();
+        eventRepository.deleteById(id);
+        return new RedirectView("/profile");
+    }
 }
