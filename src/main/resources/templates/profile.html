@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
+    <script src="https://kit.fontawesome.com/1599d6604b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/styles/ballNoticfication.css" />
 
 </head>
 <body>
-
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -17,18 +17,40 @@
         <ul class="nav navbar-nav">
             <li ><a th:if="${authUser}" th:href="${'/profile'}" >profile</a></li>
             <li ><a th:if="${authUser}" th:href="${'/event'}" >Create event</a></li>
-            <li ><a href="#" >All users</a></li>
-            <li ><a href="#" >feed</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li sec:authorize="!isAuthenticated()"><a href="/signup" ><span class="glyphicon glyphicon-user"></span> Sign Up Business</a></li>
             <li sec:authorize="!isAuthenticated()"><a href="/signupNormal" ><span class="glyphicon glyphicon-user"></span> Sign Up Normal</a></li>
             <li sec:authorize="!isAuthenticated()"><a href="/login"  ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            <li ><p  id="text"></li>
+            <div class="ball">
+                <div class = "icons">
+                    <div class = "notification">
+                        <div class = "notBtn" >
+                            <i class="fas fa-bell"></i>
+                            <div class = "box">
+                                <div class = "display">
+                                    <div class = "cont">
+                                        <div th:each="event:${authUser.getEventList()}">
+                                            <div class = "sec new" th:each="userJoin:${event.getApplicationUserList()}">
+                                                <div class = "profCont">
+                                                    <img class = "profile" src = "https://c1.staticflickr.com/5/4007/4626436851_5629a97f30_b.jpg">
+                                                </div>
+                                                <div class = "txt"> <p th:text="${userJoin.getFirstName()+ ' has joined to '+event.getGameName()  + ' event' }" ></p></div>
+                                                <div class = "txt sub">11/7 - 2:30 pm</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <li sec:authorize="isAuthenticated()"><a href="/perform_logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
     </div>
 </nav>
+
 
 <p th:text="' firstName: ' +${authUser.getFirstName()} +' '+${authUser.getLastName()}"> </p>
 <p th:text="' type: ' + ${authUser.getUserType()}"> </p>
@@ -98,13 +120,13 @@
             </div>
         </div>
     </div>
-    <div id="notification">
-        <div th:each="event:${authUser.getEventList()}">
-            <div th:each="userJoin:${event.getApplicationUserList()}">
-                <p th:text="${userJoin.getFirstName()+ ' has joined to '+event.getGameName()  + ' event' }" ></p>
-            </div>
-        </div>
-    </div>
+<!--    <div id="notification">-->
+<!--        <div th:each="event:${authUser.getEventList()}">-->
+<!--            <div th:each="userJoin:${event.getApplicationUserList()}">-->
+<!--                <p th:text="${userJoin.getFirstName()+ ' has joined to '+event.getGameName()  + ' event' }" ></p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
 </main>
 
