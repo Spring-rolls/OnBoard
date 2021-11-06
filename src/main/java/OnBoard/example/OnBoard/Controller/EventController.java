@@ -161,6 +161,4 @@ public class EventController {
         eventRepository.save(event);
         return new RedirectView("/profile");
     }
-
-
 }
