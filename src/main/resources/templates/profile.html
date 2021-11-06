@@ -5,8 +5,10 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
+
 </head>
 <body>
+
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -27,6 +29,7 @@
         </ul>
     </div>
 </nav>
+
 <p th:text="' firstName: ' +${authUser.getFirstName()} +' '+${authUser.getLastName()}"> </p>
 <p th:text="' type: ' + ${authUser.getUserType()}"> </p>
 <p th:if="${authUser.getUserType() == 'business'}" th:text="${authUser.getLocation()}"> </p>
@@ -41,6 +44,9 @@
             <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>
             <p th:text="'DateTime '+${event.getDateTime()}"></p>
             <p th:text="'Place '+${event.getPlace()}"></p>
+            <div th:each="userJoin:${event.getApplicationUserList()}">
+                <p th:text="${userJoin.getFirstName()}"></p>
+            </div>
             <a href="#" class="btn btn-danger" th:href="@{/deleted/{id}(id=${event.getId()})}">delete</a>
             <a href="#" class="btn btn-primary" th:href="@{/updatefromprofile/{id}(id=${event.getId()})}">update</a>
 
@@ -52,6 +58,9 @@
             <p th:text="'Description '+${event.getDescription()}"></p>
             <p th:text="'DateTime '+${event.getDateTime()}"></p>
             <p th:text="'Place '+${event.getPlace()}"></p>
+            <div th:each="userJoin:${event.getApplicationUserList()}">
+                <p th:text="${userJoin.getFirstName()}"></p>
+            </div>
             <a  href="#" class="btn btn-primary" th:href="@{/updatefromprofile/{id}(id=${event.getId()})}">update</a>
             <a href="#" class="btn btn-danger" th:href="@{/deleted/{id}(id=${event.getId()})}">delete</a>
         </div>
@@ -89,6 +98,15 @@
             </div>
         </div>
     </div>
+    <div id="notification">
+        <div th:each="event:${authUser.getEventList()}">
+            <div th:each="userJoin:${event.getApplicationUserList()}">
+                <p th:text="${userJoin.getFirstName()+ ' has joined to '+event.getGameName()  + ' event' }" ></p>
+            </div>
+        </div>
+    </div>
+
 </main>
+
 </body>
 </html>
