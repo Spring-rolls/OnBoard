@@ -3,11 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/sign.css" />
 
 </head>
 <body>
-<div class="container">
+
+
+<button>Individual</button>
+<button>Business</button>
+
+<div id="forms">
+<div id="indie">
+<form action="/signupNormal" method="post">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" name="username" id="username"></br>
+
+    <label for="password">Password</label>
+    <input type="password" class="form-control" name="password" id="password"></br>
+
+    <label for="firstName">firstName</label>
+    <input type="text" class="form-control" name="firstName" id="firstName"></br>
+
+    <label for="lastName">lastName</label>
+    <input type="text" class="form-control" name="lastName" id="lastName"></br>
+    <input type="submit" class="btn btn-primary">
+
+</form>
+</div>
+
+<div class="container" id="business">
     <form action="/signup" method="post">
         <label for="username">Username</label>
         <input type="text" class="form-control" name="username" id="username"></br>
@@ -33,6 +59,6 @@
     </form>
 
 </div>
-
+</div>
 </body>
 </html>

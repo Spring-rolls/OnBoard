@@ -1,0 +1,12 @@
+body {
+border: solid red;
+width: 80%;
+margin: 5rem auto;
+}
+
+#forms{
+margin-top: 10rem;
+display: flex;
+justify-content: space-between;
+
+}

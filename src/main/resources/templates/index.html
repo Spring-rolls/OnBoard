@@ -3,32 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/index.css" />
+
+<!--        <link rel="stylesheet" href="/static/styles/reset.css" />-->
+<!--        <link rel="stylesheet" href="/static/styles/index.css" />-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
 
 </head>
 <body>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">Home page</a>
+            <a class="navbar-brand" href="/">OnBoard</a>
         </div>
-        <ul class="nav navbar-nav">
+        <div class="dropdown">
+            <span class="dropbtn">Menu &#x21e9;</span>
+        <ul class="nav navbar-nav navbar-right dropdown-content">
             <li ><a th:if="${authUser}" th:href="${'/profile'}" >profile</a></li>
-            <li ><a th:if="${authUser}" th:href="${'/event'}" >Create event</a></li>
-            <li ><a href="#" >All users</a></li>
-            <li ><a href="#" >feed</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
             <li sec:authorize="!isAuthenticated()"><a href="/signup" ><span class="glyphicon glyphicon-user"></span> Sign Up Business</a></li>
             <li sec:authorize="!isAuthenticated()"><a href="/signupNormal" ><span class="glyphicon glyphicon-user"></span> Sign Up Normal</a></li>
             <li sec:authorize="!isAuthenticated()"><a href="/login"  ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <li ><p  id="text"></li>
             <li sec:authorize="isAuthenticated()"><a href="/perform_logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
+        </div>
     </div>
 </nav>
+<div id="content">
+ <div id="side-menu">
+
+ </div>
+
 <main>
-        <div th:each="event:${eventlist}">
+    <div th:if="${authUser}">
+    <form th:if="${authUser.getUserType() == 'normal'}" action="/eventfornormal" method="post">
+        <label for="gameName">gameName</label>
+        <input type="text" class="form-control" name="gameName" id="gameName"></br>
+
+        <label for="numberOfPlayer">numberOfPlayer</label>
+        <input type="number" class="form-control" name="numberOfPlayer" id="numberOfPlayer"></br>
+
+        <label for="dateTime">dateTime</label>
+        <input type="datetime-local" class="form-control" name="dateTime" id="dateTime"></br>
+
+        <label for="place">place</label>
+        <input type="text" class="form-control" name="place" id="place"></br>
+
+        <input type="submit" class="btn btn-primary">
+
+    </form>
+    <form th:if="${authUser.getUserType() == 'business'}" action="/eventforbusiness" method="post">
+        <label for="gameName">gameName</label>
+        <input type="text" class="form-control" name="gameName" id="gameName"></br>
+
+        <label for="description">description</label>
+        <input type="text" class="form-control" name="description" id="description"></br>
+
+        <label for="dateTime">dateTime</label>
+        <input type="datetime-local" class="form-control" name="dateTime" id="dateTime"></br>
+
+        <input type="hidden" class="form-control"  name="place" th:value="${authUser.getPlaceName()}" id="place"></br>
+
+        <input type="submit" class="btn btn-primary">
+
+    </form>
+</div>
+
+   <a id="this-btn" th:if="${authUser}" th:href="${'/event'}" >Create event</a>
+        <div id="event" th:each="event:${eventlist}">
             <div th:if="${event.getApplicationUser().getUserType() == 'normal'}">
                 <div th:if="!${(event.getApplicationUserList().size()+1)>=event.getNumberOfPlayer()}">
             <p th:text="'Host Name ...!: '+${event.getApplicationUser().getFirstName()}"></p>
@@ -77,6 +120,8 @@
             </div>
         </div>
 </main>
+
+</div>
 
 </body>
 </html>
