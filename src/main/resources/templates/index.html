@@ -30,12 +30,15 @@
 <main>
         <div th:each="event:${eventlist}">
             <div th:if="${event.getApplicationUser().getUserType() == 'normal'}">
+                <div th:if="!${(event.getApplicationUserList().size()+1)>=event.getNumberOfPlayer()}">
             <p th:text="'Host Name ...!: '+${event.getApplicationUser().getFirstName()}"></p>
             <p th:text="'gameName '+${event.getGameName()}"></p>
             <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>
             <p th:text="'DateTime '+${event.getDateTime()}"></p>
             <p th:text="'Place '+${event.getPlace()}"></p>
-            <div th:each="userJoin:${event.getApplicationUserList()}">
+                <p th:text="${'joined player '+(event.getApplicationUserList().size()+1)}"> </p>
+
+                <div th:each="userJoin:${event.getApplicationUserList()}">
                 <p th:text="${userJoin.getFirstName()}"></p>
             </div>
             <div th:if="${authUser}">
@@ -47,14 +50,17 @@
             <a th:if="${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/unjoin/{id}(id=${event.getId()})}">unjoin</a>
                     </div>
                 </div>
+            </div>
                 </div>
             </div>
+
             <div th:if="${event.getApplicationUser().getUserType() == 'business'}">
                 <p th:text="'Host Name ...!: '+${event.getApplicationUser().getFirstName()}"></p>
                 <p th:text="'gameName '+${event.getGameName()}"></p>
                 <p th:text="'Description '+${event.getDescription()}"></p>
                 <p th:text="'DateTime '+${event.getDateTime()}"></p>
                 <p th:text="'Place '+${event.getPlace()}"></p>
+                <p th:text="${'joined player '+(event.getApplicationUserList().size())}"> </p>
                 <div th:each="userJoin:${event.getApplicationUserList()}">
                     <p th:text="${userJoin.getFirstName()}"></p>
                 </div>
