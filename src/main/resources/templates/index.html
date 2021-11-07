@@ -4,7 +4,18 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
+<style>
+    .img{
+        border-radius: 50%;
+        width: 42px;
+        height: 42px;
+    }
+    #text {
+        color: white;
+        font-size: 25px;
+        margin: 5px 15px;
+    }
+</style>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -15,14 +26,13 @@
         <ul class="nav navbar-nav">
             <li ><a th:if="${authUser}" th:href="${'/profile'}" >profile</a></li>
             <li ><a th:if="${authUser}" th:href="${'/event'}" >Create event</a></li>
-            <li ><a href="#" >All users</a></li>
-            <li ><a href="#" >feed</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li sec:authorize="!isAuthenticated()"><a href="/signup" ><span class="glyphicon glyphicon-user"></span> Sign Up Business</a></li>
             <li sec:authorize="!isAuthenticated()"><a href="/signupNormal" ><span class="glyphicon glyphicon-user"></span> Sign Up Normal</a></li>
             <li sec:authorize="!isAuthenticated()"><a href="/login"  ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            <li ><p  id="text"></li>
+            <li th:if="${authUser}"><p th:text="${authUser.getFirstName()}" id="text"></li>
+            <li th:if="${authUser}"><img th:src="${authUser.getImage()}" class="img"></li>
             <li sec:authorize="isAuthenticated()"><a href="/perform_logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
     </div>
@@ -31,7 +41,8 @@
         <div th:each="event:${eventlist}">
             <div th:if="${event.getApplicationUser().getUserType() == 'normal'}">
                 <div th:if="!${(event.getApplicationUserList().size()+1)>=event.getNumberOfPlayer()}">
-            <p th:text="'Host Name ...!: '+${event.getApplicationUser().getFirstName()}"></p>
+                    <img th:src="${event.getApplicationUser().getImage()}" class="img">
+                    <p th:text="'Host Name ...!: '+${event.getApplicationUser().getFirstName()}"></p>
             <p th:text="'gameName '+${event.getGameName()}"></p>
             <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>
             <p th:text="'DateTime '+${event.getDateTime()}"></p>
@@ -55,6 +66,7 @@
             </div>
 
             <div th:if="${event.getApplicationUser().getUserType() == 'business'}">
+                <img th:src="${event.getApplicationUser().getImage()}" class="img">
                 <p th:text="'Host Name ...!: '+${event.getApplicationUser().getFirstName()}"></p>
                 <p th:text="'gameName '+${event.getGameName()}"></p>
                 <p th:text="'Description '+${event.getDescription()}"></p>
