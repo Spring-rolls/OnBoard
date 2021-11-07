@@ -25,6 +25,7 @@ public class ApplicationUser implements UserDetails {
     private String workingHour;
     private String authority;
     private String userType;
+    private String image;
     @ManyToMany
     @JoinTable(
             name = "user_event",
@@ -34,7 +35,7 @@ public class ApplicationUser implements UserDetails {
     @OneToMany(mappedBy = "applicationUser")
     private List<Event> eventList;
 
-    public ApplicationUser(String password, String username, String firstName, String lastName, String location, String placeName, String workingHour, String authority,String userType) {
+    public ApplicationUser(String password, String username, String firstName, String lastName, String location, String placeName, String workingHour, String authority,String userType,String image) {
         this.password = password;
         this.username = username;
         this.firstName = firstName;
@@ -44,19 +45,29 @@ public class ApplicationUser implements UserDetails {
         this.workingHour = workingHour;
         this.authority = authority;
         this.userType = userType;
+        this.image = image;
     }
 
-    public ApplicationUser(String password, String username, String firstName, String lastName, String authority,String userType) {
+    public ApplicationUser(String password, String username, String firstName, String lastName, String authority,String userType,String image) {
         this.password = password;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.authority = authority;
         this.userType = userType;
+        this.image = image;
     }
 
     public ApplicationUser() {
 
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public List<Event> getEventList() {

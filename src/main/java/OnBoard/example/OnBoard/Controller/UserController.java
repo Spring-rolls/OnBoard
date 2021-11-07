@@ -63,12 +63,14 @@ public class UserController {
                                @RequestParam String lastName,
                                @RequestParam String location,
                                @RequestParam String placeName,
-                               @RequestParam String workingHour) {
+                               @RequestParam String workingHour,
+                               @RequestParam String image) {
         /**
          * we have to create if condition if the condition isBusiness we implement the full constructor else we implement
          * the other constructor that will be without the business.
          */
-        ApplicationUser applicationUser = new ApplicationUser(encoder.encode(password), username, firstName, lastName, location, placeName, workingHour, "ROLE_USER","business");
+
+        ApplicationUser applicationUser = new ApplicationUser(encoder.encode(password), username, firstName, lastName, location, placeName, workingHour, "ROLE_USER","business",image);
         appUserRepository.save(applicationUser);
         Authentication authentication = new UsernamePasswordAuthenticationToken(applicationUser, null, applicationUser.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -78,12 +80,13 @@ public class UserController {
     public RedirectView signupNormal(@RequestParam String password,
                                      @RequestParam String username,
                                      @RequestParam String firstName,
-                                     @RequestParam String lastName) {
+                                     @RequestParam String lastName,
+                                     @RequestParam String image) {
         /**
          * we have to create if condition if the condition isBusiness we implement the full constructor else we implement
          * the other constructor that will be without the business.
          */
-        ApplicationUser applicationUser = new ApplicationUser(encoder.encode(password), username, firstName, lastName, "ROLE_USER","normal");
+        ApplicationUser applicationUser = new ApplicationUser(encoder.encode(password), username, firstName, lastName, "ROLE_USER","normal",image);
         appUserRepository.save(applicationUser);
         Authentication authentication = new UsernamePasswordAuthenticationToken(applicationUser, null, applicationUser.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);

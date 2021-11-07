@@ -33,7 +33,7 @@
                                         <div th:each="event:${authUser.getEventList()}">
                                             <div class = "sec new" th:each="userJoin:${event.getApplicationUserList()}">
                                                 <div class = "profCont">
-                                                    <img class = "profile" src = "https://c1.staticflickr.com/5/4007/4626436851_5629a97f30_b.jpg">
+                                                    <img class = "profile" th:src="${userJoin.getImage()}" >
                                                 </div>
                                                 <div class = "txt"> <p th:text="${userJoin.getFirstName()+ ' has joined to '+event.getGameName()  + ' event' }" ></p></div>
                                                 <div class = "txt sub">11/7 - 2:30 pm</div>
@@ -50,14 +50,14 @@
         </ul>
     </div>
 </nav>
-
-
+<div th:if="${authUser}">
+<img th:src="${authUser.getImage()}" class="img">
 <p th:text="' firstName: ' +${authUser.getFirstName()} +' '+${authUser.getLastName()}"> </p>
 <p th:text="' type: ' + ${authUser.getUserType()}"> </p>
 <p th:if="${authUser.getUserType() == 'business'}" th:text="${authUser.getLocation()}"> </p>
 <p th:if="${authUser.getUserType() == 'business'}" th:text="${authUser.getPlaceName()}"> </p>
 <p th:if="${authUser.getUserType() == 'business'}" th:text="${authUser.getWorkingHour()}"> </p>
-
+</div>
 <main>
     <h1>Host events</h1>
     <div th:if="${authUser.getUserType() == 'normal'}">
@@ -96,6 +96,7 @@
     <h1 th:if="${authUser.getUserType() == 'normal'}">join event</h1>
     <div th:each="event:${authUser.getEvents()}">
         <div th:if="${event.getApplicationUser().getUserType() == 'normal'}">
+            <img th:src="${event.getApplicationUser().getImage()}" class="img">
             <p th:text="'Host Name ...!: '+${event.getApplicationUser().getFirstName()}"></p>
             <p th:text="'gameName '+${event.getGameName()}"></p>
             <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>
@@ -112,6 +113,7 @@
             </div>
         </div>
         <div th:if="${event.getApplicationUser().getUserType() == 'business'}">
+            <img th:src="${event.getApplicationUser().getImage()}" class="img">
             <p th:text="'Host Name ...!: '+${event.getApplicationUser().getFirstName()}"></p>
             <p th:text="'gameName '+${event.getGameName()}"></p>
             <p th:text="'Description '+${event.getDescription()}"></p>
