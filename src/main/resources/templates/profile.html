@@ -66,8 +66,13 @@
             <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>
             <p th:text="'DateTime '+${event.getDateTime()}"></p>
             <p th:text="'Place '+${event.getPlace()}"></p>
+            <p th:text="${'joined player '+(event.getApplicationUserList().size()+1)}"> </p>
+
             <div th:each="userJoin:${event.getApplicationUserList()}">
                 <p th:text="${userJoin.getFirstName()}"></p>
+            </div>
+            <div th:if="${(event.getApplicationUserList().size()+1)>=event.getNumberOfPlayer()}">
+            <h2> the event is ready </h2>
             </div>
             <a href="#" class="btn btn-danger" th:href="@{/deleted/{id}(id=${event.getId()})}">delete</a>
             <a href="#" class="btn btn-primary" th:href="@{/updatefromprofile/{id}(id=${event.getId()})}">update</a>
@@ -80,6 +85,7 @@
             <p th:text="'Description '+${event.getDescription()}"></p>
             <p th:text="'DateTime '+${event.getDateTime()}"></p>
             <p th:text="'Place '+${event.getPlace()}"></p>
+            <p th:text="${'joined player '+(event.getApplicationUserList().size())}"> </p>
             <div th:each="userJoin:${event.getApplicationUserList()}">
                 <p th:text="${userJoin.getFirstName()}"></p>
             </div>
@@ -99,6 +105,7 @@
                 <p th:text="${userJoin.getFirstName()}"></p>
             </div>
             <div th:if="${authUser}">
+                <p th:text="${'joined player '+(event.getApplicationUserList().size()+1)}"> </p>
                 <div th:if="!${event.getApplicationUser() == authUser}">
                     <a th:if="${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/unjoins/{id}(id=${event.getId()})}">unjoin</a>
                 </div>
@@ -114,6 +121,7 @@
                 <p th:text="${userJoin.getFirstName()}"></p>
             </div>
             <div th:if="${authUser}">
+                <p th:text="${'joined player '+(event.getApplicationUserList().size())}"> </p>
                 <div th:if="!${event.getApplicationUser() == authUser}">
                     <a th:if="${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/unjoins/{id}(id=${event.getId()})}">uninterested</a>
                 </div>
