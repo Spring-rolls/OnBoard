@@ -5,11 +5,9 @@
     <title>Title</title>
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/index.css" />
-
-<!--        <link rel="stylesheet" href="/static/styles/reset.css" />-->
-<!--        <link rel="stylesheet" href="/static/styles/index.css" />-->
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
-
+    <!--        <link rel="stylesheet" href="/static/styles/reset.css" />-->
+    <!--        <link rel="stylesheet" href="/static/styles/index.css" />-->
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -19,90 +17,77 @@
         </div>
         <div class="dropdown">
             <span class="dropbtn">Menu &#x21e9;</span>
-        <ul class="nav navbar-nav navbar-right dropdown-content">
-            <li ><a th:if="${authUser}" th:href="${'/profile'}" >profile</a></li>
-
-<!--            <li sec:authorize="!isAuthenticated()"><a href="/signupNormal" ><span class="glyphicon glyphicon-user"></span> Sign Up Normal</a></li>-->
-            <li sec:authorize="!isAuthenticated()"><a href="/login"  ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            <li sec:authorize="!isAuthenticated()"><a href="/signup" ><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li ><p  id="text"></li>
-            <li sec:authorize="isAuthenticated()"><a href="/perform_logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-        </ul>
+            <ul class="nav navbar-nav navbar-right dropdown-content">
+                <li ><a th:if="${authUser}" th:href="${'/profile'}" >profile</a></li>
+                <!--            <li sec:authorize="!isAuthenticated()"><a href="/signupNormal" ><span class="glyphicon glyphicon-user"></span> Sign Up Normal</a></li>-->
+                <li sec:authorize="!isAuthenticated()"><a href="/login"  ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li sec:authorize="!isAuthenticated()"><a href="/signup" ><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li ><p  id="text"></li>
+                <li sec:authorize="isAuthenticated()"><a href="/perform_logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
         </div>
+        <img th:if="${authUser}" th:src="${authUser.getImage()}" class="img">
     </div>
 </nav>
 <div id="content">
- <div id="side-menu">
-
- </div>
-
-<main>
-    <div th:if="${authUser}">
-    <form th:if="${authUser.getUserType() == 'normal'}" action="/eventfornormal" method="post">
-        <label for="gameName">Game</label>
-        <input type="text" class="form-control" name="gameName" id="gameName"></br>
-
-        <label for="numberOfPlayer">Number Of Players</label>
-        <input type="number" class="form-control" name="numberOfPlayer" id="numberOfPlayer"></br>
-
-        <label for="dateTime">Time</label>
-        <input type="datetime-local" class="form-control" name="dateTime" id="dateTime"></br>
-
-        <label for="place">Place</label>
-        <input type="text" class="form-control" name="place" id="place"></br>
-
-        <input type="submit" value="Post" class="btn btn-primary">
-
-    </form>
-    <form th:if="${authUser.getUserType() == 'business'}" action="/eventforbusiness" method="post">
-        <label for="gameName">Game</label>
-        <input type="text" class="form-control" name="gameName" id="gameName"></br>
-
-        <label for="description">Description</label>
-        <input type="text" class="form-control" name="description" id="description"></br>
-
-        <label for="dateTime">Time</label>
-        <input type="datetime-local" class="form-control" name="dateTime" id="dateTime"></br>
-
-        <input type="hidden" class="form-control"  name="place" th:value="${authUser.getPlaceName()}" id="place"></br>
-
-        <input type="submit" value="Post" class="btn btn-primary">
-
-    </form>
-</div>
-
-<!--   <a id="this-btn" th:if="${authUser}" th:href="${'/event'}" >Create event</a>-->
+    <div id="side-menu">
+    </div>
+    <main>
+        <div th:if="${authUser}">
+            <form th:if="${authUser.getUserType() == 'normal'}" action="/eventfornormal" method="post">
+                <label for="gameName">Game</label>
+                <input type="text" class="form-control" name="gameName" id="gameName"></br>
+                <label for="numberOfPlayer">Number Of Players</label>
+                <input type="number" class="form-control" name="numberOfPlayer" id="numberOfPlayer"></br>
+                <label for="dateTime">Time</label>
+                <input type="datetime-local" class="form-control" name="dateTime" id="dateTime"></br>
+                <label for="place">Place</label>
+                <input type="text" class="form-control" name="place" id="place"></br>
+                <input type="submit" value="Post" class="btn btn-primary">
+            </form>
+            <form th:if="${authUser.getUserType() == 'business'}" action="/eventforbusiness" method="post">
+                <label for="gameName">Game</label>
+                <input type="text" class="form-control" name="gameName" id="gameName"></br>
+                <label for="description">Description</label>
+                <input type="text" class="form-control" name="description" id="description"></br>
+                <label for="dateTime">Time</label>
+                <input type="datetime-local" class="form-control" name="dateTime" id="dateTime"></br>
+                <input type="hidden" class="form-control"  name="place" th:value="${authUser.getPlaceName()}" id="place"></br>
+                <input type="submit" value="Post" class="btn btn-primary">
+            </form>
+        </div>
+        <!--   <a id="this-btn" th:if="${authUser}" th:href="${'/event'}" >Create event</a>-->
         <div id="event" th:each="event:${eventlist}">
             <div th:if="${event.getApplicationUser().getUserType() == 'normal'}">
                 <div th:if="!${(event.getApplicationUserList().size()+1)>=event.getNumberOfPlayer()}">
-            <p th:text="'Host Name ...!: '+${event.getApplicationUser().getFirstName()}"></p>
-            <p th:text="'gameName '+${event.getGameName()}"></p>
-            <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>
-            <p th:text="'DateTime '+${event.getDateTime()}"></p>
-            <p th:text="'Place '+${event.getPlace()}"></p>
-                <p th:text="${'joined player '+(event.getApplicationUserList().size()+1)}"> </p>
-
-                <div th:each="userJoin:${event.getApplicationUserList()}">
-                <p th:text="${userJoin.getFirstName()}"></p>
-            </div>
-            <div th:if="${authUser}">
-                <a th:if="${event.getApplicationUser() == authUser}" href="#" class="btn btn-danger" th:href="@{/delete/{id}(id=${event.getId()})}">delete</a>
-                <a th:if="${event.getApplicationUser() == authUser}" href="#" class="btn btn-primary" th:href="@{/update/{id}(id=${event.getId()})}">update</a>
-                <div th:if="!${event.getApplicationUser() == authUser}">
-                    <div th:if="!${authUser.getUserType() == 'business'}">
-            <a  th:if="!${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/join/{id}(id=${event.getId()})}">join</a>
-            <a th:if="${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/unjoin/{id}(id=${event.getId()})}">unjoin</a>
+                    <p th:text="'Host Name ...!: '+${event.getApplicationUser().getFirstName()}"></p>
+                    <p th:text="'gameName '+${event.getGameName()}"></p>
+                    <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>
+                    <p th:text="'DateTime '+${event.getDateTime()}"></p>
+                    <p th:id="${event.getId()}"></p>
+                    <p th:text="'Place '+${event.getPlace()}"></p>
+                    <p th:text="${'joined player '+(event.getApplicationUserList().size()+1)}"> </p>
+                    <div th:each="userJoin:${event.getApplicationUserList()}">
+                        <p th:text="${userJoin.getFirstName()}"></p>
+                    </div>
+                    <div th:if="${authUser}">
+                        <a th:if="${event.getApplicationUser() == authUser}" href="#" class="btn btn-danger" th:href="@{/delete/{id}(id=${event.getId()})}">delete</a>
+                        <a th:if="${event.getApplicationUser() == authUser}" href="#" class="btn btn-primary" th:href="@{/update/{id}(id=${event.getId()})}">update</a>
+                        <div th:if="!${event.getApplicationUser() == authUser}">
+                            <div th:if="!${authUser.getUserType() == 'business'}">
+                                <a  th:if="!${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/join/{id}(id=${event.getId()})}">join</a>
+                                <a th:if="${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/unjoin/{id}(id=${event.getId()})}">unjoin</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-                </div>
-            </div>
-
             <div th:if="${event.getApplicationUser().getUserType() == 'business'}">
                 <p th:text="'Host Name ...!: '+${event.getApplicationUser().getFirstName()}"></p>
                 <p th:text="'gameName '+${event.getGameName()}"></p>
                 <p th:text="'Description '+${event.getDescription()}"></p>
                 <p th:text="'DateTime '+${event.getDateTime()}"></p>
+                <p th:id="${event.getId()}"></p>
                 <p th:text="'Place '+${event.getPlace()}"></p>
                 <p th:text="${'joined player '+(event.getApplicationUserList().size())}"> </p>
                 <div th:each="userJoin:${event.getApplicationUserList()}">
@@ -113,16 +98,30 @@
                     <a th:if="${event.getApplicationUser() == authUser}" href="#" class="btn btn-primary" th:href="@{/update/{id}(id=${event.getId()})}">update</a>
                     <div th:if="!${event.getApplicationUser() == authUser}">
                         <div th:if="!${authUser.getUserType() == 'business'}">
-                        <a  th:if="!${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/join/{id}(id=${event.getId()})}">interested</a>
-                        <a th:if="${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/unjoin/{id}(id=${event.getId()})}">uninterested</a>
+                            <a  th:if="!${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/join/{id}(id=${event.getId()})}">interested</a>
+                            <a th:if="${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/unjoin/{id}(id=${event.getId()})}">uninterested</a>
                         </div>
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-</main>
-
+    </main>
 </div>
 
+<script th:inline="javascript" th:each="event:${eventlist}">
+/*<![CDATA[*/
+    var message = /*[[${event.getDateTime()}]]*/ 'default';
+    console.log(message);
+    var id = /*[[${(event.getId()).toString()}]]*/ 'default';
+console.log(id)
+/*]]>*/
+
+var countDownDate = new Date(message).getTime();
+ var now = new Date().getTime();
+ if(now>countDownDate){
+<!--    document.getElementById(id).innerHTML = "EXPIRED";-->
+document.getElementById(id).parentElement.remove();
+}
+</script>
 </body>
 </html>
