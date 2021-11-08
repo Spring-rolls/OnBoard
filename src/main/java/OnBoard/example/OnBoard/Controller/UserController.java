@@ -1,6 +1,7 @@
 package OnBoard.example.OnBoard.Controller;
 
 import OnBoard.example.OnBoard.Model.ApplicationUser;
+import OnBoard.example.OnBoard.Model.Event;
 import OnBoard.example.OnBoard.Repository.AppUserRepository;
 import OnBoard.example.OnBoard.Repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
@@ -98,5 +96,57 @@ public class UserController {
         ApplicationUser authUser=appUserRepository.findByUsername(principal.getName());
         model.addAttribute("authUser",authUser);
         return "profile";
+    }
+    @GetMapping("/editProfileUser")
+    public String editProfile(Model model,Principal principal){
+        ApplicationUser authUser=appUserRepository.findByUsername(principal.getName());
+        model.addAttribute("authUser",authUser);
+        return "updateProfilePage";
+    }
+
+    @PostMapping("/editProfileUsersBusiness")
+    public RedirectView editProfileUser(@RequestParam String password,
+                                        @RequestParam String username,
+                                        @RequestParam String firstName,
+                                        @RequestParam String lastName,
+                                        @RequestParam String location,
+                                        @RequestParam String placeName,
+                                        @RequestParam String workingHour,
+                                        @RequestParam String image,
+                                        Principal principal) {
+
+        ApplicationUser applicationUser=appUserRepository.findByUsername(principal.getName());
+        applicationUser.setUsername(username);
+        applicationUser.setPassword(password);
+        applicationUser.setFirstName(firstName);
+        applicationUser.setLastName(lastName);
+        applicationUser.setImage(image);
+        applicationUser.setLocation(location);
+        applicationUser.setPlaceName(placeName);
+        applicationUser.setWorkingHour(workingHour);
+        appUserRepository.save(applicationUser);
+        Authentication authentication = new UsernamePasswordAuthenticationToken(applicationUser, null, applicationUser.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return new RedirectView("/");
+    }
+
+    @PostMapping("/editProfileUsers")
+    public RedirectView editProfileUsersBusiness(@RequestParam String password,
+                                        @RequestParam String username,
+                                        @RequestParam String firstName,
+                                        @RequestParam String lastName,
+                                        @RequestParam String image,
+                                        Principal principal) {
+
+        ApplicationUser applicationUser=appUserRepository.findByUsername(principal.getName());
+        applicationUser.setUsername(username);
+        applicationUser.setPassword(password);
+        applicationUser.setFirstName(firstName);
+        applicationUser.setLastName(lastName);
+        applicationUser.setImage(image);
+        appUserRepository.save(applicationUser);
+        Authentication authentication = new UsernamePasswordAuthenticationToken(applicationUser, null, applicationUser.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return new RedirectView("/");
     }
 }
