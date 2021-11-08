@@ -21,9 +21,10 @@
             <span class="dropbtn">Menu &#x21e9;</span>
         <ul class="nav navbar-nav navbar-right dropdown-content">
             <li ><a th:if="${authUser}" th:href="${'/profile'}" >profile</a></li>
-            <li sec:authorize="!isAuthenticated()"><a href="/signup" ><span class="glyphicon glyphicon-user"></span> Sign Up Business</a></li>
-            <li sec:authorize="!isAuthenticated()"><a href="/signupNormal" ><span class="glyphicon glyphicon-user"></span> Sign Up Normal</a></li>
+
+<!--            <li sec:authorize="!isAuthenticated()"><a href="/signupNormal" ><span class="glyphicon glyphicon-user"></span> Sign Up Normal</a></li>-->
             <li sec:authorize="!isAuthenticated()"><a href="/login"  ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li sec:authorize="!isAuthenticated()"><a href="/signup" ><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li ><p  id="text"></li>
             <li sec:authorize="isAuthenticated()"><a href="/perform_logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
@@ -38,39 +39,39 @@
 <main>
     <div th:if="${authUser}">
     <form th:if="${authUser.getUserType() == 'normal'}" action="/eventfornormal" method="post">
-        <label for="gameName">gameName</label>
+        <label for="gameName">Game</label>
         <input type="text" class="form-control" name="gameName" id="gameName"></br>
 
-        <label for="numberOfPlayer">numberOfPlayer</label>
+        <label for="numberOfPlayer">Number Of Players</label>
         <input type="number" class="form-control" name="numberOfPlayer" id="numberOfPlayer"></br>
 
-        <label for="dateTime">dateTime</label>
+        <label for="dateTime">Time</label>
         <input type="datetime-local" class="form-control" name="dateTime" id="dateTime"></br>
 
-        <label for="place">place</label>
+        <label for="place">Place</label>
         <input type="text" class="form-control" name="place" id="place"></br>
 
-        <input type="submit" class="btn btn-primary">
+        <input type="submit" value="Post" class="btn btn-primary">
 
     </form>
     <form th:if="${authUser.getUserType() == 'business'}" action="/eventforbusiness" method="post">
-        <label for="gameName">gameName</label>
+        <label for="gameName">Game</label>
         <input type="text" class="form-control" name="gameName" id="gameName"></br>
 
-        <label for="description">description</label>
+        <label for="description">Description</label>
         <input type="text" class="form-control" name="description" id="description"></br>
 
-        <label for="dateTime">dateTime</label>
+        <label for="dateTime">Time</label>
         <input type="datetime-local" class="form-control" name="dateTime" id="dateTime"></br>
 
         <input type="hidden" class="form-control"  name="place" th:value="${authUser.getPlaceName()}" id="place"></br>
 
-        <input type="submit" class="btn btn-primary">
+        <input type="submit" value="Post" class="btn btn-primary">
 
     </form>
 </div>
 
-   <a id="this-btn" th:if="${authUser}" th:href="${'/event'}" >Create event</a>
+<!--   <a id="this-btn" th:if="${authUser}" th:href="${'/event'}" >Create event</a>-->
         <div id="event" th:each="event:${eventlist}">
             <div th:if="${event.getApplicationUser().getUserType() == 'normal'}">
                 <div th:if="!${(event.getApplicationUserList().size()+1)>=event.getNumberOfPlayer()}">

@@ -7,6 +7,8 @@ box-sizing: border-box;
 }
 
 
+
+
 .navbar  {
 
 font-family: 'Roboto', sans-serif;
@@ -35,6 +37,13 @@ color: red;
 .navbar-header {
 font-size: 3pc;
 font-family: 'Righteous', cursive;
+}
+
+.navbar-header a {
+padding:0.2rem;
+border: solid white;
+border-width: 10px;
+
 }
 
 
@@ -175,4 +184,68 @@ font-family: 'Roboto', sans-serif;
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+form {
+font-family: 'Roboto', sans-serif;
+display: flex;
+flex-wrap: wrap;
+margin-left: 3.5rem;
+align-items: center;
+border-radius: 5px;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+padding: 1rem;
+}
+
+input[type=text], input[type=datetime-local], input[type=number] {
+margin-left: 1rem;
+padding: 0.2rem;
+}
+
+input[type=number]{
+
+width: 2rem;
+}
+
+
+
+label{
+margin-left: 1rem;
+}
+
+ input[type=number]:focus {
+  outline: none;
+}
+
+
+input[type=text]:focus {
+  outline: none;
+}
+
+input[type=datetime-local]:focus {
+  outline: none;
+}
+
+.btn {
+background-color: #79B4B7;
+margin-left: 1rem;
+border: none;
+padding: 0.5rem;
+color: white;
+width: 5rem;
+transition: 0.2s;
+border-radius:5px;
+}
+
+
+.btn:hover {
+transform: scale(110%);
+
+}
+.btn:active {
+transform: scale(100%);
+background-color: #FF4646;
+}
+
+
+
 
