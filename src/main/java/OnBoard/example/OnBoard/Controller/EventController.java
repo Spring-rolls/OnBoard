@@ -2,8 +2,10 @@ package OnBoard.example.OnBoard.Controller;
 
 import OnBoard.example.OnBoard.Model.ApplicationUser;
 import OnBoard.example.OnBoard.Model.Event;
+import OnBoard.example.OnBoard.Model.Notification;
 import OnBoard.example.OnBoard.Repository.AppUserRepository;
 import OnBoard.example.OnBoard.Repository.EventRepository;
+import OnBoard.example.OnBoard.Repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,14 +13,22 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 @Controller
 public class EventController {
+
+
     @Autowired
     EventRepository eventRepository;
 
     @Autowired
     AppUserRepository appUserRepository;
+
+    @Autowired
+    NotificationRepository notificationRepository;
 
     @GetMapping("/event")
     public String getEvent(Principal p , Model m){
@@ -54,37 +64,85 @@ public class EventController {
     }
     @GetMapping("/join/{id}")
     public RedirectView joinEvent(@PathVariable Integer id,Principal p){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
         Event event =eventRepository.findById(id).get();
         ApplicationUser applicationUser =appUserRepository.findByUsername(p.getName());
         applicationUser.getEvents().add(event);
         appUserRepository.save(applicationUser);
+        /* notification*/
+        String notification= p.getName() + " has joined to your " + event.getGameName()+" event at " +dtf.format(now);
+        Notification notification1=new Notification(notification,event.getApplicationUser());
+        notificationRepository.save(notification1);
+        /*------------*/
         return new RedirectView("/");
     }
     @GetMapping("/unjoin/{id}")
     public RedirectView unJoinEvent(@PathVariable Integer id,Principal p){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
         Event event =eventRepository.findById(id).get();
         ApplicationUser applicationUser =appUserRepository.findByUsername(p.getName());
         applicationUser.getEvents().remove(event);
         appUserRepository.save(applicationUser);
+
+        /* notification*/
+        String notification= p.getName() + " has left from your " + event.getGameName()+" event at " +dtf.format(now);
+        Notification notification1=new Notification(notification,event.getApplicationUser());
+        notificationRepository.save(notification1);
+        /*------------*/
         return new RedirectView("/");
     }
     @GetMapping("/unjoins/{id}")
     public RedirectView unJoinEvents(@PathVariable Integer id,Principal p){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
         Event event =eventRepository.findById(id).get();
         ApplicationUser applicationUser =appUserRepository.findByUsername(p.getName());
         applicationUser.getEvents().remove(event);
         appUserRepository.save(applicationUser);
+
+        /* notification*/
+        String notification= p.getName() + " has left from your " + event.getGameName()+" event at " +dtf.format(now);
+        Notification notification1=new Notification(notification,event.getApplicationUser());
+        notificationRepository.save(notification1);
+        /*------------*/
         return new RedirectView("/profile");
     }
     @GetMapping("/delete/{id}")
     public RedirectView deleteEventFromHomePage(@PathVariable Integer id,Principal p){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
         Event event =eventRepository.findById(id).get();
+        /* -----------------notification---------------*/
+        for (ApplicationUser user:event.getApplicationUserList()) {
+            String notification= p.getName() + " has delete from your " + event.getGameName()+" event at " +dtf.format(now);
+            Notification notification1=new Notification(notification,user);
+            notificationRepository.save(notification1);
+            user.getEvents().remove(event);
+            appUserRepository.save(user);
+        }
+        /*-----------------------------------------------*/
+
         eventRepository.deleteById(id);
         return new RedirectView("/");
     }
     @GetMapping("/deleted/{id}")
     public RedirectView deleteEventFromProfile(@PathVariable Integer id,Principal p){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
         Event event =eventRepository.findById(id).get();
+
+        /* -----------------notification---------------*/
+        for (ApplicationUser user:event.getApplicationUserList()) {
+            String notification= p.getName() + " has delete his " + event.getGameName()+" event at " +dtf.format(now);
+            Notification notification1=new Notification(notification,user);
+            notificationRepository.save(notification1);
+            user.getEvents().remove(event);
+            appUserRepository.save(user);
+        }
+        /*-----------------------------------------------*/
+
         eventRepository.deleteById(id);
         return new RedirectView("/profile");
     }
@@ -102,12 +160,22 @@ public class EventController {
                                        @RequestParam int numberOfPlayer,
                                        @RequestParam String dateTime,
                                        @RequestParam String place,
-                                     @PathVariable Integer id){
+                                     @PathVariable Integer id,
+                                     Principal p){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
         Event event=eventRepository.findById(id).get();
         event.setGameName(gameName);
         event.setNumberOfPlayer(numberOfPlayer);
         event.setDateTime(dateTime);
         event.setPlace(place);
+        /* -----------------notification---------------*/
+        for (ApplicationUser user:event.getApplicationUserList()) {
+            String notification= p.getName() + " has update his " + event.getGameName()+" event at " +dtf.format(now);
+            Notification notification1=new Notification(notification,user);
+            notificationRepository.save(notification1);
+        }
+        /*-----------------------------------------------*/
         eventRepository.save(event);
         return new RedirectView("/");
     }
@@ -116,12 +184,24 @@ public class EventController {
                                      @RequestParam String description,
                                      @RequestParam String dateTime,
                                      @RequestParam String place,
-                                     @PathVariable Integer id){
+                                     @PathVariable Integer id,
+                                       Principal p){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
         Event event=eventRepository.findById(id).get();
         event.setGameName(gameName);
         event.setDescription(description);
         event.setDateTime(dateTime);
         event.setPlace(place);
+
+
+        /* -----------------notification---------------*/
+        for (ApplicationUser user:event.getApplicationUserList()) {
+            String notification= p.getName() + " has update his " + event.getGameName()+" event at " +dtf.format(now);
+            Notification notification1=new Notification(notification,user);
+            notificationRepository.save(notification1);
+        }
+        /*-----------------------------------------------*/
         eventRepository.save(event);
         return new RedirectView("/");
     }
@@ -138,12 +218,23 @@ public class EventController {
                                        @RequestParam int numberOfPlayer,
                                        @RequestParam String dateTime,
                                        @RequestParam String place,
-                                     @PathVariable Integer id){
+                                     @PathVariable Integer id,
+                                                    Principal p){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
         Event event=eventRepository.findById(id).get();
         event.setGameName(gameName);
         event.setNumberOfPlayer(numberOfPlayer);
         event.setDateTime(dateTime);
         event.setPlace(place);
+
+        /* -----------------notification---------------*/
+        for (ApplicationUser user:event.getApplicationUserList()) {
+            String notification= p.getName() + " has update his " + event.getGameName()+" event at " +dtf.format(now);
+            Notification notification1=new Notification(notification,user);
+            notificationRepository.save(notification1);
+        }
+        /*-----------------------------------------------*/
         eventRepository.save(event);
         return new RedirectView("/profile");
     }
@@ -152,12 +243,24 @@ public class EventController {
                                      @RequestParam String description,
                                      @RequestParam String dateTime,
                                      @RequestParam String place,
-                                     @PathVariable Integer id){
+                                     @PathVariable Integer id,
+                                                  Principal p){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
         Event event=eventRepository.findById(id).get();
         event.setGameName(gameName);
         event.setDescription(description);
         event.setDateTime(dateTime);
         event.setPlace(place);
+
+        /* -----------------notification---------------*/
+        for (ApplicationUser user:event.getApplicationUserList()) {
+            String notification= p.getName() + " has update his " + event.getGameName()+" event at " +dtf.format(now);
+            Notification notification1=new Notification(notification,user);
+            notificationRepository.save(notification1);
+        }
+        /*-----------------------------------------------*/
+
         eventRepository.save(event);
         return new RedirectView("/profile");
     }

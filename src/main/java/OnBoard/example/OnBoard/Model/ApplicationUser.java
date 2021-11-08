@@ -35,6 +35,10 @@ public class ApplicationUser implements UserDetails {
     @OneToMany(mappedBy = "applicationUser")
     private List<Event> eventList;
 
+    @OneToMany(mappedBy = "appUser")
+    private List<Notification> notifications;
+
+
     public ApplicationUser(String password, String username, String firstName, String lastName, String location, String placeName, String workingHour, String authority,String userType,String image) {
         this.password = password;
         this.username = username;

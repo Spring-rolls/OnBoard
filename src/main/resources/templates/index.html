@@ -29,6 +29,9 @@
         <img th:if="${authUser}" th:src="${authUser.getImage()}" class="img">
     </div>
 </nav>
+<div id="cover">
+    <h2>Discover, Plan, Play!</h2>
+</div>
 <div id="content">
     <div id="side-menu">
     </div>
@@ -38,7 +41,7 @@
                 <label for="gameName">Game</label>
                 <input type="text" class="form-control" name="gameName" id="gameName"></br>
                 <label for="numberOfPlayer">Number Of Players</label>
-                <input type="number" class="form-control" name="numberOfPlayer" id="numberOfPlayer"></br>
+                <input type="number" class="form-control" name="numberOfPlayer" id="numberOfPlayer" min="1" max="10"></br>
                 <label for="dateTime">Time</label>
                 <input type="datetime-local" class="form-control" name="dateTime" id="dateTime"></br>
                 <label for="place">Place</label>
@@ -120,7 +123,7 @@ var countDownDate = new Date(message).getTime();
  var now = new Date().getTime();
  if(now>countDownDate){
 <!--    document.getElementById(id).innerHTML = "EXPIRED";-->
-document.getElementById(id).parentElement.remove();
+document.getElementById(id).parentElement.parentElement.parentElement.remove();
 }
 </script>
 </body>
