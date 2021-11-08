@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>user</title>
+</head>
+<body>
+
+<div>
+    <img th:src="${user.getImage()}" class="img">
+    <p th:text="' firstName: ' +${user.getFirstName()} +' '+${user.getLastName()}"> </p>
+    <p th:text="' type: ' + ${user.getUserType()}"> </p>
+    <p th:if="${user.getUserType() == 'business'}" th:text="${user.getLocation()}"> </p>
+    <p th:if="${user.getUserType() == 'business'}" th:text="${user.getPlaceName()}"> </p>
+    <p th:if="${user.getUserType() == 'business'}" th:text="${user.getWorkingHour()}"> </p>
+</div>
+
+    <div th:if="${authUser}">
+        <div th:if="!${authUser.getReviewers().contains(user)}">
+        <form method="post" th:action="${'/feedBack/'+user.getId()}">
+            <label for="starNumber">Rate</label>
+            <input type="number" class="form-control" name="starNumber" id="starNumber" min="1" max="5" step="0.5"></br>
+            <label for="feedBack">review</label>
+            <input type="text" class="form-control" name="feedBack" id="feedBack"></br>
+            <input type="submit" value="Post" class="btn btn-primary">
+        </form>
+        </div>
+    </div>
+    <div th:each="rate:${user.getRatings()}">
+        <p th:text="${rate.getFeedBack()}"></p>
+        <p th:text="${rate.getStarNumber()}"></p>
+    </div>
+
+</body>
+</html>

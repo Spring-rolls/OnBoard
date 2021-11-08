@@ -4,6 +4,7 @@ import OnBoard.example.OnBoard.Model.ApplicationUser;
 import OnBoard.example.OnBoard.Model.Event;
 import OnBoard.example.OnBoard.Repository.AppUserRepository;
 import OnBoard.example.OnBoard.Repository.EventRepository;
+import OnBoard.example.OnBoard.Repository.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,10 +16,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 public class UserController {
 
+    @Autowired
+    RatingRepository ratingRepository;
     @Autowired
     PasswordEncoder encoder;
 
@@ -91,6 +97,16 @@ public class UserController {
         return new RedirectView("/");
     }
 
+    @GetMapping("/user/{id}")
+    public String userPage(@PathVariable Integer id,Model model,Principal principal){
+        ApplicationUser authUser=appUserRepository.findByUsername(principal.getName());
+        ApplicationUser user=appUserRepository.findById(id).get();
+        model.addAttribute("authUser",authUser);
+        model.addAttribute("user", user);
+        return "user";
+    }
+
+
     @GetMapping("/profile")
     public String profilePage(Model model,Principal principal){
         ApplicationUser authUser=appUserRepository.findByUsername(principal.getName());
@@ -105,7 +121,7 @@ public class UserController {
     }
 
     @PostMapping("/editProfileUsersBusiness")
-    public RedirectView editProfileUser(@RequestParam String password,
+    public RedirectView editProfileUser(
                                         @RequestParam String username,
                                         @RequestParam String firstName,
                                         @RequestParam String lastName,
@@ -117,7 +133,6 @@ public class UserController {
 
         ApplicationUser applicationUser=appUserRepository.findByUsername(principal.getName());
         applicationUser.setUsername(username);
-        applicationUser.setPassword(password);
         applicationUser.setFirstName(firstName);
         applicationUser.setLastName(lastName);
         applicationUser.setImage(image);
@@ -131,7 +146,7 @@ public class UserController {
     }
 
     @PostMapping("/editProfileUsers")
-    public RedirectView editProfileUsersBusiness(@RequestParam String password,
+    public RedirectView editProfileUsersBusiness(
                                         @RequestParam String username,
                                         @RequestParam String firstName,
                                         @RequestParam String lastName,
@@ -140,7 +155,6 @@ public class UserController {
 
         ApplicationUser applicationUser=appUserRepository.findByUsername(principal.getName());
         applicationUser.setUsername(username);
-        applicationUser.setPassword(password);
         applicationUser.setFirstName(firstName);
         applicationUser.setLastName(lastName);
         applicationUser.setImage(image);
