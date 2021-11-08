@@ -3,16 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/sign.css" />
-    <!--            <link rel="stylesheet" href="/static/styles/reset.css" />-->
-    <!--            <link rel="stylesheet" href="/static/styles/sign.css" />-->
+                <link rel="stylesheet" href="/static/styles/reset.css" />
+                <link rel="stylesheet" href="/static/styles/sign.css" />
 </head>
 <body>
-<p id="logo" >OnBoard</p><br>
+
+<div class="logo">
+     <img href="/" src="https://logomakercdn.truic.com/ux-flow/industry/board-game-lounge-meta.png"  >
+    <a href="/">OnBoard</a>
+</div>
+
+
+<div class="asUser">
 <a id="up" href="javascript:;" onmousedown="toggleDiv('mydiv');">Sign up as</a>
 </div>
+
+
 <div id="mydivon" style="display:block">
     <h1 class="tag">Individual</h1>
     <form action="/signupNormal" method="post">
@@ -38,7 +47,8 @@
         <input type="submit" class="btn btn-primary">
     </form>
 </div>
-<a href="/">Home</a>
+<div class="goHome"><a href="/">Home</a></div>
+
 <script type="text/javascript">
        function toggleDiv(divid)
   {
