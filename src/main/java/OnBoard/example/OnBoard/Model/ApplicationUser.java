@@ -38,6 +38,18 @@ public class ApplicationUser implements UserDetails {
     @OneToMany(mappedBy = "appUser")
     private List<Notification> notifications;
 
+    @OneToMany(mappedBy = "appU")
+    private List<Rating> ratings;
+    @ManyToMany
+    @JoinTable(
+            name="user_userid",
+            joinColumns = { @JoinColumn(name = "primaryUser") },
+            inverseJoinColumns = { @JoinColumn(name = "raterUser") }
+    )
+    public List<ApplicationUser> reviewers;
+
+    @ManyToMany(mappedBy = "reviewers")
+    public List<ApplicationUser> reviewsUser;
 
     public ApplicationUser(String password, String username, String firstName, String lastName, String location, String placeName, String workingHour, String authority,String userType,String image) {
         this.password = password;
@@ -152,6 +164,42 @@ public class ApplicationUser implements UserDetails {
 
     public void setWorkingHour(String workingHour) {
         this.workingHour = workingHour;
+    }
+
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
+    public List<ApplicationUser> getReviewers() {
+        return reviewers;
+    }
+
+    public void setReviewers(List<ApplicationUser> reviewers) {
+        this.reviewers = reviewers;
+    }
+
+    public List<ApplicationUser> getReviewsUser() {
+        return reviewsUser;
+    }
+
+    public void setReviewsUser(List<ApplicationUser> reviewsUser) {
+        this.reviewsUser = reviewsUser;
     }
 
     @Override
