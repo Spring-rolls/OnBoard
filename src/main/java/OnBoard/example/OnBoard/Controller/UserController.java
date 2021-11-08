@@ -44,6 +44,12 @@ public class UserController {
         return "index";
     }
 
+    @GetMapping("/aboutus")
+    public String aboutUs() {
+        return "aboutus";
+    }
+
+
     @GetMapping("/login")
     public String getLoginPage() {
         return "login";
