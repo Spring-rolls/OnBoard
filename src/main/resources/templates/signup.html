@@ -3,40 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/sign.css" />
+    <!--            <link rel="stylesheet" href="/static/styles/reset.css" />-->
+    <!--            <link rel="stylesheet" href="/static/styles/sign.css" />-->
 </head>
 <body>
-<div class="container">
-    <form action="/signup" method="post">
-        <label for="username">Username</label>
-        <input type="text" class="form-control" name="username" id="username"></br>
-
-        <label for="password">Password</label>
-        <input type="password" class="form-control" name="password" id="password"></br>
-
-        <label for="firstName">firstName</label>
-        <input type="text" class="form-control" name="firstName" id="firstName"></br>
-
-        <label for="lastName">lastName</label>
-        <input type="text" class="form-control" name="lastName" id="lastName"></br>
-
-        <label for="location">location</label>
-        <input type="text" class="form-control" name="location" id="location"></br>
-
-        <label for="placeName">placeName</label>
-        <input type="text" class="form-control" name="placeName" id="placeName"></br>
-
-        <label for="workingHour">workingHour</label>
-        <input type="text" class="form-control" name="workingHour" id="workingHour"></br>
-
-        <label for="image">image</label>
-        <input type="text" class="form-control" name="image" id="image" accept="image/jpeg, image/png"></br>
-
+<p id="logo" >OnBoard</p><br>
+<a id="up" href="javascript:;" onmousedown="toggleDiv('mydiv');">Sign up as</a>
+</div>
+<div id="mydivon" style="display:block">
+    <h1 class="tag">Individual</h1>
+    <form action="/signupNormal" method="post">
+        <label for="username">Username<input type="text" class="form-control" name="username" id="username"> </label></br>
+        <label for="password">Password <input type="password" class="form-control" name="password" id="password"> </label></br>
+        <label for="firstName">First Name<input type="text" class="form-control" name="firstName" id="firstName"> </label></br>
+        <label for="lastName">Last Name <input type="text" class="form-control" name="lastName" id="lastName"> </label></br>
+        <label for="image"> Avatar <input type="text" class="form-control" name="image" id="image" accept="image/jpeg, image/png"> </label></br>
         <input type="submit" class="btn btn-primary">
     </form>
-
 </div>
-
+<div id="mydivoff" style="display:none">
+    <h1 class="tag">Business</h1>
+    <form action="/signup" method="post">
+        <label for="username">Username <input type="text" class="form-control" name="username" id="username"> </label></br>
+        <label for="password">Password <input type="password" class="form-control" name="password" id="password"></label></br>
+        <label for="firstName">First Name <input type="text" class="form-control" name="firstName" id="firstName"> </label></br>
+        <label for="lastName">Last Name <input type="text" class="form-control" name="lastName" id="lastName"></label></br>
+        <label for="location">Location &nbsp;  &nbsp; <input type="text" class="form-control" name="location" id="location"></label></br>
+        <label for="placeName">Business Name <input type="text" class="form-control" name="placeName" id="placeName"> </label></br>
+        <label for="workingHour">Working Hours <input type="text" class="form-control" name="workingHour" id="workingHour"></label></br>
+        <label for="image"> Avatar <input type="text" class="form-control" name="image" id="image" accept="image/jpeg, image/png"> </label></br>
+        <input type="submit" class="btn btn-primary">
+    </form>
+</div>
+<a href="/">Home</a>
+<script type="text/javascript">
+       function toggleDiv(divid)
+  {
+    varon = divid + 'on';
+    varoff = divid + 'off';
+    if(document.getElementById(varon).style.display == 'block')
+    {
+    document.getElementById(varon).style.display = 'none';
+    document.getElementById(varoff).style.display = 'block';
+    }
+    else
+    {
+    document.getElementById(varoff).style.display = 'none';
+    document.getElementById(varon).style.display = 'block'
+    }
+}
+    </script>
 </body>
 </html>
