@@ -85,7 +85,7 @@
         <div id="event" th:each="event:${eventlist}" >
             <div th:if="${event.getApplicationUser().getUserType() == 'normal'}">
                 <div th:if="!${(event.getApplicationUserList().size()+1)>=event.getNumberOfPlayer()}">
-<!--                    <a th:href="${'/user/'+event.getApplicationUser().getId()}">  <p th:text="${event.getApplicationUser().getFirstName()}"></p></a>-->
+                    <a th:href="${'/user/'+event.getApplicationUser().getId()}">  <p th:text="${event.getApplicationUser().getFirstName()}"></p></a>
                     <p th:text="'Game: '+${event.getGameName()}"></p>
 <!--                    <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>-->
                     <p th:text="'On '+${event.getDateTime()}"></p>
@@ -109,7 +109,7 @@
                 </div>
             </div>
             <div th:if="${event.getApplicationUser().getUserType() == 'business'}">
-<!--                <a th:href="${'/user/'+event.getApplicationUser().getId()}">  <p th:text="${event.getApplicationUser().getFirstName()}"></p></a>-->
+                <a th:href="${'/user/'+event.getApplicationUser().getId()}">  <p th:text="${event.getApplicationUser().getFirstName()}"></p></a>
                 <p th:text="'Game: '+${event.getGameName()}"></p>
                 <p th:text="'Host offer: '+${event.getDescription()}"></p>
                 <p th:text="'On '+${event.getDateTime()}"></p>
