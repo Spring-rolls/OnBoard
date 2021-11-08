@@ -19,6 +19,7 @@
             <span class="dropbtn">Menu &#x21e9;</span>
             <ul class="nav navbar-nav navbar-right dropdown-content">
                 <li ><a th:if="${authUser}" th:href="${'/profile'}" >profile</a></li>
+                <li ><a th:if="${authUser}" th:href="${'/editProfileUser'}" >update profile</a></li>
                 <!--            <li sec:authorize="!isAuthenticated()"><a href="/signupNormal" ><span class="glyphicon glyphicon-user"></span> Sign Up Normal</a></li>-->
                 <li sec:authorize="!isAuthenticated()"><a href="/login"  ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 <li sec:authorize="!isAuthenticated()"><a href="/signup" ><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>

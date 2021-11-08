@@ -24,6 +24,7 @@
     <input type="submit" class="btn btn-primary">
 
   </form>
+
   <form th:if="${authUser.getUserType() == 'business'}" th:action="${'/updateformbusiness/'+event.getId()}" method="post">
     <label for="gameName">gameName</label>
     <input type="text" class="form-control" name="gameName" id="gameName" th:value="${event.getGameName()}"></br>
