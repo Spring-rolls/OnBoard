@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<main>
+
+    <form th:if="${authUser.getUserType() == 'normal'}" action="/editProfileUsers" method="post">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" name="username" id="username" th:value="${authUser.getUsername()}"></br>
+
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" id="password" th:value="${authUser.getPassword()}"></br>
+
+        <label for="firstName">firstName</label>
+        <input type="text" class="form-control" name="firstName" id="firstName" th:value="${authUser.getFirstName()}"></br>
+
+        <label for="lastName">lastName</label>
+        <input type="text" class="form-control" name="lastName" id="lastName" th:value="${authUser.getLastName()}"> </br>
+
+        <label for="image">image</label>
+        <input type="text" class="form-control" name="image" id="image" accept="image/jpeg, image/png" th:value="${authUser.getImage()}"></br>
+
+        <input type="submit" class="btn btn-primary">
+
+    </form>
+
+    <form th:if="${authUser.getUserType() == 'business'}" action="/editProfileUsersBusiness" method="post">
+        <label for="username">Username <input type="text" class="form-control" name="username" id="username" th:value="${authUser.getUsername()}"> </label></br>
+        <label for="password">Password <input type="password" class="form-control" name="password" id="password" th:value="${authUser.getPassword()}"></label></br>
+        <label for="firstName">First Name <input type="text" class="form-control" name="firstName" id="firstName" th:value="${authUser.getFirstName()}"> </label></br>
+        <label for="lastName">Last Name <input type="text" class="form-control" name="lastName" id="lastName" th:value="${authUser.getLastName()}"></label></br>
+        <label for="location">Location &nbsp;  &nbsp; <input type="text" class="form-control" name="location" id="location" th:value="${authUser.getLocation()}"></label></br>
+        <label for="placeName">Business Name <input type="text" class="form-control" name="placeName" id="placeName" th:value="${authUser.getPlaceName()}"> </label></br>
+        <label for="workingHour">Working Hours <input type="text" class="form-control" name="workingHour" id="workingHour" th:value="${authUser.getWorkingHour()}"></label></br>
+        <label for="image"> Avatar <input type="text" class="form-control" name="image" id="image" accept="image/jpeg, image/png" th:value="${authUser.getImage()}"> </label></br>
+        <input type="submit" class="btn btn-primary">
+    </form>
+</main>
+</body>
+</html>
