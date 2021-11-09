@@ -36,7 +36,7 @@ public class RatingController {
                                        Principal p){
         ApplicationUser authUser =appUserRepository.findByUsername(p.getName());
         ApplicationUser applicationUser =appUserRepository.findById(id).get();
-        Rating rating=new Rating(starNumber,authUser.getFirstName()+ feedBack,applicationUser);
+        Rating rating=new Rating(starNumber,authUser.getFirstName()+' '+feedBack,applicationUser);
         ratingRepository.save(rating);
         authUser.getReviewers().add(appUserRepository.findById(id).get());
         appUserRepository.save(authUser);
