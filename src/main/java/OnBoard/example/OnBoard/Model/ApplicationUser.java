@@ -207,9 +207,6 @@ public class ApplicationUser implements UserDetails {
         for (Rating rate:this.ratings) {
             sum+=rate.getStarNumber();
         }
-
-        System.out.println("sum: " +sum );
-        System.out.println("rate: " + sum/(float)ratings.size() );
         DecimalFormat df = new DecimalFormat();
         df.setMaximumFractionDigits(2);
 
