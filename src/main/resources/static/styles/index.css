@@ -76,7 +76,8 @@ position: absolute;
 right: 10rem;
 top: 1rem;
 width: 55px;
-border-radius: 70px;
+    height: 55px;
+border-radius: 50%;
 }
 
 

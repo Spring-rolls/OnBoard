@@ -16,7 +16,7 @@
 <div class="userPro">
 <figure class="snip1515">
     <div class="profile-image"><img th:src="${user.getImage()}" class="img"></div>
-    <div class="gg">
+    <div th:if="${user.starRate() != 'NaN'}" class="gg">
     <p th:text="${'Star rating '+user.starRate()}"></p><i class="fas fa-star"></i>
     </div >
     <figcaption>
@@ -45,6 +45,7 @@
 </div>
 
 <div class="div1" th:if="${authUser}">
+    <div  th:if="${authUser != user}">
     <div th:if="!${authUser.getReviewers().contains(user)}">
         <form method="post" th:action="${'/feedBack/'+user.getId()}">
             <div class="form-group required">
@@ -77,6 +78,7 @@
             </div>
         </form>
     </div>
+</div>
 </div>
 <div class="imgUser">
     <img src="https://github.com/4O4ers/eventome-fe/blob/main/src/components/Images/Vector%205.png?raw=true">
