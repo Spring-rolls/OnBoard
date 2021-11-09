@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>user</title>
+    <style>
+        .star-rating {
+    direction: rtl;
+    display: inline-block;
+    padding: 20px;
+}
+
+.star-rating input[type=radio] {
+    display: none;
+}
+
+.star-rating label {
+    color: #bbb;
+    font-size: 35px;
+    padding: 0;
+    cursor: pointer;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input[type=radio]:checked ~ label {
+    color: #f2b600;
+}
+
+    </style>
+</head>
+<body>
+
+<div>
+    <img th:src="${user.getImage()}" class="img">
+    <p th:text="' firstName: ' +${user.getFirstName()} +' '+${user.getLastName()}"> </p>
+    <p th:text="' type: ' + ${user.getUserType()}"> </p>
+    <p th:if="${user.getUserType() == 'business'}" th:text="${user.getLocation()}"> </p>
+    <p th:if="${user.getUserType() == 'business'}" th:text="${user.getPlaceName()}"> </p>
+    <p th:if="${user.getUserType() == 'business'}" th:text="${user.getWorkingHour()}"> </p>
+</div>
+
+    <div th:if="${authUser}">
+        <div th:if="!${authUser.getReviewers().contains(user)}">
+        <form method="post" th:action="${'/feedBack/'+user.getId()}">
+            <div class="form-group required">
+                <div class="col-sm-12">
+                    <label class="control-label">{{ entry_rating }}</label>
+                    <div class="star-rating">
+                        <input id="star-5" type="radio" name="starNumber" value="5" />
+                        <label for="star-5" title="5 stars">★</label>
+                        &nbsp;
+                        <input id="star-4" type="radio" name="starNumber" value="4" />
+                        <label for="star-4" title="4 stars">★</label>
+                        &nbsp;
+                        <input id="star-3" type="radio" name="starNumber" value="3" />
+                        <label for="star-3" title="3 stars">★</label>
+                        &nbsp;
+                        <input id="star-2" type="radio" name="starNumber" value="2" />
+                        <label for="star-2" title="2 stars">★</label>
+                        &nbsp;
+                        <input id="star-1" type="radio" name="starNumber" value="1" />
+                        <label for="star-1" title="1 star">★</label>
+                    </div>
+                </div>
+            </div>
+
+            </br>
+            <label for="feedBack">review</label>
+            <input type="text" class="form-control" name="feedBack" id="feedBack"></br>
+
+            <input type="submit" value="Post" class="btn btn-primary">
+        </form>
+        </div>
+    </div>
+    <div th:each="rate:${user.getRatings()}">
+        <p th:text="${rate.getFeedBack()}"></p>
+        <p th:text="${rate.getStarNumber()}"></p>
+    </div>
+
+</body>
+</html>
