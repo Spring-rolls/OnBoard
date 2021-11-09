@@ -11,12 +11,15 @@ public class Photo {
 
     private String url;
 
-    @OneToOne(mappedBy = "photo")
+    @OneToOne
     private Event event;
 
     public Photo(String url, Event event) {
         this.url = url;
         this.event = event;
+    }
+
+    public Photo(){
     }
 
     public Integer getId() {
