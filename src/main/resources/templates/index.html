@@ -106,18 +106,17 @@
             </form>
         </div>
 
-<div>
-            <button onclick="notAll()">All</button>
+<div id="switch">
+            <span onclick="notAll()">All</span>
 
-            <button onclick="normal()">Casual</button>
+            <span onclick="normal()">Casual</span>
 
-            <button onclick="business()">Events</button>
+            <span onclick="business()">Events</span>
 </div>
 
         <!--   <a id="this-btn" th:if="${authUser}" th:href="${'/event'}" >Create event</a>-->
             <!-- //////////////////////////////////all event/////////////////////////-->
         <div id="notAll" style="display:block">
-            <h1>all event</h1>
         <div th:each="event:${eventlist}" >
             <div  th:if="!${(event.getApplicationUserList().size()+1)>=event.getNumberOfPlayer()}">
              <div  class="event"   th:if="${event.getApplicationUser().getUserType() == 'normal'}">
@@ -174,7 +173,6 @@
         </div>
 <!--     /////////////   Normal //////////////////// -->
         <div id="normal1" style="display:none">
-            <h1>normal event</h1>
             <div  th:each="event:${eventlist}" >
                 <div  th:if="!${(event.getApplicationUserList().size()+1)>=event.getNumberOfPlayer()}">
 
@@ -206,7 +204,6 @@
             </div>
 <!--  /////////////////// business///////////////////      -->
         <div id="business1" style="display:none">
-            <h1>business event</h1>
             <div  th:each="event:${eventlist}" >
             <div class="event"  th:if="${event.getApplicationUser().getUserType() == 'business'}">
                 <a class="name" th:href="${'/user/'+event.getApplicationUser().getId()}">  <p th:text="${event.getApplicationUser().getFirstName()}"></p></a>
