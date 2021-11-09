@@ -3,51 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>user</title>
-    <style>
-        .star-rating {
-    direction: rtl;
-    display: inline-block;
-    padding: 20px;
-}
-
-.star-rating input[type=radio] {
-    display: none;
-}
-
-.star-rating label {
-    color: #bbb;
-    font-size: 35px;
-    padding: 0;
-    cursor: pointer;
-    -webkit-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
-}
-
-.star-rating label:hover,
-.star-rating label:hover ~ label,
-.star-rating input[type=radio]:checked ~ label {
-    color: #f2b600;
-}
-
-    </style>
+    <link rel="stylesheet" href="/styles/user.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/1599d6604b.js" crossorigin="anonymous"></script>
 </head>
 <body>
+<div class="parent">
 
-<div>
-    <img th:src="${user.getImage()}" class="img">
-    <p th:text="' firstName: ' +${user.getFirstName()} +' '+${user.getLastName()}"> </p>
-    <p th:text="' type: ' + ${user.getUserType()}"> </p>
-    <p th:if="${user.getUserType() == 'business'}" th:text="${user.getLocation()}"> </p>
-    <p th:if="${user.getUserType() == 'business'}" th:text="${user.getPlaceName()}"> </p>
-    <p th:if="${user.getUserType() == 'business'}" th:text="${user.getWorkingHour()}"> </p>
+
+
+
+<div class="userPro">
+<figure class="snip1515">
+    <div class="profile-image"><img th:src="${user.getImage()}" class="img"></div>
+    <figcaption>
+        <h3 th:text="' Name: ' +${user.getFirstName()} +' '+${user.getLastName()}"></h3>
+        <h4 th:text="' type of user: ' + ${user.getUserType()}"></h4>
+        <div class="con">
+            <div> <label>Location</label>
+                <p th:if="${user.getUserType() == 'business'}" th:text="${user.getLocation()}"></p></div>
+            <div> <label>PlaceName</label>
+                <p th:if="${user.getUserType() == 'business'}" th:text="${user.getPlaceName()}"></p></div>
+            <div><label>WorkingHour</label>
+                <p th:if="${user.getUserType() == 'business'}" th:text="${user.getWorkingHour()}"></p></div>
+        </div>
+    </figcaption>
+</figure>
 </div>
 
-    <div th:if="${authUser}">
-        <div th:if="!${authUser.getReviewers().contains(user)}">
+    <div class="userPro1">
+        <div class="div3">
+        <h1><i class="fas fa-star">Reviews</i></h1>
+        </div>
+    <div class="message" th:each="rate:${user.getRatings()}">
+        <p th:text="${rate.getFeedBack()} +' '+ ${rate.getStarNumber()}"></p><i class="fas fa-star"></i>
+    </div>
+    </div>
+</div>
+
+<div class="div1" th:if="${authUser}">
+    <div th:if="!${authUser.getReviewers().contains(user)}">
         <form method="post" th:action="${'/feedBack/'+user.getId()}">
             <div class="form-group required">
                 <div class="col-sm-12">
-                    <label class="control-label">{{ entry_rating }}</label>
+                    <label class="control-label"></label>
                     <div class="star-rating">
                         <input id="star-5" type="radio" name="starNumber" value="5" />
                         <label for="star-5" title="5 stars">★</label>
@@ -66,19 +65,19 @@
                     </div>
                 </div>
             </div>
-
-            </br>
-            <label for="feedBack">review</label>
-            <input type="text" class="form-control" name="feedBack" id="feedBack"></br>
-
-            <input type="submit" value="Post" class="btn btn-primary">
+            <div class="re">
+                <label for="feedBack">Review</label>
+                <div class="kk">
+                <input type="text" class="form-control" name="feedBack" id="feedBack"></br>
+                <input type="submit" value="Post" class="standard-btn btn-lg">
+                </div>
+            </div>
         </form>
-        </div>
     </div>
-    <div th:each="rate:${user.getRatings()}">
-        <p th:text="${rate.getFeedBack()}"></p>
-        <p th:text="${rate.getStarNumber()}"></p>
-    </div>
+</div>
+<div class="imgUser">
+    <img src="https://github.com/4O4ers/eventome-fe/blob/main/src/components/Images/Vector%205.png?raw=true">
+</div>
 
 </body>
 </html>
