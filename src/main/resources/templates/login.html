@@ -4,29 +4,14 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="/static/styles/reset.css" />
+    <link rel="stylesheet" href="/static/styles/login.css" />
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">Home page</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li ><a th:if="${authUser}" th:href="${'/profile'}" >profile</a></li>
-            <li ><a th:if="${authUser}" th:href="${'/event'}" >Create event</a></li>
-            <li ><a href="#" >All users</a></li>
-            <li ><a href="#" >feed</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li sec:authorize="!isAuthenticated()"><a href="/signup" ><span class="glyphicon glyphicon-user"></span> Sign Up Business</a></li>
-            <li sec:authorize="!isAuthenticated()"><a href="/signupNormal" ><span class="glyphicon glyphicon-user"></span> Sign Up Normal</a></li>
-            <li sec:authorize="!isAuthenticated()"><a href="/login"  ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            <li ><p  id="text"></li>
-            <li sec:authorize="isAuthenticated()"><a href="/perform_logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-        </ul>
-    </div>
-</nav>
+<div class="logo">
+    <img href="/" src="https://logomakercdn.truic.com/ux-flow/industry/board-game-lounge-meta.png"  >
+    <a href="/">OnBoard</a>
+</div>
 <div class="container">
     <form action="/perform_login" method="post">
         <label for="username">Username</label>
