@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+
 body {
-    width: 1400px;
-    margin: auto;
-    font-family: 'Noto Sans JP', sans-serif;
+    margin: 0;
+    padding: 0;
     background-color: #fef8f8;
 }
 header h1{
@@ -16,7 +19,9 @@ header p{
     width: 600px;
 }
 main {
-    margin-bottom: 150px;
+    width: 1400px;
+    margin: 50px auto;
+
 }
 .con {
     display: grid;
@@ -32,6 +37,7 @@ main {
 }
 .d1 h3{
     text-align: center;
+    color: #181D31;
 }
 .d1 p{
     text-align: center;
@@ -46,6 +52,7 @@ main {
 }
 .d2 h3{
     text-align: center;
+    color: #181D31;
 }
 .d2 p{
     text-align: center;
@@ -60,6 +67,8 @@ main {
 }
 .d3 h3{
     text-align: center;
+    color: #181D31;
+    font-weight: 700;
 }
 .d3 p{
     text-align: center;
@@ -192,6 +201,7 @@ main {
     z-index: -10;
 }
 .container{
+    margin-top: 100px;
     background: #fff;
     border-radius: 6px;
     padding: 20px 60px 30px 40px;
@@ -228,7 +238,7 @@ main {
 }
 .content .left-side .details i{
     font-size: 30px;
-    color: #3e2093;
+    color: #181D31;
     margin-bottom: 10px;
 }
 .content .left-side .details .topic{
@@ -247,7 +257,7 @@ main {
 .content .right-side .topic-text{
     font-size: 23px;
     font-weight: 600;
-    color: #3e2093;
+    color: #181D31;
 }
 .right-side .input-box{
     height: 50px;
@@ -283,12 +293,12 @@ main {
     border: none;
     padding: 8px 16px;
     border-radius: 6px;
-    background: #3e2093;
+    background: #181D31;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 .button input[type="button"]:hover{
-    background: #5029bc;
+    background: #181D31;
 }
 
 @media (max-width: 950px) {
@@ -324,3 +334,129 @@ main {
         margin-left: 0;
     }
 }
+
+* {
+    box-sizing: border-box;
+
+}
+
+.navbar  {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2pc;
+    background-color: #181D31;
+    height: 5.5rem;
+    border-radius: 0px;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+}
+
+.navbar  a{
+    text-decoration: none;
+    color: white;
+    transition: 0.2s;
+}
+
+.navbar  a:hover{
+    color: blue;
+}
+
+
+.navbar-header {
+    margin-top: -2rem;
+    font-size: 3.5pc;
+    font-family: 'Staatliches', cursive;
+}
+
+.navbar-header img {
+    width: 70px;
+    filter: invert(1);
+
+}
+
+.navbar-header  a:hover{
+    color:white;
+}
+
+
+.container-fluid {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: row;
+    height: 7rem;
+    align-items: center;
+}
+
+
+.nav{
+    display: flex;
+    justify-content: flex-start;
+    height: 5rem;
+    align-items: center;
+}
+
+.nav li {
+    margin-left: 1rem;
+}
+
+.img {
+
+    position: absolute;
+    right: 10rem;
+    top: 1rem;
+    width: 55px;
+    border-radius: 70px;
+}
+
+
+.a {
+    position: absolute;
+    right: 5.5rem;
+    top: 2.5rem;
+}
+
+
+.dropbtn {
+
+    color: white;
+    font-size: 1.4pc;
+    border: none;
+    cursor: pointer;
+    margin-left: 2rem;
+
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+
+    padding-top: 0.5rem;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    height: fit-content;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius:5px;
+    margin-left: 3.5rem;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+

@@ -16,16 +16,17 @@
 <div class="userPro">
 <figure class="snip1515">
     <div class="profile-image"><img th:src="${user.getImage()}" class="img"></div>
+    <p th:text="${'Star rating '+user.starRate()}"></p>
     <figcaption>
         <h3 th:text="' Name: ' +${user.getFirstName()} +' '+${user.getLastName()}"></h3>
         <h4 th:text="' type of user: ' + ${user.getUserType()}"></h4>
-        <div class="con">
-            <div> <label>Location</label>
-                <p th:if="${user.getUserType() == 'business'}" th:text="${user.getLocation()}"></p></div>
+        <div th:if="${user.getUserType() == 'business'}"class="con">
+            <div > <label>Location</label>
+                <p  th:text="${user.getLocation()}"></p></div>
             <div> <label>PlaceName</label>
-                <p th:if="${user.getUserType() == 'business'}" th:text="${user.getPlaceName()}"></p></div>
-            <div><label>WorkingHour</label>
-                <p th:if="${user.getUserType() == 'business'}" th:text="${user.getWorkingHour()}"></p></div>
+                <p  th:text="${user.getPlaceName()}"></p></div>
+            <div ><label>WorkingHour</label>
+                <p  th:text="${user.getWorkingHour()}"></p></div>
         </div>
     </figcaption>
 </figure>
