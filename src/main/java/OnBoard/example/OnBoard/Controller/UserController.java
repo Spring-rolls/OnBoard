@@ -45,7 +45,11 @@ public class UserController {
     }
 
     @GetMapping("/aboutus")
-    public String aboutUs() {
+    public String aboutUs(Principal p, Model m) {
+        if (p != null) {
+            ApplicationUser authUser = appUserRepository.findByUsername(p.getName());
+            m.addAttribute("authUser", authUser);
+        }
         return "aboutus";
     }
 
