@@ -63,22 +63,24 @@ public class EventController {
 
         /*-----API----*/
 
-//        Gson gson = new Gson();
-//        Splash s = null;
-//        HttpURLConnection conn = null;
-//        BufferedReader read = null;
-//        try {
-//            System.out.println("from API file");
-//            URL url = new URL("https://api.unsplash.com/search/photos/?client_id=5JrdpKwQXgj6389dUkJ0mwaZagbWALMWQYhHAiygjco&query="+gameName);
-//            conn = (HttpURLConnection) url.openConnection();
-//            read = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-//            s = gson.fromJson(read, Splash.class);
-//            System.out.println("array of games" + s.toString());
-//        } catch (Exception IOException) {
-//            System.out.println("from catch");
-//            Reader reader = null;
-//        }
-//        eventRepository.save(event);
+        Gson gson = new Gson();
+         Splash s = null;
+        HttpURLConnection conn = null;
+        BufferedReader read = null;
+        try {
+            System.out.println("from API file");
+            URL url = new URL("https://api.unsplash.com/search/photos/?client_id=5JrdpKwQXgj6389dUkJ0mwaZagbWALMWQYhHAiygjco&query="+gameName);
+            conn = (HttpURLConnection) url.openConnection();
+            read = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            s = gson.fromJson(read, Splash.class);
+            System.out.println("array of games" + s.getResults()[0].urls.raw);
+            Photo photo=new Photo(s.getResults()[0].urls.raw,event);
+            photoRepository.save(photo);
+        } catch (Exception IOException) {
+            System.out.println("from catch");
+            Reader reader = null;
+        }
+        eventRepository.save(event);
         /*-----------*/
 
         appUserRepository.save(applicationUser);

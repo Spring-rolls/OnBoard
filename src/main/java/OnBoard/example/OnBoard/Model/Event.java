@@ -21,9 +21,9 @@ public class Event {
 
     @ManyToOne
     private ApplicationUser applicationUser;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "photo_id", referencedColumnName = "id")
+//(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "event")
+//    @JoinColumn(name = "photo_event", referencedColumnName = "id")
     private Photo photo;
 
     public Event(String gameName, int numberOfPlayer, String dateTime, String place,ApplicationUser applicationUser) {

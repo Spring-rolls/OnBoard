@@ -126,7 +126,7 @@
                     <p th:text="'On '+${event.getDateTime()}"></p>
                     <p th:id="${event.getId()}"></p>
                     <p th:text="'Place: '+${event.getPlace()}"></p>
-
+                 <img th:src="${event.getPhoto().getUrl()}">
 <!--                    <div th:each="userJoin:${event.getApplicationUserList()}">-->
 <!--                        <p th:text="${userJoin.getFirstName()}"></p>-->
 <!--                    </div>-->
@@ -152,7 +152,7 @@
                 <p th:text="'On '+${event.getDateTime()}"></p>
                 <p th:id="${event.getId()}"></p>
                 <p th:text="'Place: '+${event.getPlace()}"></p>
-
+                <img th:src="${event.getPhoto().getUrl()}">
 <!--                <div th:each="userJoin:${event.getApplicationUserList()}">-->
 <!--                    <p th:text="${userJoin.getFirstName()}"></p>-->
 <!--                </div>-->
@@ -183,7 +183,7 @@
                         <p th:text="'On '+${event.getDateTime()}"></p>
                         <p th:id="${event.getId()}"></p>
                         <p th:text="'Place: '+${event.getPlace()}"></p>
-
+                    <img th:src="${event.getPhoto().getUrl()}">
                         <!--                    <div th:each="userJoin:${event.getApplicationUserList()}">-->
                         <!--                        <p th:text="${userJoin.getFirstName()}"></p>-->
                         <!--                    </div>-->
@@ -212,7 +212,7 @@
                 <p th:text="'On '+${event.getDateTime()}"></p>
                 <p th:id="${event.getId()}"></p>
                 <p th:text="'Place: '+${event.getPlace()}"></p>
-
+                <img th:src="${event.getPhoto().getUrl()}">
                 <!--                <div th:each="userJoin:${event.getApplicationUserList()}">-->
                 <!--                    <p th:text="${userJoin.getFirstName()}"></p>-->
                 <!--                </div>-->
