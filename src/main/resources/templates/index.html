@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -39,8 +39,8 @@
                         <i class="fas fa-bell"></i>
                         <div class = "box">
                             <div class = "display">
-                                <div class = "cont">
-                                    <div th:each="event:${authUser.getEventList()}">
+                                <div class = "cont" th:if="${authUser}">
+                                    <div  th:each="event:${authUser.getEventList()}">
                                         <div class = "sec new" th:each="userJoin:${event.getApplicationUserList()}">
                                             <div class = "profCont">
                                                 <img class = "profile" th:src="${userJoin.getImage()}" >
@@ -76,7 +76,6 @@
     </ul>
 </div>
 
-
 <div id="content">
 
     <main>
@@ -107,19 +106,21 @@
             </form>
         </div>
 
-        <div id="switch">
-            <span>All</span>
+<div>
+            <button onclick="notAll()">All</button>
 
-            <span>Casual</span>
+            <button onclick="normal()">Casual</button>
 
-            <span>Events</span>
+            <button onclick="business()">Events</button>
+</div>
 
-        </div>
         <!--   <a id="this-btn" th:if="${authUser}" th:href="${'/event'}" >Create event</a>-->
-        <div id="event" th:each="event:${eventlist}"  >
-
-            <div  class="event"  style="display:block" th:if="${event.getApplicationUser().getUserType() == 'normal'}">
-                <div  th:if="!${(event.getApplicationUserList().size()+1)>=event.getNumberOfPlayer()}">
+            <!-- //////////////////////////////////all event/////////////////////////-->
+        <div id="notAll" style="display:block">
+            <h1>all event</h1>
+        <div th:each="event:${eventlist}" >
+            <div  th:if="!${(event.getApplicationUserList().size()+1)>=event.getNumberOfPlayer()}">
+             <div  class="event"   th:if="${event.getApplicationUser().getUserType() == 'normal'}">
                     <a class="name" th:href="${'/user/'+event.getApplicationUser().getId()}">  <p th:text="${event.getApplicationUser().getFirstName()}"></p></a>
                     <p th:text="'Game: '+${event.getGameName()}"></p>
 <!--                    <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>-->
@@ -170,6 +171,68 @@
             </div>
             </div>
         </div>
+        </div>
+<!--     /////////////   Normal //////////////////// -->
+        <div id="normal1" style="display:none">
+            <h1>normal event</h1>
+            <div  th:each="event:${eventlist}" >
+                <div  th:if="!${(event.getApplicationUserList().size()+1)>=event.getNumberOfPlayer()}">
+
+                <div  class="event"   th:if="${event.getApplicationUser().getUserType() == 'normal'}">
+                        <a class="name" th:href="${'/user/'+event.getApplicationUser().getId()}">  <p th:text="${event.getApplicationUser().getFirstName()}"></p></a>
+                        <p th:text="'Game: '+${event.getGameName()}"></p>
+                        <!--                    <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>-->
+                        <p th:text="'On '+${event.getDateTime()}"></p>
+                        <p th:id="${event.getId()}"></p>
+                        <p th:text="'Place: '+${event.getPlace()}"></p>
+
+                        <!--                    <div th:each="userJoin:${event.getApplicationUserList()}">-->
+                        <!--                        <p th:text="${userJoin.getFirstName()}"></p>-->
+                        <!--                    </div>-->
+                        <div th:if="${authUser}">
+                            <a th:if="${event.getApplicationUser() == authUser}" href="#" class="btn btn-danger" th:href="@{/delete/{id}(id=${event.getId()})}">Delete</a>
+                            <a th:if="${event.getApplicationUser() == authUser}" href="#" class="btn btn-primary" th:href="@{/update/{id}(id=${event.getId()})}">Edit</a>
+                            <div th:if="!${event.getApplicationUser() == authUser}">
+                                <div th:if="!${authUser.getUserType() == 'business'}">
+                                    <span th:text="${(event.getApplicationUserList().size()+1)}+'/'+${event.getNumberOfPlayer()}"> </span>
+                                    <a  th:if="!${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/join/{id}(id=${event.getId()})}">Join</a>
+                                    <a th:if="${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/unjoin/{id}(id=${event.getId()})}">Unjoin</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+</div>
+            </div>
+<!--  /////////////////// business///////////////////      -->
+        <div id="business1" style="display:none">
+            <h1>business event</h1>
+            <div  th:each="event:${eventlist}" >
+            <div class="event"  th:if="${event.getApplicationUser().getUserType() == 'business'}">
+                <a class="name" th:href="${'/user/'+event.getApplicationUser().getId()}">  <p th:text="${event.getApplicationUser().getFirstName()}"></p></a>
+                <p th:text="'Game: '+${event.getGameName()}"></p>
+                <p th:text="'Host offer: '+${event.getDescription()}"></p>
+                <p th:text="'On '+${event.getDateTime()}"></p>
+                <p th:id="${event.getId()}"></p>
+                <p th:text="'Place: '+${event.getPlace()}"></p>
+
+                <!--                <div th:each="userJoin:${event.getApplicationUserList()}">-->
+                <!--                    <p th:text="${userJoin.getFirstName()}"></p>-->
+                <!--                </div>-->
+                <div th:if="${authUser}">
+                    <a  th:if="${event.getApplicationUser() == authUser}" href="#" class="btn btn-danger" th:href="@{/delete/{id}(id=${event.getId()})}">Delete</a>
+                    <a th:if="${event.getApplicationUser() == authUser}" href="#" class="btn btn-primary" th:href="@{/update/{id}(id=${event.getId()})}">Edit</a>
+                    <div th:if="!${event.getApplicationUser() == authUser}">
+                        <div th:if="!${authUser.getUserType() == 'business'}">
+                            <span><i class="fas fa-chess-rook"></i>  &nbsp; <span th:text="${(event.getApplicationUserList().size())}"> </span></span>
+                            <a  th:if="!${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/join/{id}(id=${event.getId()})}">Upvote</a>
+                            <a th:if="${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/unjoin/{id}(id=${event.getId()})}">Down-vote</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+    </div>
     </main>
 </div>
 
@@ -210,22 +273,47 @@ var countDownDate = new Date(message).getTime();
 document.getElementById(id).parentElement.parentElement.parentElement.remove();
 }
 </script>
-<script type="text/javascript">
-       function toggleDiv(divid)
-  {
-    varon = divid + 'on';
-    varoff = divid + 'off';
-    if(document.getElementById(varon).style.display == 'block')
-    {
-    document.getElementById(varon).style.display = 'none';
-    document.getElementById(varoff).style.display = 'block';
-    }
-    else
-    {
-    document.getElementById(varoff).style.display = 'none';
-    document.getElementById(varon).style.display = 'block'
-    }
+<!--<script type="text/javascript">-->
+<!--       function toggleDiv(divid)-->
+<!--  {-->
+<!--    varon = divid + 'on';-->
+<!--    varoff = divid + 'off';-->
+<!--    if(document.getElementById(varon).style.display == 'block')-->
+<!--    {-->
+<!--    document.getElementById(varon).style.display = 'none';-->
+<!--    document.getElementById(varoff).style.display = 'block';-->
+<!--    }-->
+<!--    else-->
+<!--    {-->
+<!--    document.getElementById(varoff).style.display = 'none';-->
+<!--    document.getElementById(varon).style.display = 'block'-->
+<!--    }-->
+<!--}-->
+<!--    </script>-->
+    <script th:inline="javascript">
+        function notAll(){
+            console.log("out")
+
+        document.getElementById("notAll").style.display = "block";
+        document.getElementById("normal1").style.display = "none"
+        document.getElementById("business1").style.display = "none"
+
+        }
+        function normal(){
+
+        console.log("2")
+        document.getElementById("notAll").style.display = "none";
+        document.getElementById("normal1").style.display = "block"
+        document.getElementById("business1").style.display = "none"
+        }
+
+                function business(){
+                console.log("3")
+        document.getElementById("notAll").style.display = "none";
+        document.getElementById("normal1").style.display = "none"
+        document.getElementById("business1").style.display = "block"
 }
+
     </script>
 </body>
 </html>
