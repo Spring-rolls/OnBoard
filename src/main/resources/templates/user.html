@@ -16,7 +16,9 @@
 <div class="userPro">
 <figure class="snip1515">
     <div class="profile-image"><img th:src="${user.getImage()}" class="img"></div>
-    <p th:text="${'Star rating '+user.starRate()}"></p>
+    <div class="gg">
+    <p th:text="${'Star rating '+user.starRate()}"></p><i class="fas fa-star"></i>
+    </div >
     <figcaption>
         <h3 th:text="' Name: ' +${user.getFirstName()} +' '+${user.getLastName()}"></h3>
         <h4 th:text="' type of user: ' + ${user.getUserType()}"></h4>
