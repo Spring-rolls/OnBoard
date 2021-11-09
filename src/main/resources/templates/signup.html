@@ -3,50 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/sign.css" />
-
+    <script
+            src="https://kit.fontawesome.com/eac52206dc.js"
+            crossorigin="anonymous"
+    ></script>
 </head>
 <body>
 
+
+
+<div class="container">
+    <div id="left">
 <div class="logo">
      <img href="/" src="https://logomakercdn.truic.com/ux-flow/industry/board-game-lounge-meta.png"  >
     <a href="/">OnBoard</a>
 </div>
-
-
 <div class="asUser">
 <a id="up" href="javascript:;" onmousedown="toggleDiv('mydiv');">Sign up as</a>
 </div>
-
-
 <div id="mydivon" style="display:block">
     <h1 class="tag">Individual</h1>
     <form action="/signupNormal" method="post">
-        <label for="username">Username<input type="text" class="form-control" name="username" id="username"> </label></br>
-        <label for="password">Password <input type="password" class="form-control" name="password" id="password"> </label></br>
-        <label for="firstName">First Name<input type="text" class="form-control" name="firstName" id="firstName"> </label></br>
-        <label for="lastName">Last Name <input type="text" class="form-control" name="lastName" id="lastName"> </label></br>
-        <label for="image"> Avatar <input type="text" class="form-control" name="image" id="image" accept="image/jpeg, image/png"> </label></br>
-        <input type="submit" class="btn btn-primary">
+        <label for="username"> <i class="fas fa-user"></i>  <input type="text" placeholder="Username" class="form-control" name="username" id="username"></label></br>
+        <label for="password"> <i class="fas fa-unlock"></i> <input type="password"  placeholder="Password" class="form-control" name="password" id="password"></label></br>
+        <label for="firstName"><i class="fas fa-chess-pawn"></i><input type="text" placeholder="First Name" class="form-control" name="firstName" id="firstName"> </label></br>
+        <label for="lastName"><i class="fas fa-chess-knight"></i><input type="text" placeholder="Last Name" class="form-control" name="lastName" id="lastName"> </label></br>
+        <label for="image"><i class="fas fa-user-tag"></i><input type="text" class="form-control" placeholder="Avatar" name="image" id="image" accept="image/jpeg, image/png"> </label></br>
+        <input type="submit"  value="Sign up" class="btn btn-primary">
     </form>
 </div>
 <div id="mydivoff" style="display:none">
     <h1 class="tag">Business</h1>
-    <form action="/signup" method="post">
-        <label for="username">Username <input type="text" class="form-control" name="username" id="username"> </label></br>
-        <label for="password">Password <input type="password" class="form-control" name="password" id="password"></label></br>
-        <label for="firstName">First Name <input type="text" class="form-control" name="firstName" id="firstName"> </label></br>
-        <label for="lastName">Last Name <input type="text" class="form-control" name="lastName" id="lastName"></label></br>
-        <label for="location">Location &nbsp;  &nbsp; <input type="text" class="form-control" name="location" id="location"></label></br>
-        <label for="placeName">Business Name <input type="text" class="form-control" name="placeName" id="placeName"> </label></br>
-        <label for="workingHour">Working Hours <input type="text" class="form-control" name="workingHour" id="workingHour"></label></br>
-        <label for="image"> Avatar <input type="text" class="form-control" name="image" id="image" accept="image/jpeg, image/png"> </label></br>
-        <input type="submit" class="btn btn-primary">
+    <form id="gol" style="display: flex; flex-wrap: wrap; justify-content: center"  action="/signup" method="post">
+        <label for="username"> <i class="fas fa-user"></i>  <input type="text" placeholder="Username" class="form-control" name="username" id="username"></label></br>
+        <label for="password"> <i class="fas fa-unlock"></i> <input type="password"  placeholder="Password" class="form-control" name="password" id="password"></label></br>
+        <label for="firstName"><i class="fas fa-chess-pawn"></i><input type="text" placeholder="First Name" class="form-control" name="firstName" id="firstName"> </label></br>
+        <label for="lastName"><i class="fas fa-chess-knight"></i><input type="text" placeholder="Last Name" class="form-control" name="lastName" id="lastName"> </label></br>
+        <label for="location"><i class="fas fa-location-arrow"></i><input type="text" placeholder="Location" class="form-control" name="location" id="location"></label></br>
+        <label for="placeName"><i class="fas fa-briefcase"></i><input type="text" class="form-control" placeholder="Business Name" name="placeName" id="placeName"> </label></br>
+        <label for="workingHour"><i class="fas fa-clock"></i><input type="text" placeholder="Working Hours" class="form-control" name="workingHour" id="workingHour"></label></br>
+        <label for="image"><i class="fas fa-user-tag"></i><input type="text" class="form-control" placeholder="Avatar" name="image" id="image" accept="image/jpeg, image/png"> </label></br>
+        <input type="submit" value="Sign up" class="btn btn-primary">
     </form>
 </div>
-<div class="goHome"><a href="/">Home</a></div>
+        <div id="op">
+            <p>Already have an account? <a href="/login">Log in</a></p>
+
+            <a id="home" href="/">Home</a>
+        </div>
+    </div>
+    <div id="right"></div>
+</div>
+
+
+
+
+
+
+
 
 <script type="text/javascript">
        function toggleDiv(divid)

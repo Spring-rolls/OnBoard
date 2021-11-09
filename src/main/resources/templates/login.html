@@ -3,25 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/login.css" />
 <!--    <link rel="stylesheet" href="/static/styles/reset.css" />-->
 <!--    <link rel="stylesheet" href="/static/styles/login.css" />-->
+    <script
+            src="https://kit.fontawesome.com/eac52206dc.js"
+            crossorigin="anonymous"
+    ></script>
 </head>
 <body>
-<div class="logo">
-    <img href="/" src="https://logomakercdn.truic.com/ux-flow/industry/board-game-lounge-meta.png"  >
-    <a href="/">OnBoard</a>
-</div>
+
 <div class="container">
+    <div id="left">
+    <div class="logo">
+        <img href="/" src="https://logomakercdn.truic.com/ux-flow/industry/board-game-lounge-meta.png"  >
+        <a href="/">OnBoard</a>
+    </div>
     <form action="/perform_login" method="post">
-        <label for="username">Username</label>
-        <input type="text" class="form-control" name="username" id="username"></br>
-        <label for="password">Password</label>
-        <input type="password"  class="form-control" name="password" id="password"></br>
-        <input type="submit" class="btn btn-primary">
+
+       <label for="username"> <i class="fas fa-user"></i>  <input type="text" placeholder="Username" class="form-control" name="username" id="username"></label></br>
+
+        <label for="password"> <i class="fas fa-unlock"></i> <input type="password"  placeholder="Password" class="form-control" name="password" id="password"></label></br>
+        <input type="submit" value="Login" class="btn btn-primary">
     </form>
+    <div id="op">
+        <p>Don't have an account? <a href="/signup">Create</a></p>
+
+        <a id="home" href="/">Home</a>
+    </div>
+    </div>
+    <div id="right"></div>
 </div>
+
+
+
+
 </body>
 </html>
