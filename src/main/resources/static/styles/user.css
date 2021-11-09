@@ -188,3 +188,11 @@ p {
 .kk {
     display: flex;
 }
+.gg {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+.gg p {
+    font-size: 18px;
+}
