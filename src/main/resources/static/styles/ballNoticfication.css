@@ -8,20 +8,20 @@
 .box::-webkit-scrollbar
 {
     width: 10px;
-    background-color: #F5F5F5;
+    background-color: #181D31;
     border-radius: 5px
 }
 
 .box::-webkit-scrollbar-thumb
 {
-    background-color: black;
-    border: 2px solid black;
+    background-color: #181D31;
+    border: 2px solid #181D31;
     border-radius: 5px
 }
 
 .icons{
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-content: center;
 }
 
@@ -63,10 +63,26 @@
     margin-left: 40px;
 }
 
+#this {
+color: white;
+    padding-bottom: 0;
+    margin-right: 0;
+font-size: 1.4pc;
+  border: none;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+#this:hover {
+
+color: white;
+}
+
+
 .box{
     width: 400px;
     height: 0px;
-    border-radius: 10px;
+    border-radius: 5px;
     transition: 0.5s;
     position: absolute;
     overflow-y: scroll;
@@ -78,6 +94,7 @@
     -moz-box-shadow: 10px 10px 23px 0px rgba(0,0,0,0.1);
     box-shadow: 10px 10px 23px 0px rgba(0,0,0,0.1);
     cursor: pointer;
+    z-index: 2;
 }
 
 .fas:hover {
@@ -106,6 +123,8 @@
     padding: 25px 10px;
     background-color: #F4F4F4;
     transition: 0.5s;
+    color: black;
+    text-align: center;
 }
 
 .profCont{
@@ -127,7 +146,7 @@
 
 .sub{
     font-size: 1rem;
-    color: grey;
+    color: black;
 }
 
 .new{
@@ -140,6 +159,7 @@
 }
 .ball{
     position: absolute;
-    right: 80px;
-    top: -20px;
+    right: 13rem;
+    top: 0.3rem;
+
 }
