@@ -1,20 +1,30 @@
 package OnBoard.example.OnBoard.Controller;
 
-import OnBoard.example.OnBoard.Model.ApplicationUser;
-import OnBoard.example.OnBoard.Model.Event;
-import OnBoard.example.OnBoard.Model.Notification;
+import OnBoard.example.OnBoard.Model.*;
 import OnBoard.example.OnBoard.Repository.AppUserRepository;
 import OnBoard.example.OnBoard.Repository.EventRepository;
 import OnBoard.example.OnBoard.Repository.NotificationRepository;
+import OnBoard.example.OnBoard.Repository.PhotoRepository;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+import com.google.gson.Gson;
 
 
 @Controller
@@ -29,6 +39,8 @@ public class EventController {
 
     @Autowired
     NotificationRepository notificationRepository;
+    @Autowired
+    PhotoRepository photoRepository;
 
     @GetMapping("/event")
     public String getEvent(Principal p , Model m){
@@ -41,10 +53,34 @@ public class EventController {
                                     @RequestParam String dateTime,
                                     @RequestParam String place,
                                     Principal p){
+
+
+
         ApplicationUser applicationUser =appUserRepository.findByUsername(p.getName());
             Event event =new Event(gameName,numberOfPlayer,dateTime,place,applicationUser);
-            eventRepository.save(event);
-//        applicationUser.getEvents().add(event);
+
+        eventRepository.save(event);
+
+        /*-----API----*/
+
+//        Gson gson = new Gson();
+//        Splash s = null;
+//        HttpURLConnection conn = null;
+//        BufferedReader read = null;
+//        try {
+//            System.out.println("from API file");
+//            URL url = new URL("https://api.unsplash.com/search/photos/?client_id=5JrdpKwQXgj6389dUkJ0mwaZagbWALMWQYhHAiygjco&query="+gameName);
+//            conn = (HttpURLConnection) url.openConnection();
+//            read = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//            s = gson.fromJson(read, Splash.class);
+//            System.out.println("array of games" + s.toString());
+//        } catch (Exception IOException) {
+//            System.out.println("from catch");
+//            Reader reader = null;
+//        }
+//        eventRepository.save(event);
+        /*-----------*/
+
         appUserRepository.save(applicationUser);
         return new RedirectView("/");
     }
@@ -54,10 +90,13 @@ public class EventController {
                                     @RequestParam String place,
                                     @RequestParam String description,
                                     Principal p){
+
+
         ApplicationUser applicationUser =appUserRepository.findByUsername(p.getName());
 
             Event event =new Event(gameName,dateTime,place,description,applicationUser);
-            eventRepository.save(event);
+        eventRepository.save(event);
+
 //        applicationUser.getEvents().add(event);
         appUserRepository.save(applicationUser);
         return new RedirectView("/");
@@ -71,7 +110,7 @@ public class EventController {
         applicationUser.getEvents().add(event);
         appUserRepository.save(applicationUser);
         /* notification*/
-        String notification= p.getName() + " has joined to your " + event.getGameName()+" event at " +dtf.format(now);
+        String notification= applicationUser.getFirstName() + " has joined to your " + event.getGameName()+" event at " +dtf.format(now);
         Notification notification1=new Notification(notification,event.getApplicationUser());
         notificationRepository.save(notification1);
         /*------------*/

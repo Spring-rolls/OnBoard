@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -201,7 +202,19 @@ public class ApplicationUser implements UserDetails {
     public void setReviewsUser(List<ApplicationUser> reviewsUser) {
         this.reviewsUser = reviewsUser;
     }
+    public String starRate(){
+        float sum=0;
+        for (Rating rate:this.ratings) {
+            sum+=rate.getStarNumber();
+        }
 
+        System.out.println("sum: " +sum );
+        System.out.println("rate: " + sum/(float)ratings.size() );
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
+
+        return  df.format(sum/(float)ratings.size());
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority simpleGrantedAuthority=new SimpleGrantedAuthority(authority);

@@ -22,6 +22,10 @@ public class Event {
     @ManyToOne
     private ApplicationUser applicationUser;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "photo_id", referencedColumnName = "id")
+    private Photo photo;
+
     public Event(String gameName, int numberOfPlayer, String dateTime, String place,ApplicationUser applicationUser) {
         this.gameName = gameName;
         this.numberOfPlayer = numberOfPlayer;
@@ -100,5 +104,13 @@ public class Event {
 
     public void setApplicationUserList(List<ApplicationUser> applicationUserList) {
         this.applicationUserList = applicationUserList;
+    }
+
+    public Photo getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Photo photo) {
+        this.photo = photo;
     }
 }
