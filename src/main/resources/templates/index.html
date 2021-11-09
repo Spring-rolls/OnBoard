@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/index.css" />
+    <link rel="stylesheet" href="/styles/ballNoticfication.css" />
 <!--            <link rel="stylesheet" href="/static/styles/reset.css" />-->
 <!--            <link rel="stylesheet" href="/static/styles/index.css" />-->
     <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
@@ -20,7 +21,7 @@
             <a class="navbar-brand" href="/"> <img src="https://logomakercdn.truic.com/ux-flow/industry/board-game-lounge-meta.png"  >OnBoard</a>
         </div>
         <div class="dropdown">
-            <span class="dropbtn">Menu <i class="fas fa-sort-down"></i></span>
+            <span class="dropbtn">Menu <i id="this" class="fas fa-sort-down"></i></span>
             <ul class="nav navbar-nav navbar-right dropdown-content">
                 <li ><a th:if="${authUser}" th:href="${'/profile'}" >profile</a></li>
                 <li ><a th:if="${authUser}" th:href="${'/editProfileUser'}" >update profile</a></li>
@@ -30,6 +31,30 @@
                 <li ><p  id="text"></li>
                 <li sec:authorize="isAuthenticated()"><a href="/perform_logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
+        </div>
+        <div class="ball">
+            <div class = "icons">
+                <div class = "notification">
+                    <div class = "notBtn" >
+                        <i class="fas fa-bell"></i>
+                        <div class = "box">
+                            <div class = "display">
+                                <div class = "cont">
+                                    <div th:each="event:${authUser.getEventList()}">
+                                        <div class = "sec new" th:each="userJoin:${event.getApplicationUserList()}">
+                                            <div class = "profCont">
+                                                <img class = "profile" th:src="${userJoin.getImage()}" >
+                                            </div>
+                                            <div class = "txt"> <p th:text="${userJoin.getFirstName()+ ' has joined to '+event.getGameName()  + ' event' }" ></p></div>
+                                            <div class = "txt sub">11/7 - 2:30 pm</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <a th:href="${'/profile'}"><img th:if="${authUser}" th:src="${authUser.getImage()}" class="img"></a>
         <img sec:authorize="!isFullyAuthenticated()" src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png" class="img" style="filter: invert(1);">
@@ -58,7 +83,7 @@
 
 <!--        <hr id="mid">-->
         <p id="host">Host a new event</p>
-        <div th:if="${authUser}">
+        <div id="slideForm" th:if="${authUser}">
             <form th:if="${authUser.getUserType() == 'normal'}" action="/eventfornormal" method="post">
 <!--                <label for="gameName">Game</label>-->
                 <input  placeholder="Game" type="text" class="form-control" name="gameName" id="gameName" required></br>
@@ -81,11 +106,21 @@
                 <input type="submit" value="Post" class="btn btn-primary">
             </form>
         </div>
+
+        <div id="switch">
+            <span>All</span>
+
+            <span>Casual</span>
+
+            <span>Events</span>
+
+        </div>
         <!--   <a id="this-btn" th:if="${authUser}" th:href="${'/event'}" >Create event</a>-->
-        <div id="event" th:each="event:${eventlist}" >
-            <div th:if="${event.getApplicationUser().getUserType() == 'normal'}">
-                <div th:if="!${(event.getApplicationUserList().size()+1)>=event.getNumberOfPlayer()}">
-                    <a th:href="${'/user/'+event.getApplicationUser().getId()}">  <p th:text="${event.getApplicationUser().getFirstName()}"></p></a>
+        <div id="event" th:each="event:${eventlist}"  >
+
+            <div  class="event"  style="display:block" th:if="${event.getApplicationUser().getUserType() == 'normal'}">
+                <div  th:if="!${(event.getApplicationUserList().size()+1)>=event.getNumberOfPlayer()}">
+                    <a class="name" th:href="${'/user/'+event.getApplicationUser().getId()}">  <p th:text="${event.getApplicationUser().getFirstName()}"></p></a>
                     <p th:text="'Game: '+${event.getGameName()}"></p>
 <!--                    <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>-->
                     <p th:text="'On '+${event.getDateTime()}"></p>
@@ -108,8 +143,10 @@
                     </div>
                 </div>
             </div>
-            <div th:if="${event.getApplicationUser().getUserType() == 'business'}">
-                <a th:href="${'/user/'+event.getApplicationUser().getId()}">  <p th:text="${event.getApplicationUser().getFirstName()}"></p></a>
+
+            <div >
+            <div class="event"  th:if="${event.getApplicationUser().getUserType() == 'business'}">
+                <a class="name" th:href="${'/user/'+event.getApplicationUser().getId()}">  <p th:text="${event.getApplicationUser().getFirstName()}"></p></a>
                 <p th:text="'Game: '+${event.getGameName()}"></p>
                 <p th:text="'Host offer: '+${event.getDescription()}"></p>
                 <p th:text="'On '+${event.getDateTime()}"></p>
@@ -131,11 +168,18 @@
                     </div>
                 </div>
             </div>
+            </div>
         </div>
     </main>
 </div>
 
 &nbsp;
+
+
+
+
+
+
 
 <hr id="imp">
 
@@ -146,9 +190,8 @@
 
     &nbsp;
 
-
     <a class="navbar-brand" href="/"> <img src="https://logomakercdn.truic.com/ux-flow/industry/board-game-lounge-meta.png"  >OnBoard</a><br>
-    <span id="rights"> All rights reserved for OnBoard M.N.C <i class="far fa-copyright"></i></span>
+    <div id="rit"><span id="rights"> All rights reserved for OnBoard  <i class="far fa-copyright"></i> 2021</span></div>
 </footer>
 
 
@@ -167,5 +210,22 @@ var countDownDate = new Date(message).getTime();
 document.getElementById(id).parentElement.parentElement.parentElement.remove();
 }
 </script>
+<script type="text/javascript">
+       function toggleDiv(divid)
+  {
+    varon = divid + 'on';
+    varoff = divid + 'off';
+    if(document.getElementById(varon).style.display == 'block')
+    {
+    document.getElementById(varon).style.display = 'none';
+    document.getElementById(varoff).style.display = 'block';
+    }
+    else
+    {
+    document.getElementById(varoff).style.display = 'none';
+    document.getElementById(varon).style.display = 'block'
+    }
+}
+    </script>
 </body>
 </html>

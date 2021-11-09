@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/profile.css" />
+
     <script src="https://kit.fontawesome.com/1599d6604b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/styles/ballNoticfication.css" />
 
@@ -12,32 +16,35 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">Home page</a>
+            <a class="navbar-brand" href="/"> <img src="https://logomakercdn.truic.com/ux-flow/industry/board-game-lounge-meta.png"  >OnBoard</a>
         </div>
-        <ul class="nav navbar-nav">
-            <li ><a th:if="${authUser}" th:href="${'/profile'}" >profile</a></li>
-            <li ><a th:if="${authUser}" th:href="${'/event'}" >Create event</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li sec:authorize="!isAuthenticated()"><a href="/signup" ><span class="glyphicon glyphicon-user"></span> Sign Up Business</a></li>
-            <li sec:authorize="!isAuthenticated()"><a href="/signupNormal" ><span class="glyphicon glyphicon-user"></span> Sign Up Normal</a></li>
-            <li sec:authorize="!isAuthenticated()"><a href="/login"  ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            <div class="ball">
-                <div class = "icons">
-                    <div class = "notification">
-                        <div class = "notBtn" >
-                            <i class="fas fa-bell"></i>
-                            <div class = "box">
-                                <div class = "display">
-                                    <div class = "cont">
-                                        <div th:each="event:${authUser.getEventList()}">
-                                            <div class = "sec new" th:each="userJoin:${event.getApplicationUserList()}">
-                                                <div class = "profCont">
-                                                    <img class = "profile" th:src="${userJoin.getImage()}" >
-                                                </div>
-                                                <div class = "txt"> <p th:text="${userJoin.getFirstName()+ ' has joined to '+event.getGameName()  + ' event' }" ></p></div>
-                                                <div class = "txt sub">11/7 - 2:30 pm</div>
+        <div class="dropdown">
+            <span class="dropbtn">Menu<i id="this" class="fas fa-sort-down"></i></span>
+            <ul class="nav navbar-nav navbar-right dropdown-content">
+                <li ><a th:if="${authUser}" th:href="${'/profile'}" >profile</a></li>
+                <li ></li>
+                <!--            <li sec:authorize="!isAuthenticated()"><a href="/signupNormal" ><span class="glyphicon glyphicon-user"></span> Sign Up Normal</a></li>-->
+                <li sec:authorize="!isAuthenticated()"><a href="/login"  ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li sec:authorize="!isAuthenticated()"><a href="/signup" ><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li ><p  id="text"></li>
+                <li sec:authorize="isAuthenticated()"><a href="/perform_logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
+        </div>
+        <div class="ball">
+            <div class = "icons">
+                <div class = "notification">
+                    <div class = "notBtn" >
+                        <i class="fas fa-bell"></i>
+                        <div class = "box">
+                            <div class = "display">
+                                <div class = "cont">
+                                    <div th:each="event:${authUser.getEventList()}">
+                                        <div class = "sec new" th:each="userJoin:${event.getApplicationUserList()}">
+                                            <div class = "profCont">
+                                                <img class = "profile" th:src="${userJoin.getImage()}" >
                                             </div>
+                                            <div class = "txt"> <p th:text="${userJoin.getFirstName()+ ' has joined to '+event.getGameName()  + ' event' }" ></p></div>
+                                            <div class = "txt sub">11/7 - 2:30 pm</div>
                                         </div>
                                     </div>
                                 </div>
@@ -46,34 +53,49 @@
                     </div>
                 </div>
             </div>
-            <li sec:authorize="isAuthenticated()"><a href="/perform_logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-        </ul>
+        </div>
+        <a th:href="${'/profile'}"><img th:if="${authUser}" th:src="${authUser.getImage()}" class="img"></a>
+        <img sec:authorize="!isFullyAuthenticated()" src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png" class="img" style="filter: invert(1);">
+        <a  class="a" sec:authorize="!isFullyAuthenticated()" href="/login">Login</a>
+        <a class="a"  sec:authorize="isFullyAuthenticated()" href="/perform_logout">Logout</a>
     </div>
 </nav>
-<div th:if="${authUser}">
-<img th:src="${authUser.getImage()}" class="img">
-<p th:text="' firstName: ' +${authUser.getFirstName()} +' '+${authUser.getLastName()}"> </p>
-<p th:text="' type: ' + ${authUser.getUserType()}"> </p>
+
+
+
+
+
+<div id="info" th:if="${authUser}">
+<img th:src="${authUser.getImage()}" class="avatar">
+    <div id="ps">
+<p th:text="'Name: ' +${authUser.getFirstName()} +' '+${authUser.getLastName()}"> </p>
+<p th:text="'Account Type: ' + ${authUser.getUserType()}"> </p>
 <p th:if="${authUser.getUserType() == 'business'}" th:text="${authUser.getLocation()}"> </p>
 <p th:if="${authUser.getUserType() == 'business'}" th:text="${authUser.getPlaceName()}"> </p>
 <p th:if="${authUser.getUserType() == 'business'}" th:text="${authUser.getWorkingHour()}"> </p>
+        <a th:if="${authUser}" th:href="${'/editProfileUser'}" >Update Info</a>
+    </div>
+
 </div>
+
 <main>
-    <h1>Host events</h1>
+    <hr>
     <div th:if="${authUser.getUserType() == 'normal'}">
-        <div th:each="event:${authUser.getEventList()}">
-            <p th:text="'gameName '+${event.getGameName()}"></p>
-            <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>
-            <p th:text="'DateTime '+${event.getDateTime()}"></p>
+        <h1>Hosted Events</h1>
+        <div id="hosting">
+
+        <div class="event" th:each="event:${authUser.getEventList()}">
+            <p th:text="'Game: '+${event.getGameName()}"></p>
+
+            <p th:text="'On '+${event.getDateTime()}"></p>
             <p th:text="'Place '+${event.getPlace()}"></p>
-            <p th:text="${'joined player '+(event.getApplicationUserList().size()+1)}"> </p>
-            <p ><span>Status: </span><span th:id="${event.getId()+'h'}"> Active </span></p>
-            <div th:each="userJoin:${event.getApplicationUserList()}">
-                <p th:text="${userJoin.getFirstName()}"></p>
-            </div>
+<!--            <p th:text="${'joined player '+(event.getApplicationUserList().size()+1)}"> </p>-->
+            <p ><span>Status: </span><span th:id="${event.getId()+'h'}"> Open </span></p>
+
             <div th:if="${(event.getApplicationUserList().size()+1)>=event.getNumberOfPlayer()}">
             <h2> the event is ready </h2>
             </div>
+            <span th:text="${(event.getApplicationUserList().size()+1)}+'/'+${event.getNumberOfPlayer()}"> </span><br>
             <a href="#" class="btn btn-danger" th:href="@{/deleted/{id}(id=${event.getId()})}">delete</a>
             <a href="#" class="btn btn-primary" th:href="@{/updatefromprofile/{id}(id=${event.getId()})}">update</a>
 
@@ -87,28 +109,28 @@
               <p ><span>Status: </span><span th:id="${event.getId()+'h'}"> Active </span></p>
             <p th:text="'Place '+${event.getPlace()}"></p>
             <p th:text="${'joined player '+(event.getApplicationUserList().size())}"> </p>
-            <div th:each="userJoin:${event.getApplicationUserList()}">
-                <p th:text="${userJoin.getFirstName()}"></p>
-            </div>
+
             <a  href="#" class="btn btn-primary" th:href="@{/updatefromprofile/{id}(id=${event.getId()})}">update</a>
             <a href="#" class="btn btn-danger" th:href="@{/deleted/{id}(id=${event.getId()})}">delete</a>
         </div>
     </div>
-    <h1 th:if="${authUser.getUserType() == 'normal'}">join event</h1>
-    <div th:each="event:${authUser.getEvents()}">
+    </div>
+
+
+    <h1 style="margin-top: -1.2rem" th:if="${authUser.getUserType() == 'normal'}">Joined and Upvoted Events</h1>
+    <div id="joining">
+    <div class="event" th:each="event:${authUser.getEvents()}">
         <div th:if="${event.getApplicationUser().getUserType() == 'normal'}">
             <img th:src="${event.getApplicationUser().getImage()}" class="img">
-            <p th:text="'Host Name ...!: '+${event.getApplicationUser().getFirstName()}"></p>
-            <p th:text="'gameName '+${event.getGameName()}"></p>
-            <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>
-            <p th:text="'DateTime '+${event.getDateTime()}"></p>
+            <p th:text="${event.getApplicationUser().getFirstName()}"></p>
+            <p th:text="'Game: '+${event.getGameName()}"></p>
+<!--            <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>-->
+            <p th:text="'On '+${event.getDateTime()}"></p>
             <p th:id="${event.getId()}"></p>
-            <p th:text="'Place '+${event.getPlace()}"></p>
-            <div th:each="userJoin:${event.getApplicationUserList()}">
-                <p th:text="${userJoin.getFirstName()}"></p>
-            </div>
+            <p th:text="'Place: '+${event.getPlace()}"></p>
+
             <div th:if="${authUser}">
-                <p th:text="${'joined player '+(event.getApplicationUserList().size()+1)}"> </p>
+                <span th:text="${(event.getApplicationUserList().size()+1)}+'/'+${event.getNumberOfPlayer()}"> </span><br>
                 <div th:if="!${event.getApplicationUser() == authUser}">
                     <a th:if="${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/unjoins/{id}(id=${event.getId()})}">unjoin</a>
                 </div>
@@ -116,24 +138,45 @@
         </div>
         <div th:if="${event.getApplicationUser().getUserType() == 'business'}">
             <img th:src="${event.getApplicationUser().getImage()}" class="img">
-            <p th:text="'Host Name ...!: '+${event.getApplicationUser().getFirstName()}"></p>
-            <p th:text="'gameName '+${event.getGameName()}"></p>
+            <p th:text="${event.getApplicationUser().getFirstName()}"></p>
+            <p th:text="'Game: '+${event.getGameName()}"></p>
             <p th:text="'Description '+${event.getDescription()}"></p>
-            <p th:text="'DateTime '+${event.getDateTime()}"></p>
+            <p th:text="'On '+${event.getDateTime()}"></p>
             <p th:id="${event.getId()}" ></p>
-            <p th:text="'Place '+${event.getPlace()}"></p>
-            <div th:each="userJoin:${event.getApplicationUserList()}">
-                <p th:text="${userJoin.getFirstName()}"></p>
-            </div>
+            <p th:text="'Place: '+${event.getPlace()}"></p>
+            <span th:text="${(event.getApplicationUserList().size()+1)}+'/'+${event.getNumberOfPlayer()}"> </span><br>
             <div th:if="${authUser}">
-                <p th:text="${'joined player '+(event.getApplicationUserList().size())}"> </p>
+
                 <div th:if="!${event.getApplicationUser() == authUser}">
                     <a th:if="${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/unjoins/{id}(id=${event.getId()})}">uninterested</a>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+
 </main>
+
+<span id="gg" >Events Log</span>
+<div id="notify">
+
+    <div id="not"  th:if="${authUser}"  th:each="note:${authUser.getNotifications()}">
+        <p th:text="${note.getNotification()}"></p>
+    </div>
+</div>
+
+<hr id="imp">
+
+<!--<hr id="divider">-->
+
+<footer>
+
+
+    &nbsp;
+
+    <a class="navbar-brand" href="/"> <img src="https://logomakercdn.truic.com/ux-flow/industry/board-game-lounge-meta.png"  >OnBoard</a><br>
+    <div id="rit"><span id="rights"> All rights reserved for OnBoard  <i class="far fa-copyright"></i> 2021</span></div>
+</footer>
 
 <script th:inline="javascript" th:each="event:${authUser.getEventList()}">
 /*<![CDATA[*/
