@@ -76,7 +76,8 @@ position: absolute;
 right: 10rem;
 top: 1rem;
 width: 55px;
-border-radius: 70px;
+height: 55px;
+border-radius: 50%;
 }
 
 
@@ -133,11 +134,24 @@ margin-right: 2rem;
 }
 
 
+#banner {
+
+width: 100%;
+height: 20rem;
+background-image: url(https://images.unsplash.com/photo-1606503153255-59d8b8b82176?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80);
+background-size: cover;
+background-position-y: 33rem;
+}
+
+
+
+
 #info {
+background-color: white;
 position: relative;
 width: 85%;
 height: 25rem;
-margin: 5rem auto;
+margin: -12rem auto;
 border-radius: 5px;
 box-shadow: 0px 5px 7px hsla(284, 0%, 0%, 0.31);
 
@@ -146,7 +160,8 @@ box-shadow: 0px 5px 7px hsla(284, 0%, 0%, 0.31);
 
 .avatar {
 width: 250px;
-border-radius: 150px;
+height: 250px;
+border-radius: 50%;
 box-shadow: 0px 5px 7px hsla(284, 0%, 0%, 0.31);
 position:absolute;
 top: 5rem;
@@ -155,7 +170,7 @@ left: 3rem;
 
 #ps {
 position: absolute;
-top: 7rem;
+top: 4rem;
 left: 22rem;
 width: fit-content;
 
@@ -165,6 +180,7 @@ width: fit-content;
 font-family: 'Roboto', sans-serif;
 font-size: 2pc;
 margin-top: 1rem;
+font-weight: light;
 }
 
 
@@ -177,11 +193,8 @@ text-decoration: none;
 }
 
 main {
-
 width: 85%;
-margin: -2rem auto;
-margin-bottom: 3rem;
-
+margin: 4rem auto;
 }
 
 h1 {
@@ -189,77 +202,81 @@ h1 {
 font-family: 'Roboto', sans-serif;
 font-size: 1.4pc;
 margin-top: 2rem;
+margin-left: 2rem;
 }
 
-#hosting {
+.hosting {
 width: 50%;
-height: 35rem;
+height: 36rem;
 float: left;
 border-radius: 5px;
 font-family: 'Roboto', sans-serif;
 overflow: auto;
+margin-top: 2rem;
+padding: 0.5rem;
 
 }
 
 
 #joining {
-
 width: 50%;
 float: right;
-height: 35rem;
+height: 36rem;
 border-radius: 5px;
 font-family: 'Roboto', sans-serif;
 overflow: auto;
-margin-top: -0.2rem;
+margin-top: 2rem;
+padding: 0.5rem;
 }
 
 #notify {
 width: 85%;
-height: 7rem;
+height: 12rem;
 border-radius: 5px;
 font-family: 'Roboto', sans-serif;
 overflow: auto;
 padding: 0.5rem;
 margin: 0 auto;
-margin-top: 1rem;
+margin-top: 17rem;
+
 }
 
 
 #gg {
 font-family: 'Roboto', sans-serif;
 font-size: 1.4pc;
-display: block;
-
+position: absolute;
+top: 41rem;
+left: 9rem;
 }
 
 #not {
 
 padding: 1rem;
-width: 90%;
-margin-left: 2rem;
-margin-top: 2rem;
+width: 100%;
 border-radius: 5px;
 height: fit-content;
 box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.27);
+margin-top: 2rem;
 
 }
 
 
-#hosting::-webkit-scrollbar-track
+.hosting::-webkit-scrollbar-track
 {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     background-color: #F5F5F5;
     border-radius: 5px
 }
 
-#hosting::-webkit-scrollbar
+.hosting::-webkit-scrollbar
 {
     width: 10px;
     background-color: #181D31;
     border-radius: 5px
 }
 
-#hosting::-webkit-scrollbar-thumb
+.hosting::-webkit-scrollbar-thumb
 {
     background-color: #181D31;
     border: 2px solid #181D31;

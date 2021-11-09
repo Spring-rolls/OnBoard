@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:wght@300&display=swap');
 
 * {
 box-sizing: border-box;
@@ -8,114 +6,105 @@ box-sizing: border-box;
 }
 
 body{
-background: rgb(24,29,49);
-background: linear-gradient(332deg, rgba(24,29,49,1) 12%, rgba(57,66,102,1) 31%, rgba(255,255,255,1) 100%);
- height:50rem;
+
+
 }
 
 .logo{
-display:block;
-margin-left : 600px;
+width: fit-content;
 }
 
-
 .logo img{
-width:100px;
-filter: invert(1);
+width: 75px;
+
 }
 
 
 .logo a{
-font-size: 3.0pc;
+font-size: 3.5pc;
 font-family: 'Staatliches', cursive;
-color:white;
 text-decoration: none;
+color: black;
 }
 
-.asUser{
-margin-top:10px;
-margin-left : 600px;
-}
-
-#up {
-text-decoration: none;
-font-size: 15px;
-font-family: 'Roboto', sans-serif;
-font-weight: bolder;
-color:white;
-transition: 0.2s;
-}
-
-.tag{
-font-size: 30px;
-font-family: 'Roboto', sans-serif;
-font-weight: bolder;
-color: #181D52;
-margin-left : 600px;
-
-}
-
-
-label{
-font-weight: bolder;
-color:#181D52;
-}
-
- input[type=number]:focus {
-  outline: none;
-}
-
-
-input[type=text]:focus {
-  outline: none;
-}
-
-input[type=password]:focus {
-  outline: none;
-}
-
-input[type=datetime-local]:focus {
-  outline: none;
-}
-
-
-form {
+.container{
+width: 85%;
+height: 75vh;
+margin: 6rem auto;
 font-family: 'Roboto', sans-serif;
 display: flex;
-flex-direction: column;
-margin-left:600px;
-margin-right:600px;
-margin-top:10px;
-align-items: center;
-align-content: center;
+flex-direction: row;
 border-radius: 5px;
 box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-padding: 1rem;
 transition: 0.3s;
+position: relative;
 }
 
-.goHome {
-margin-top: 20px;
-margin-left : 600px;
+#left {
+width: 50%;
+height: 75vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+align-content: baseline;
+padding: 4rem;
+margin-top: -1rem;
 }
 
-.goHome a {
-font-size: 1.5pc;
-font-family: 'Staatliches', cursive;
-color:white;
+#gol label{
+margin-left: 1rem;
+
+}
+
+
+#gol .btn{
+margin-left: 1rem;
+
+}
+
+#right {
+background-image: url(https://images.unsplash.com/photo-1615806647582-53fea422c9b4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1776&q=80);
+background-size: cover;
+width: 50%;
+height: 75vh;
+float: right;
+}
+
+input {
+margin-top: 1rem;
+padding: 0.5rem;
+border-width: 0.1px;
+}
+
+.btn {
+margin-left: 5rem;
+background-color: #181D31;
+padding: 0.7rem;
+color: white;
+cursor: pointer;
+border-style: none;
+}
+
+i {
+margin-right: 1rem;
+font-size: 1.2pc;
+opacity: 0.8;
+}
+
+#op {
+width: fit-content;
+margin-top: 2rem;
+text-align: center;
+font-family: 'Roboto', sans-serif;
+
+}
+
+#op a {
 text-decoration: none;
+
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+#home {
+display: block;
+margin-top: 1rem;
+}

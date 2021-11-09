@@ -32,7 +32,7 @@
                 <li sec:authorize="isAuthenticated()"><a href="/perform_logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
         </div>
-        <div class="ball">
+        <div class="ball" th:if="${authUser}">
             <div class = "icons">
                 <div class = "notification">
                     <div class = "notBtn" >

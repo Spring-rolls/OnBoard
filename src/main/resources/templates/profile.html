@@ -8,8 +8,12 @@
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/profile.css" />
 
+<!--                <link rel="stylesheet" href="/static/styles/reset.css" />-->
+<!--                <link rel="stylesheet" href="/static/styles/profile.css" />-->
+
     <script src="https://kit.fontawesome.com/1599d6604b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/styles/ballNoticfication.css" />
+
 
 </head>
 <body>
@@ -61,7 +65,9 @@
     </div>
 </nav>
 
+<div id="banner">
 
+</div>
 
 
 
@@ -70,20 +76,31 @@
     <div id="ps">
 <p th:text="'Name: ' +${authUser.getFirstName()} +' '+${authUser.getLastName()}"> </p>
 <p th:text="'Account Type: ' + ${authUser.getUserType()}"> </p>
-<p th:if="${authUser.getUserType() == 'business'}" th:text="${authUser.getLocation()}"> </p>
-<p th:if="${authUser.getUserType() == 'business'}" th:text="${authUser.getPlaceName()}"> </p>
-<p th:if="${authUser.getUserType() == 'business'}" th:text="${authUser.getWorkingHour()}"> </p>
+<p th:if="${authUser.getUserType() == 'business'}" th:text="'Location: ' +${authUser.getLocation()}"> </p>
+<p th:if="${authUser.getUserType() == 'business'}" th:text="'Business Name: ' +${authUser.getPlaceName()}"> </p>
+<p th:if="${authUser.getUserType() == 'business'}" th:text="'Working Hours: ' +${authUser.getWorkingHour()}"> </p>
         <a th:if="${authUser}" th:href="${'/editProfileUser'}" >Update Info</a>
     </div>
 
 </div>
 
+
+<div id="notify">
+
+    <p id="gg">Events Log</p>
+            <div id="not"  th:if="${authUser}"  th:each="note:${authUser.getNotifications()}">
+                <p th:text="${note.getNotification()}"></p>
+            </div>
+
+</div>
+
+
+
 <main>
     <hr>
+    <h1>Hosted Events</h1>
     <div th:if="${authUser.getUserType() == 'normal'}">
-        <h1>Hosted Events</h1>
-        <div id="hosting">
-
+        <div class="hosting">
         <div class="event" th:each="event:${authUser.getEventList()}">
             <p th:text="'Game: '+${event.getGameName()}"></p>
 
@@ -96,29 +113,32 @@
             <h2> the event is ready </h2>
             </div>
             <span th:text="${(event.getApplicationUserList().size()+1)}+'/'+${event.getNumberOfPlayer()}"> </span><br>
-            <a href="#" class="btn btn-danger" th:href="@{/deleted/{id}(id=${event.getId()})}">delete</a>
-            <a href="#" class="btn btn-primary" th:href="@{/updatefromprofile/{id}(id=${event.getId()})}">update</a>
-
+            <a href="#" class="btn btn-danger" th:href="@{/deleted/{id}(id=${event.getId()})}">Delete</a>
+            <a href="#" class="btn btn-primary" th:href="@{/updatefromprofile/{id}(id=${event.getId()})}">Edit</a>
         </div>
+      </div>
     </div>
-    <div th:if="${authUser.getUserType() == 'business'}">
-        <div th:each="event:${authUser.getEventList()}">
+
+     <div th:if="${authUser.getUserType() == 'business'}">
+        <div class="hosting" style="width: 100%">
+          <div class="event" th:each="event:${authUser.getEventList()}">
             <p th:text="'gameName '+${event.getGameName()}"></p>
             <p th:text="'Description '+${event.getDescription()}"></p>
             <p th:text="'DateTime '+${event.getDateTime()}"></p>
-              <p ><span>Status: </span><span th:id="${event.getId()+'h'}"> Active </span></p>
+              <p ><span>Status: </span><span th:id="${event.getId()+'h'}"> Open </span></p>
             <p th:text="'Place '+${event.getPlace()}"></p>
-            <p th:text="${'joined player '+(event.getApplicationUserList().size())}"> </p>
+            <span th:text="${(event.getApplicationUserList().size()+1)}+'/'+${event.getNumberOfPlayer()}"> </span><br>
 
-            <a  href="#" class="btn btn-primary" th:href="@{/updatefromprofile/{id}(id=${event.getId()})}">update</a>
-            <a href="#" class="btn btn-danger" th:href="@{/deleted/{id}(id=${event.getId()})}">delete</a>
+            <a  href="#" class="btn btn-primary" th:href="@{/updatefromprofile/{id}(id=${event.getId()})}">Edit</a>
+            <a href="#" class="btn btn-danger" th:href="@{/deleted/{id}(id=${event.getId()})}">Delete</a>
+          </div>
         </div>
     </div>
-    </div>
 
 
-    <h1 style="margin-top: -1.2rem" th:if="${authUser.getUserType() == 'normal'}">Joined and Upvoted Events</h1>
-    <div id="joining">
+
+    <h1  style="position: absolute; top:59.5rem; left: 48rem" th:if="${authUser.getUserType() == 'normal'}">Joined and Upvoted Events</h1>
+    <div th:if="!${authUser.getUserType() == 'business'}" id="joining">
     <div class="event" th:each="event:${authUser.getEvents()}">
         <div th:if="${event.getApplicationUser().getUserType() == 'normal'}">
             <img th:src="${event.getApplicationUser().getImage()}" class="img">
@@ -157,13 +177,7 @@
 
 </main>
 
-<span id="gg" >Events Log</span>
-<div id="notify">
 
-    <div id="not"  th:if="${authUser}"  th:each="note:${authUser.getNotifications()}">
-        <p th:text="${note.getNotification()}"></p>
-    </div>
-</div>
 
 <hr id="imp">
 
