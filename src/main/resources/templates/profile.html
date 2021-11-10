@@ -82,6 +82,9 @@
 <p th:if="${authUser.getUserType() == 'business'}" th:text="'Location: ' +${authUser.getLocation()}"> </p>
 <p th:if="${authUser.getUserType() == 'business'}" th:text="'Business Name: ' +${authUser.getPlaceName()}"> </p>
 <p th:if="${authUser.getUserType() == 'business'}" th:text="'Working Hours: ' +${authUser.getWorkingHour()}"> </p>
+<!--        <div th:if="${authUser.starRate() != 'NaN'}" class="gg">-->
+<!--            <i   style="color: yellow; font-size: 4pc" class="fas fa-star"></i><span style="position: absolute; top:1.5rem; left:1.3rem;" th:text="${authUser.starRate()}"></span>-->
+<!--        </div >-->
         <a th:if="${authUser}" th:href="${'/editProfileUser'}" >Update Info</a>
     </div>
 
@@ -110,7 +113,7 @@
             <p th:text="'On '+${event.getDateTime()}"></p>
             <p th:text="'Place '+${event.getPlace()}"></p>
 <!--            <p th:text="${'joined player '+(event.getApplicationUserList().size()+1)}"> </p>-->
-            <p ><span>Status: </span><span th:id="${event.getId()+'h'}"> Open </span></p>
+            <p ><span>Status: </span><span style="color: green" th:id="${event.getId()+'h'}"> OPEN </span></p>
 
             <div th:if="${(event.getApplicationUserList().size()+1)>=event.getNumberOfPlayer()}">
             <h2> the event is ready </h2>
@@ -128,10 +131,9 @@
             <p th:text="'gameName '+${event.getGameName()}"></p>
             <p th:text="'Description '+${event.getDescription()}"></p>
             <p th:text="'DateTime '+${event.getDateTime()}"></p>
-              <p ><span>Status: </span><span th:id="${event.getId()+'h'}"> Open </span></p>
+              <p ><span>Status: </span><span style="color: green" th:id="${event.getId()+'h'}"> OPEN </span></p>
             <p th:text="'Place '+${event.getPlace()}"></p>
-            <span th:text="${(event.getApplicationUserList().size()+1)}+'/'+${event.getNumberOfPlayer()}"> </span><br>
-
+            <span th:text="'Votes '+${event.getNumberOfPlayer()}"> </span><br>
             <a  href="#" class="btn btn-primary" th:href="@{/updatefromprofile/{id}(id=${event.getId()})}">Edit</a>
             <a href="#" class="btn btn-danger" th:href="@{/deleted/{id}(id=${event.getId()})}">Delete</a>
           </div>
@@ -167,11 +169,11 @@
             <p th:text="'On '+${event.getDateTime()}"></p>
             <p th:id="${event.getId()}" ></p>
             <p th:text="'Place: '+${event.getPlace()}"></p>
-            <span th:text="${(event.getApplicationUserList().size()+1)}+'/'+${event.getNumberOfPlayer()}"> </span><br>
+            <span th:text="'Votes '+${event.getNumberOfPlayer()}"> </span><br>
             <div th:if="${authUser}">
 
                 <div th:if="!${event.getApplicationUser() == authUser}">
-                    <a th:if="${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/unjoins/{id}(id=${event.getId()})}">uninterested</a>
+                    <a th:if="${authUser.getEvents().contains(event)}" href="#" class="btn btn-primary" th:href="@{/unjoins/{id}(id=${event.getId()})}">Down-vote</a>
                 </div>
             </div>
         </div>
@@ -207,6 +209,8 @@ var countDownDate = new Date(message).getTime();
  var now = new Date().getTime();
  if(now>countDownDate){
     document.getElementById(id+'h').innerHTML = "EXPIRED";
+    document.getElementById(id+'h').style.color="red";
+
 }
 </script>
 
