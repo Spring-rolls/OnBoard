@@ -122,12 +122,14 @@
         <div th:each="event:${eventlist}" >
             <div  th:if="!${(event.getApplicationUserList().size()+1)>=event.getNumberOfPlayer()}">
              <div  class="event"   th:if="${event.getApplicationUser().getUserType() == 'normal'}">
+                 <a  th:href="${'/user/'+event.getApplicationUser().getId()}"> <img class="propic" th:src="${event.getApplicationUser().getImage()}"></a>
                     <a class="name" th:href="${'/user/'+event.getApplicationUser().getId()}">  <p th:text="${event.getApplicationUser().getFirstName()}"></p></a>
                     <p th:text="'Game: '+${event.getGameName()}"></p>
 <!--                    <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>-->
                     <p th:text="'On '+${event.getDateTime()}"></p>
                     <p th:id="${event.getId()}"></p>
                     <p th:text="'Place: '+${event.getPlace()}"></p>
+                 <span th:text="${(event.getApplicationUserList().size()+1)}+'/'+${event.getNumberOfPlayer()}"> </span><br>
                  <div class="imgcont">
                  <img class="cardpic" th:src="${event.getPhoto().getUrl()}">
                  </div>
@@ -150,12 +152,14 @@
 
             <div >
             <div class="event"  th:if="${event.getApplicationUser().getUserType() == 'business'}">
+                <a th:href="${'/user/'+event.getApplicationUser().getId()}"> <img class="propic" th:src="${event.getApplicationUser().getImage()}"></a>
                 <a class="name" th:href="${'/user/'+event.getApplicationUser().getId()}">  <p th:text="${event.getApplicationUser().getFirstName()}"></p></a>
                 <p th:text="'Game: '+${event.getGameName()}"></p>
                 <p th:text="'Host offer: '+${event.getDescription()}"></p>
                 <p th:text="'On '+${event.getDateTime()}"></p>
                 <p th:id="${event.getId()}"></p>
-                <p th:text="'Place: '+${event.getPlace()}"></p>
+                <p th:text="'Place: '+${event.getPlace()}"></p><br>
+
                 <div class="imgcont">
                     <img class="cardpic" th:src="${event.getPhoto().getUrl()}">
                 </div>
@@ -183,11 +187,12 @@
                 <div  th:if="!${(event.getApplicationUserList().size()+1)>=event.getNumberOfPlayer()}">
 
                 <div  class="event"   th:if="${event.getApplicationUser().getUserType() == 'normal'}">
+                    <a th:href="${'/user/'+event.getApplicationUser().getId()}"> <img class="propic" th:src="${event.getApplicationUser().getImage()}"></a>
                         <a class="name" th:href="${'/user/'+event.getApplicationUser().getId()}">  <p th:text="${event.getApplicationUser().getFirstName()}"></p></a>
                         <p th:text="'Game: '+${event.getGameName()}"></p>
                         <!--                    <p th:text="'NumberOfPlayer '+${event.getNumberOfPlayer()}"></p>-->
                         <p th:text="'On '+${event.getDateTime()}"></p>
-                        <p th:id="${event.getId()}"></p>
+                        <p th:id="${event.getId()+'z'}"></p>
                         <p th:text="'Place: '+${event.getPlace()}"></p>
                     <div class="imgcont">
                         <img class="cardpic" th:src="${event.getPhoto().getUrl()}">
@@ -214,11 +219,12 @@
         <div id="business1" style="display:none">
             <div  th:each="event:${eventlist}" >
             <div class="event"  th:if="${event.getApplicationUser().getUserType() == 'business'}">
+                <a th:href="${'/user/'+event.getApplicationUser().getId()}"> <img class="propic" th:src="${event.getApplicationUser().getImage()}"></a>
                 <a class="name" th:href="${'/user/'+event.getApplicationUser().getId()}">  <p th:text="${event.getApplicationUser().getFirstName()}"></p></a>
                 <p th:text="'Game: '+${event.getGameName()}"></p>
                 <p th:text="'Host offer: '+${event.getDescription()}"></p>
                 <p th:text="'On '+${event.getDateTime()}"></p>
-                <p th:id="${event.getId()}"></p>
+                <p th:id="${event.getId()+'z'}"></p>
                 <p th:text="'Place: '+${event.getPlace()}"></p>
                 <div class="imgcont">
                     <img class="cardpic" th:src="${event.getPhoto().getUrl()}">
@@ -278,25 +284,12 @@ var countDownDate = new Date(message).getTime();
  if(now>countDownDate){
 <!--    document.getElementById(id).innerHTML = "EXPIRED";-->
 document.getElementById(id).parentElement.parentElement.parentElement.remove();
+document.getElementById(id+'z').parentElement.parentElement.parentElement.remove();
+
 }
 </script>
-<!--<script type="text/javascript">-->
-<!--       function toggleDiv(divid)-->
-<!--  {-->
-<!--    varon = divid + 'on';-->
-<!--    varoff = divid + 'off';-->
-<!--    if(document.getElementById(varon).style.display == 'block')-->
-<!--    {-->
-<!--    document.getElementById(varon).style.display = 'none';-->
-<!--    document.getElementById(varoff).style.display = 'block';-->
-<!--    }-->
-<!--    else-->
-<!--    {-->
-<!--    document.getElementById(varoff).style.display = 'none';-->
-<!--    document.getElementById(varon).style.display = 'block'-->
-<!--    }-->
-<!--}-->
-<!--    </script>-->
+
+
     <script th:inline="javascript">
         function notAll(){
             console.log("out")
