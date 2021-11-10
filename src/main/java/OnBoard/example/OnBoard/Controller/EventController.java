@@ -49,11 +49,12 @@ public class EventController {
     }
     @PostMapping("/eventfornormal")
     public RedirectView eventForNormal(@RequestParam String gameName,
-                                    @RequestParam int numberOfPlayer,
+                                    @RequestParam Integer numberOfPlayer,
                                     @RequestParam String dateTime,
                                     @RequestParam String place,
                                     Principal p){
 
+        if(gameName!=null&&dateTime!=null&&(numberOfPlayer instanceof Integer)&&place!=null) {
 
 
         ApplicationUser applicationUser =appUserRepository.findByUsername(p.getName());
@@ -86,6 +87,7 @@ public class EventController {
         eventRepository.save(event);
         /*-----------*/
         appUserRepository.save(applicationUser);
+        }
         return new RedirectView("/");
     }
     @PostMapping("/eventforbusiness")
@@ -95,38 +97,39 @@ public class EventController {
                                     @RequestParam String description,
                                     Principal p){
 
+            if(gameName!=null&&dateTime!=null&&place!=null&&description!=null) {
+                ApplicationUser applicationUser = appUserRepository.findByUsername(p.getName());
 
-        ApplicationUser applicationUser =appUserRepository.findByUsername(p.getName());
+                Event event = new Event(gameName, dateTime, place, description, applicationUser);
+                eventRepository.save(event);
+                /*-----API----*/
 
-            Event event =new Event(gameName,dateTime,place,description,applicationUser);
-        eventRepository.save(event);
-        /*-----API----*/
+                Gson gson = new Gson();
+                Splash s = null;
+                HttpURLConnection conn = null;
+                BufferedReader read = null;
+                try {
+                    System.out.println("from API file");
+                    URL url = new URL("https://api.unsplash.com/search/photos/?client_id=5JrdpKwQXgj6389dUkJ0mwaZagbWALMWQYhHAiygjco&query=" + gameName);
+                    conn = (HttpURLConnection) url.openConnection();
+                    read = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    s = gson.fromJson(read, Splash.class);
+                    System.out.println("array of games" + s.getResults()[0].urls.raw);
+                    Photo photo = new Photo(s.getResults()[0].urls.raw, event);
+                    photoRepository.save(photo);
 
-        Gson gson = new Gson();
-        Splash s = null;
-        HttpURLConnection conn = null;
-        BufferedReader read = null;
-        try {
-            System.out.println("from API file");
-            URL url = new URL("https://api.unsplash.com/search/photos/?client_id=5JrdpKwQXgj6389dUkJ0mwaZagbWALMWQYhHAiygjco&query="+gameName);
-            conn = (HttpURLConnection) url.openConnection();
-            read = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            s = gson.fromJson(read, Splash.class);
-            System.out.println("array of games" + s.getResults()[0].urls.raw);
-            Photo photo=new Photo(s.getResults()[0].urls.raw,event);
-                photoRepository.save(photo);
-
-        } catch (Exception IOException) {
-            System.out.println("from catch");
-            Photo photo1=new Photo("https://images.unsplash.com/photo-1532699462982-132875fc5397?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGJvYXJkJTIwZ2FtZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",event);
-            photoRepository.save(photo1);
-            Reader reader = null;
-        }
-        eventRepository.save(event);
-        /*-----------*/
-        appUserRepository.save(applicationUser);
-        return new RedirectView("/");
-    }
+                } catch (Exception IOException) {
+                    System.out.println("from catch");
+                    Photo photo1 = new Photo("https://images.unsplash.com/photo-1532699462982-132875fc5397?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGJvYXJkJTIwZ2FtZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", event);
+                    photoRepository.save(photo1);
+                    Reader reader = null;
+                }
+                eventRepository.save(event);
+                /*-----------*/
+                appUserRepository.save(applicationUser);
+            }
+                return new RedirectView("/");
+            }
     @GetMapping("/join/{id}")
     public RedirectView joinEvent(@PathVariable Integer id,Principal p){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");

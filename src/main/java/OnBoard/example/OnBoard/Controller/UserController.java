@@ -2,9 +2,11 @@ package OnBoard.example.OnBoard.Controller;
 
 import OnBoard.example.OnBoard.Model.ApplicationUser;
 import OnBoard.example.OnBoard.Model.Event;
+import OnBoard.example.OnBoard.OnBoardApplication;
 import OnBoard.example.OnBoard.Repository.AppUserRepository;
 import OnBoard.example.OnBoard.Repository.EventRepository;
 import OnBoard.example.OnBoard.Repository.RatingRepository;
+import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -83,12 +85,15 @@ public class UserController {
          * we have to create if condition if the condition isBusiness we implement the full constructor else we implement
          * the other constructor that will be without the business.
          */
-
+        if(password!=""&&username!=""&&firstName!=""&&lastName!=""&&location!=""&&placeName!=""&&workingHour!=""&&image!=""){
         ApplicationUser applicationUser = new ApplicationUser(encoder.encode(password), username, firstName, lastName, location, placeName, workingHour, "ROLE_USER","business",image);
         appUserRepository.save(applicationUser);
         Authentication authentication = new UsernamePasswordAuthenticationToken(applicationUser, null, applicationUser.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new RedirectView("/");
+            return new RedirectView("/");
+
+        }
+        return new RedirectView("/signup");
     }
     @PostMapping("/signupNormal")
     public RedirectView signupNormal(@RequestParam String password,
@@ -100,11 +105,18 @@ public class UserController {
          * we have to create if condition if the condition isBusiness we implement the full constructor else we implement
          * the other constructor that will be without the business.
          */
+
+
+        if(password!=""&&username!=""&&firstName!=""&&lastName!=""&&image!=""){
+
         ApplicationUser applicationUser = new ApplicationUser(encoder.encode(password), username, firstName, lastName, "ROLE_USER","normal",image);
         appUserRepository.save(applicationUser);
         Authentication authentication = new UsernamePasswordAuthenticationToken(applicationUser, null, applicationUser.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new RedirectView("/");
+            return new RedirectView("/");
+
+        }
+        return new RedirectView("/signup");
     }
 
     @GetMapping("/user/{id}")
