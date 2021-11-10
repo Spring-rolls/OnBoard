@@ -64,7 +64,7 @@ public class EventController {
         /*-----API----*/
 
         Gson gson = new Gson();
-         Splash s = null;
+        Splash s = null;
         HttpURLConnection conn = null;
         BufferedReader read = null;
         try {
@@ -76,13 +76,15 @@ public class EventController {
             System.out.println("array of games" + s.getResults()[0].urls.raw);
             Photo photo=new Photo(s.getResults()[0].urls.raw,event);
             photoRepository.save(photo);
+
         } catch (Exception IOException) {
             System.out.println("from catch");
+            Photo photo1=new Photo("https://images.unsplash.com/photo-1532699462982-132875fc5397?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGJvYXJkJTIwZ2FtZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",event);
+            photoRepository.save(photo1);
             Reader reader = null;
         }
         eventRepository.save(event);
         /*-----------*/
-
         appUserRepository.save(applicationUser);
         return new RedirectView("/");
     }
@@ -98,8 +100,30 @@ public class EventController {
 
             Event event =new Event(gameName,dateTime,place,description,applicationUser);
         eventRepository.save(event);
+        /*-----API----*/
 
-//        applicationUser.getEvents().add(event);
+        Gson gson = new Gson();
+        Splash s = null;
+        HttpURLConnection conn = null;
+        BufferedReader read = null;
+        try {
+            System.out.println("from API file");
+            URL url = new URL("https://api.unsplash.com/search/photos/?client_id=5JrdpKwQXgj6389dUkJ0mwaZagbWALMWQYhHAiygjco&query="+gameName);
+            conn = (HttpURLConnection) url.openConnection();
+            read = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            s = gson.fromJson(read, Splash.class);
+            System.out.println("array of games" + s.getResults()[0].urls.raw);
+            Photo photo=new Photo(s.getResults()[0].urls.raw,event);
+                photoRepository.save(photo);
+
+        } catch (Exception IOException) {
+            System.out.println("from catch");
+            Photo photo1=new Photo("https://images.unsplash.com/photo-1532699462982-132875fc5397?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGJvYXJkJTIwZ2FtZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",event);
+            photoRepository.save(photo1);
+            Reader reader = null;
+        }
+        eventRepository.save(event);
+        /*-----------*/
         appUserRepository.save(applicationUser);
         return new RedirectView("/");
     }
@@ -164,7 +188,7 @@ public class EventController {
             appUserRepository.save(user);
         }
         /*-----------------------------------------------*/
-
+        photoRepository.deleteById(event.getPhoto().getId());
         eventRepository.deleteById(id);
         return new RedirectView("/");
     }
@@ -179,11 +203,12 @@ public class EventController {
             String notification= p.getName() + " has delete his " + event.getGameName()+" event at " +dtf.format(now);
             Notification notification1=new Notification(notification,user);
             notificationRepository.save(notification1);
+
             user.getEvents().remove(event);
             appUserRepository.save(user);
         }
         /*-----------------------------------------------*/
-
+        photoRepository.deleteById(event.getPhoto().getId());
         eventRepository.deleteById(id);
         return new RedirectView("/profile");
     }
