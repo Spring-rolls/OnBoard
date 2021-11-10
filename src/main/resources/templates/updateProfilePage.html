@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <!--    <link rel="stylesheet" href="/styles/updateUser.css" />-->
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/updateUser.css" />
@@ -17,119 +17,119 @@
 
 
 
-<div class="container">
-    <div id="left">
-        <div class="logo">
-            <img href="/" src="https://logomakercdn.truic.com/ux-flow/industry/board-game-lounge-meta.png"  >
-            <a href="/">OnBoard</a>
-        </div>
-        <div id="mydivon" style="display:block">
-            <h1 class="tag">Individual</h1>
-            <form th:if="${authUser.getUserType() == 'normal'}" action="/editProfileUsers" method="post">
-                <label for="username"> <i class="fas fa-user"></i>  <input type="text" placeholder="Username" class="form-control" th:value="${authUser.getUsername()}" name="username" id="username"></label></br>
-                <label for="firstName"><i class="fas fa-chess-pawn"></i><input type="text" placeholder="First Name" class="form-control" th:value="${authUser.getFirstName()}" name="firstName" id="firstName"> </label></br>
-                <label for="lastName"><i class="fas fa-chess-knight"></i><input type="text" placeholder="Last Name" class="form-control" th:value="${authUser.getLastName()}" name="lastName" id="lastName"> </label></br>
-                <label for="image"><i class="fas fa-user-tag"></i><input type="text" class="form-control" placeholder="Avatar" name="image" id="image"  th:value="${authUser.getImage()}" accept="image/jpeg, image/png"> </label></br>
-                <input type="submit"  value="Sign up" class="btn btn-primary">
-            </form>
-        </div>
-        <div id="mydivoff" >
-            <h1 class="tag">Business</h1>
-            <form th:if="${authUser.getUserType() == 'business'}" action="/editProfileUsersBusiness" method="post">
-                <label for="username"> <i class="fas fa-user"></i>  <input type="text" placeholder="Username" class="form-control" th:value="${authUser.getUsername()}" name="username" id="username"></label></br>
-                <label for="firstName"><i class="fas fa-chess-pawn"></i><input type="text" placeholder="First Name" class="form-control"  th:value="${authUser.getFirstName()}" name="firstName" id="firstName"> </label></br>
-                <label for="lastName"><i class="fas fa-chess-knight"></i><input type="text" placeholder="Last Name" class="form-control" th:value="${authUser.getLastName()}" name="lastName" id="lastName"> </label></br>
-                <label for="location"><i class="fas fa-location-arrow"></i><input type="text" placeholder="Location" class="form-control" th:value="${authUser.getLocation()}" name="location" id="location"></label></br>
-                <label for="placeName"><i class="fas fa-briefcase"></i><input type="text" class="form-control" placeholder="Business Name" th:value="${authUser.getPlaceName()}" name="placeName" id="placeName"> </label></br>
-                <label for="workingHour"><i class="fas fa-clock"></i><input type="text" placeholder="Working Hours" class="form-control" th:value="${authUser.getWorkingHour()}" name="workingHour" id="workingHour"></label></br>
-                <label for="image"><i class="fas fa-user-tag"></i><input type="text" class="form-control" placeholder="Avatar" name="image"  th:value="${authUser.getImage()}" id="image" accept="image/jpeg, image/png"> </label></br>
-                <input type="submit" value="Sign up" class="btn btn-primary">
-            </form>
-        </div>
-        <div id="op">
-            <p>Already have an account? <a href="/login">Log in</a></p>
+<!--<div class="container">-->
+<!--    <div id="left">-->
+<!--        <div class="logo">-->
+<!--            <img href="/" src="https://logomakercdn.truic.com/ux-flow/industry/board-game-lounge-meta.png"  >-->
+<!--            <a href="/">OnBoard</a>-->
+<!--        </div>-->
+<!--        <div id="mydivon" style="display:block">-->
+<!--            <h1 class="tag">Individual</h1>-->
+<!--            <form th:if="${authUser.getUserType() == 'normal'}" action="/editProfileUsers" method="post">-->
+<!--                <label for="username"> <i class="fas fa-user"></i>  <input type="text" placeholder="Username" class="form-control" th:value="${authUser.getUsername()}" name="username" id="username"></label></br>-->
+<!--                <label for="firstName"><i class="fas fa-chess-pawn"></i><input type="text" placeholder="First Name" class="form-control" th:value="${authUser.getFirstName()}" name="firstName" id="firstName"> </label></br>-->
+<!--                <label for="lastName"><i class="fas fa-chess-knight"></i><input type="text" placeholder="Last Name" class="form-control" th:value="${authUser.getLastName()}" name="lastName" id="lastName"> </label></br>-->
+<!--                <label for="image"><i class="fas fa-user-tag"></i><input type="text" class="form-control" placeholder="Avatar" name="image" id="image"  th:value="${authUser.getImage()}" accept="image/jpeg, image/png"> </label></br>-->
+<!--                <input type="submit"  value="Sign up" class="btn btn-primary">-->
+<!--            </form>-->
+<!--        </div>-->
+<!--        <div id="mydivoff" >-->
+<!--            <h1 class="tag">Business</h1>-->
+<!--            <form th:if="${authUser.getUserType() == 'business'}" action="/editProfileUsersBusiness" method="post">-->
+<!--                <label for="username"> <i class="fas fa-user"></i>  <input type="text" placeholder="Username" class="form-control" th:value="${authUser.getUsername()}" name="username" id="username"></label></br>-->
+<!--                <label for="firstName"><i class="fas fa-chess-pawn"></i><input type="text" placeholder="First Name" class="form-control"  th:value="${authUser.getFirstName()}" name="firstName" id="firstName"> </label></br>-->
+<!--                <label for="lastName"><i class="fas fa-chess-knight"></i><input type="text" placeholder="Last Name" class="form-control" th:value="${authUser.getLastName()}" name="lastName" id="lastName"> </label></br>-->
+<!--                <label for="location"><i class="fas fa-location-arrow"></i><input type="text" placeholder="Location" class="form-control" th:value="${authUser.getLocation()}" name="location" id="location"></label></br>-->
+<!--                <label for="placeName"><i class="fas fa-briefcase"></i><input type="text" class="form-control" placeholder="Business Name" th:value="${authUser.getPlaceName()}" name="placeName" id="placeName"> </label></br>-->
+<!--                <label for="workingHour"><i class="fas fa-clock"></i><input type="text" placeholder="Working Hours" class="form-control" th:value="${authUser.getWorkingHour()}" name="workingHour" id="workingHour"></label></br>-->
+<!--                <label for="image"><i class="fas fa-user-tag"></i><input type="text" class="form-control" placeholder="Avatar" name="image"  th:value="${authUser.getImage()}" id="image" accept="image/jpeg, image/png"> </label></br>-->
+<!--                <input type="submit" value="Sign up" class="btn btn-primary">-->
+<!--            </form>-->
+<!--        </div>-->
+<!--        <div id="op">-->
+<!--            <p>Already have an account? <a href="/login">Log in</a></p>-->
 
-            <a id="home" href="/">Home</a>
-        </div>
-    </div>
-</div>
-
-
+<!--            <a id="home" href="/">Home</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 
-<!--<main>-->
-<!--            <div class="formmm" th:if="${authUser.getUserType() == 'normal'}">-->
-<!--            <div class="formbg-outer">-->
-<!--                <div class="formbg">-->
-<!--                    <div class="formbg-inner padding-horizontal&#45;&#45;48">-->
-<!--                        <span class="padding-bottom&#45;&#45;15">Update your account</span>-->
-<!--                        <form th:if="${authUser.getUserType() == 'normal'}" action="/editProfileUsers" method="post">-->
-<!--                            <div class="field padding-bottom&#45;&#45;10">-->
-<!--                                <label for="username">Username</label>-->
-<!--                                <input type="text" class="form-control" name="username" id="username" th:value="${authUser.getUsername()}"></br>-->
-<!--                            </div>-->
-<!--                            <div class="field padding-bottom&#45;&#45;10">-->
-<!--                                <label for="firstName">firstName</label>-->
-<!--                                <input type="text" class="form-control" name="firstName" id="firstName" th:value="${authUser.getFirstName()}"></br>-->
-<!--                            </div>-->
-<!--                            <div class="field padding-bottom&#45;&#45;10">-->
-<!--                                <label for="lastName">lastName</label>-->
-<!--                                <input type="text" class="form-control" name="lastName" id="lastName" th:value="${authUser.getLastName()}"> </br>-->
-<!--                            </div>-->
-<!--                            <div class="field padding-bottom&#45;&#45;10">-->
-<!--                                <label for="image">image</label>-->
-<!--                                <input type="text" class="form-control" name="image" id="image" accept="image/jpeg, image/png" th:value="${authUser.getImage()}"></br>-->
-<!--                            </div>-->
-<!--                            <div class="field field-checkbox padding-bottom&#45;&#45;10 flex-flex align-center">-->
-<!--                            </div>-->
-<!--                            <div class="field padding-bottom&#45;&#45;10">-->
-<!--                                <input type="submit" name="submit" value="Continue">-->
-<!--                            </div>-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            </div>-->
 
 
-<!--            <div th:if="${authUser.getUserType() == 'business'}">-->
-<!--                <div class="formbg-outer">-->
-<!--                    <div class="formbg">-->
-<!--                        <div class="formbg-inner padding-horizontal&#45;&#45;48">-->
-<!--                            <span class="padding-bottom&#45;&#45;15">Update your account</span>-->
-<!--                            <form th:if="${authUser.getUserType() == 'business'}" action="/editProfileUsersBusiness" method="post">-->
-<!--                                <div class="field padding-bottom&#45;&#45;0">-->
-<!--                                    <label for="username">Username <input type="text" class="form-control" name="username" id="username" th:value="${authUser.getUsername()}"> </label></br>-->
-<!--                                </div>-->
-<!--                                <div class="field padding-bottom&#45;&#45;0">-->
-<!--                                    <label for="firstName">First Name <input type="text" class="form-control" name="firstName" id="firstName" th:value="${authUser.getFirstName()}"> </label></br>-->
-<!--                                </div>-->
-<!--                                <div class="field padding-bottom&#45;&#45;0">-->
-<!--                                    <label for="lastName">Last Name <input type="text" class="form-control" name="lastName" id="lastName" th:value="${authUser.getLastName()}"></label></br>-->
-<!--                                </div>-->
-<!--                                <div class="field padding-bottom&#45;&#45;0">-->
-<!--                                    <label for="location">Location<input type="text" class="form-control" name="location" id="location" th:value="${authUser.getLocation()}"></label></br>-->
-<!--                                </div>-->
-<!--                                <div class="field padding-bottom&#45;&#45;0">-->
-<!--                                    <label for="placeName">Business Name <input type="text" class="form-control" name="placeName" id="placeName" th:value="${authUser.getPlaceName()}"> </label></br>-->
-<!--                                </div>-->
-<!--                                <div class="field padding-bottom&#45;&#45;0">-->
-<!--                                    <label for="workingHour">Working Hours <input type="text" class="form-control" name="workingHour" id="workingHour" th:value="${authUser.getWorkingHour()}"></label></br>-->
-<!--                                </div>-->
-<!--                                <div class="field padding-bottom&#45;&#45;0">-->
-<!--                                    <label for="image"> Avatar <input type="text" class="form-control" name="image" id="image" accept="image/jpeg, image/png" th:value="${authUser.getImage()}"> </label></br>-->
-<!--                                </div>-->
-<!--                                <div class="field field-checkbox padding-bottom&#45;&#45;0 flex-flex align-center">-->
-<!--                                </div>-->
-<!--                                <div class="field padding-bottom&#45;&#45;24">-->
-<!--                                    <input type="submit" name="submit" value="Continue">-->
-<!--                                </div>-->
-<!--                            </form>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+<main>
+            <div class="formmm" th:if="${authUser.getUserType() == 'normal'}">
+            <div class="formbg-outer">
+                <div class="formbg">
+                    <div class="formbg-inner padding-horizontal--48">
+                        <span class="padding-bottom--15">Update your account</span>
+                        <form th:if="${authUser.getUserType() == 'normal'}" action="/editProfileUsers" method="post">
+                            <div class="field padding-bottom--10">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" name="username" id="username" th:value="${authUser.getUsername()}"></br>
+                            </div>
+                            <div class="field padding-bottom--10">
+                                <label for="firstName">firstName</label>
+                                <input type="text" class="form-control" name="firstName" id="firstName" th:value="${authUser.getFirstName()}"></br>
+                            </div>
+                            <div class="field padding-bottom--10">
+                                <label for="lastName">lastName</label>
+                                <input type="text" class="form-control" name="lastName" id="lastName" th:value="${authUser.getLastName()}"> </br>
+                            </div>
+                            <div class="field padding-bottom--10">
+                                <label for="image">image</label>
+                                <input type="text" class="form-control" name="image" id="image" accept="image/jpeg, image/png" th:value="${authUser.getImage()}"></br>
+                            </div>
+                            <div class="field field-checkbox padding-bottom--10 flex-flex align-center">
+                            </div>
+                            <div class="field padding-bottom--10">
+                                <input type="submit" name="submit" class="btn" value="Update">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
 
-<!--</main>-->
+
+            <div th:if="${authUser.getUserType() == 'business'}">
+                <div class="formbg-outer">
+                    <div class="formbg">
+                        <div class="formbg-inner padding-horizontal--48">
+                            <span class="padding-bottom--15">Update your account</span>
+                            <form th:if="${authUser.getUserType() == 'business'}" action="/editProfileUsersBusiness" method="post">
+                                <div class="field padding-bottom--0">
+                                    <label for="username">Username <input type="text" class="form-control" name="username" id="username" th:value="${authUser.getUsername()}"> </label></br>
+                                </div>
+                                <div class="field padding-bottom--0">
+                                    <label for="firstName">First Name <input type="text" class="form-control" name="firstName" id="firstName" th:value="${authUser.getFirstName()}"> </label></br>
+                                </div>
+                                <div class="field padding-bottom--0">
+                                    <label for="lastName">Last Name <input type="text" class="form-control" name="lastName" id="lastName" th:value="${authUser.getLastName()}"></label></br>
+                                </div>
+                                <div class="field padding-bottom--0">
+                                    <label for="location">Location<input type="text" class="form-control" name="location" id="location" th:value="${authUser.getLocation()}"></label></br>
+                                </div>
+                                <div class="field padding-bottom--0">
+                                    <label for="placeName">Business Name <input type="text" class="form-control" name="placeName" id="placeName" th:value="${authUser.getPlaceName()}"> </label></br>
+                                </div>
+                                <div class="field padding-bottom--0">
+                                    <label for="workingHour">Working Hours <input type="text" class="form-control" name="workingHour" id="workingHour" th:value="${authUser.getWorkingHour()}"></label></br>
+                                </div>
+                                <div class="field padding-bottom--0">
+                                    <label for="image"> Avatar <input type="text" class="form-control" name="image" id="image" accept="image/jpeg, image/png" th:value="${authUser.getImage()}"> </label></br>
+                                </div>
+                                <div class="field field-checkbox padding-bottom--0 flex-flex align-center">
+                                </div>
+                                <div class="field padding-bottom--24">
+                                    <input type="submit" name="submit" value="Continue">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</main>
 </body>
 </html>

@@ -2,26 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>user</title>
+    <title>OnBoard - User Profile</title>
+    <link rel="shortcut icon" href="https://logomakercdn.truic.com/ux-flow/industry/board-game-lounge-meta.png" type="image/x-icon">
+    <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/user.css" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!--        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
     <script src="https://kit.fontawesome.com/1599d6604b.js" crossorigin="anonymous"></script>
 </head>
 <body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"> <img src="https://logomakercdn.truic.com/ux-flow/industry/board-game-lounge-meta.png"  >OnBoard</a>
+        </div>
+        <div class="dropdown">
+            <span class="dropbtn">Menu <i id="this" class="fas fa-sort-down"></i></span>
+            <ul class="nav navbar-nav navbar-right dropdown-content">
+                <li ><a  href="/" >Home</a></li>
+                <li ><a th:if="${authUser}" th:href="${'/profile'}" >profile</a></li>
+                <li ><a  href="/aboutus" >About Us</a></li>
+                <!--            <li sec:authorize="!isAuthenticated()"><a href="/signupNormal" ><span class="glyphicon glyphicon-user"></span> Sign Up Normal</a></li>-->
+                <li sec:authorize="!isAuthenticated()"><a href="/login"  ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li sec:authorize="!isAuthenticated()"><a href="/signup" ><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li ><p  id="text"></li>
+                <li sec:authorize="isAuthenticated()"><a href="/perform_logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
+        </div>
+
+        <a th:href="${'/profile'}"><img th:if="${authUser}" th:src="${authUser.getImage()}" class="img"></a>
+        <img sec:authorize="!isFullyAuthenticated()" src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png" class="img" style="filter: invert(1);">
+        <a  class="a" sec:authorize="!isFullyAuthenticated()" href="/login">Login</a>
+        <a class="a"  sec:authorize="isFullyAuthenticated()" href="/perform_logout">Logout</a>
+    </div>
+</nav>
+<div id="banner">
+
+</div>
+
+
 <div class="parent">
 
 
+ <div id="info">
+   <img th:src="${user.getImage()}" class="avatar">
 
-
-<div class="userPro">
-<figure class="snip1515">
-    <div class="profile-image"><img th:src="${user.getImage()}" class="img"></div>
-    <div th:if="${user.starRate() != 'NaN'}" class="gg">
-    <p th:text="${'Star rating '+user.starRate()}"></p><i class="fas fa-star"></i>
-    </div >
-    <figcaption>
-        <h3 th:text="' Name: ' +${user.getFirstName()} +' '+${user.getLastName()}"></h3>
-        <h4 th:text="' type of user: ' + ${user.getUserType()}"></h4>
+     <div id="ps">
+         <div th:if="${user.starRate() != 'NaN'}" class="gg">
+             <i  style="color: yellow; font-size: 4pc" class="fas fa-star"></i><span style="position: absolute; top:1.5rem; left:1.3rem;" th:text="${user.starRate()}"></span>
+         </div >
+        <p th:text="' Name: ' +${user.getFirstName()} +' '+${user.getLastName()}"></p>
+        <p th:text="'Account Type: ' + ${user.getUserType()}"></p>
         <div th:if="${user.getUserType() == 'business'}"class="con">
             <div > <label>Location</label>
                 <p  th:text="${user.getLocation()}"></p></div>
@@ -30,59 +60,59 @@
             <div ><label>WorkingHour</label>
                 <p  th:text="${user.getWorkingHour()}"></p></div>
         </div>
-    </figcaption>
-</figure>
+         <div class="div1" th:if="${authUser}">
+             <div  th:if="${authUser != user}">
+                 <div th:if="!${authUser.getReviewers().contains(user)}">
+                     <form method="post" th:action="${'/feedBack/'+user.getId()}">
+                         <div class="form-group required">
+                             <div class="col-sm-12">
+                                 <label class="control-label"></label>
+                                 <div class="star-rating">
+                                     <input id="star-5" type="radio" name="starNumber" value="5" />
+                                     <label for="star-5" title="5 stars">★</label>
+                                     &nbsp;
+                                     <input id="star-4" type="radio" name="starNumber" value="4" />
+                                     <label for="star-4" title="4 stars">★</label>
+                                     &nbsp;
+                                     <input id="star-3" type="radio" name="starNumber" value="3" />
+                                     <label for="star-3" title="3 stars">★</label>
+                                     &nbsp;
+                                     <input id="star-2" type="radio" name="starNumber" value="2" />
+                                     <label for="star-2" title="2 stars">★</label>
+                                     &nbsp;
+                                     <input id="star-1" type="radio" name="starNumber" value="1" />
+                                     <label for="star-1" title="1 star">★</label>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="re">
+
+                             <div class="kk">
+                                 <input type="text" placeholder="Feedback" class="form-control" name="feedBack" id="feedBack"></br>
+                                 <input type="submit" value="Post" class="standard-btn btn-lg">
+                             </div>
+                         </div>
+                     </form>
+                 </div>
+             </div>
+         </div>
+         <div class="rev">
+             <div class="div3">
+                 <p>Reviews</p>
+                 <hr>
+             </div>
+             <div class="message" th:each="rate:${user.getRatings()}">
+                 <p th:text="${rate.getFeedBack()} +' '+ ${rate.getStarNumber()}"></p><i style="color: yellow; font-size: 2pc" class="fas fa-star"></i>
+             </div>
+         </div>
+    </div>
+ </div>
+
+
 </div>
 
-    <div class="userPro1">
-        <div class="div3">
-        <h1><i class="fas fa-star">Reviews</i></h1>
-        </div>
-    <div class="message" th:each="rate:${user.getRatings()}">
-        <p th:text="${rate.getFeedBack()} +' '+ ${rate.getStarNumber()}"></p><i class="fas fa-star"></i>
-    </div>
-    </div>
-</div>
 
-<div class="div1" th:if="${authUser}">
-    <div  th:if="${authUser != user}">
-    <div th:if="!${authUser.getReviewers().contains(user)}">
-        <form method="post" th:action="${'/feedBack/'+user.getId()}">
-            <div class="form-group required">
-                <div class="col-sm-12">
-                    <label class="control-label"></label>
-                    <div class="star-rating">
-                        <input id="star-5" type="radio" name="starNumber" value="5" />
-                        <label for="star-5" title="5 stars">★</label>
-                        &nbsp;
-                        <input id="star-4" type="radio" name="starNumber" value="4" />
-                        <label for="star-4" title="4 stars">★</label>
-                        &nbsp;
-                        <input id="star-3" type="radio" name="starNumber" value="3" />
-                        <label for="star-3" title="3 stars">★</label>
-                        &nbsp;
-                        <input id="star-2" type="radio" name="starNumber" value="2" />
-                        <label for="star-2" title="2 stars">★</label>
-                        &nbsp;
-                        <input id="star-1" type="radio" name="starNumber" value="1" />
-                        <label for="star-1" title="1 star">★</label>
-                    </div>
-                </div>
-            </div>
-            <div class="re">
-                <label for="feedBack">Review</label>
-                <div class="kk">
-                <input type="text" class="form-control" name="feedBack" id="feedBack"></br>
-                <input type="submit" value="Post" class="standard-btn btn-lg">
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-</div>
-<div class="imgUser">
-    <img src="https://github.com/4O4ers/eventome-fe/blob/main/src/components/Images/Vector%205.png?raw=true">
-</div>
+
 
 </body>
 </html>
