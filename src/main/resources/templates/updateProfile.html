@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/update.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
@@ -21,7 +24,7 @@
         <label for="place">place</label>
         <input type="text" class="form-control" name="place" id="place"  th:value="${event.getPlace()}"></br>
 
-        <input type="submit" class="btn btn-primary">
+        <input type="submit" value="Edit" class="btn btn-primary">
 
     </form>
     <form th:if="${authUser.getUserType() == 'business'}" th:action="${'/updateformbusinessprofile/'+event.getId()}" method="post">
@@ -36,7 +39,7 @@
 
         <input type="hidden" class="form-control"  name="place"  id="place" th:value="${event.getPlace()}"></br>
 
-        <input type="submit" class="btn btn-primary">
+        <input type="submit" value="Edit" class="btn btn-primary">
 
     </form>
 </main>

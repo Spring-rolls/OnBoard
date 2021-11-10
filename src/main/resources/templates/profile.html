@@ -2,7 +2,8 @@
 <html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>OnBoard - Profile</title>
+    <link rel="shortcut icon" href="https://logomakercdn.truic.com/ux-flow/industry/board-game-lounge-meta.png" type="image/x-icon">
 <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
 
     <link rel="stylesheet" href="/styles/reset.css" />
@@ -25,7 +26,9 @@
         <div class="dropdown">
             <span class="dropbtn">Menu<i id="this" class="fas fa-sort-down"></i></span>
             <ul class="nav navbar-nav navbar-right dropdown-content">
+                <li ><a  href="/" >Home</a></li>
                 <li ><a th:if="${authUser}" th:href="${'/profile'}" >profile</a></li>
+                <li ><a  href="/aboutus" >About Us</a></li>
                 <li ></li>
                 <!--            <li sec:authorize="!isAuthenticated()"><a href="/signupNormal" ><span class="glyphicon glyphicon-user"></span> Sign Up Normal</a></li>-->
                 <li sec:authorize="!isAuthenticated()"><a href="/login"  ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>

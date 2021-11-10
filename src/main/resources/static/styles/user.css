@@ -1,4 +1,213 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+
+
+
+* {
+box-sizing: border-box;
+
+}
+
+
+
+
+.navbar  {
+font-family: 'Roboto', sans-serif;
+font-size: 1.2pc;
+background-color: #181D31;
+height: 5.5rem;
+border-radius: 0px;
+color: white;
+position: sticky;
+top: 0;
+z-index: 10;
+}
+
+.navbar  a{
+text-decoration: none;
+color: white;
+transition: 0.2s;
+}
+
+.navbar  a:hover{
+color: blue;
+}
+
+
+.navbar-header {
+margin-top: -2rem;
+font-size: 3.5pc;
+font-family: 'Staatliches', cursive;
+}
+
+.navbar-header img {
+width: 70px;
+filter: invert(1);
+
+}
+
+.navbar-header  a:hover{
+color:white;
+}
+
+
+.container-fluid {
+width: 90%;
+margin: 0 auto;
+display: flex;
+justify-content: row;
+height: 7rem;
+align-items: center;
+}
+
+
+.nav{
+display: flex;
+justify-content: flex-start;
+height: 5rem;
+align-items: center;
+}
+
+.nav li {
+margin-left: 1rem;
+}
+
+.img {
+
+position: absolute;
+right: 10rem;
+top: 1rem;
+width: 55px;
+height: 55px;
+border-radius: 50%;
+}
+
+
+.a {
+position: absolute;
+right: 5.5rem;
+top: 2.5rem;
+}
+
+
+.dropbtn {
+
+  color: white;
+  font-size: 1.4pc;
+  border: none;
+  cursor: pointer;
+  margin-left: 2rem;
+
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+padding-top: 0.5rem;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  height: fit-content;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius:5px;
+  margin-left: 3.5rem;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+i {
+
+margin-right: 2rem;
+}
+
+#banner {
+
+width: 100%;
+height: 20rem;
+background-image: url(https://images.unsplash.com/photo-1606503153255-59d8b8b82176?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80);
+background-size: cover;
+background-position-y: 33rem;
+}
+
+
+#info {
+font-family: 'Roboto', sans-serif;
+background-color: white;
+position: relative;
+width: 85%;
+height: 25rem;
+margin: -12rem auto;
+border-radius: 5px;
+box-shadow: 0px 5px 7px hsla(284, 0%, 0%, 0.31);
+
+}
+
+.gg {
+position: absolute;
+
+    top: 12rem;
+    left: -6rem;
+
+}
+.gg span {
+    font-size: 1.5pc;
+}
+
+
+.avatar {
+width: 250px;
+height: 250px;
+border-radius: 50%;
+box-shadow: 0px 5px 7px hsla(284, 0%, 0%, 0.31);
+position:absolute;
+top: 5rem;
+left: 3rem;
+}
+
+#ps {
+position: absolute;
+top: 4rem;
+left: 22rem;
+width: fit-content;
+
+flex-wrap: wrap;
+}
+
+#info p {
+font-family: 'Roboto', sans-serif;
+font-size: 2pc;
+margin-top: 1rem;
+font-weight: light;
+}
+
+
+#info a {
+display: block;
+font-family: 'Roboto', sans-serif;
+font-size: 1.5pc;
+margin-top: 2rem;
+text-decoration: none;
+}
+
+
+
 .star-rating {
     direction: rtl;
     display: inline-block;
@@ -113,40 +322,51 @@
     -webkit-transition: all 0.35s ease;
     transition: all 0.35s ease;
 }
-.parent {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
 
+
+
+
+.rev {
+
+position: absolute;
+right: -25rem;
+top: 0rem;
 }
+
+
 .div1 {
     width: fit-content;
-    margin-left: 250px;
-    margin-top: -25px;
+
+  position: absolute;
+  right: 1rem;
+  top: 10rem;
+  padding: 0.5rem;
+  border-radius: 5px;
 }
 input[type=text] {
-    padding: 30px;
+    padding: 0.2rem;
+    margin-left: 1rem;
 }
 .re {
-    font-size: 23px;
+    font-size: 1pc;
     font-weight: bold;
+     margin-left: 1rem;
 }
 input[type=submit] {
-    padding: 7px 20px;
+    padding: 0.5rem;
 }
 
 p {
-    padding-bottom:15px;
-    font-size: 18px;
+
 }
 
 .standard-btn {
     text-decoration:none;
-    border: 2px solid #00ACEC;
-    padding:10px 20px 10px 20px;
-    border-radius:2px;
-    color:#00ACEC;
-    margin:5px;
+background-color: #181D31;
+    border-radius:3px;
+    border-style: none;
+color: white;
+margin-left: 1rem;
 }
 .standard-btn-coloured {
     text-decoration:none;
@@ -187,12 +407,4 @@ p {
 }
 .kk {
     display: flex;
-}
-.gg {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-}
-.gg p {
-    font-size: 18px;
 }

@@ -2,7 +2,8 @@
 <html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>OnBoard</title>
+    <link rel="shortcut icon" href="https://logomakercdn.truic.com/ux-flow/industry/board-game-lounge-meta.png" type="image/x-icon">
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/index.css" />
     <link rel="stylesheet" href="/styles/ballNoticfication.css" />
@@ -23,8 +24,9 @@
         <div class="dropdown">
             <span class="dropbtn">Menu <i id="this" class="fas fa-sort-down"></i></span>
             <ul class="nav navbar-nav navbar-right dropdown-content">
+                <li ><a  href="/" >Home</a></li>
                 <li ><a th:if="${authUser}" th:href="${'/profile'}" >profile</a></li>
-                <li ><a th:if="${authUser}" th:href="${'/editProfileUser'}" >update profile</a></li>
+                <li ><a  href="/aboutus" >About Us</a></li>
                 <!--            <li sec:authorize="!isAuthenticated()"><a href="/signupNormal" ><span class="glyphicon glyphicon-user"></span> Sign Up Normal</a></li>-->
                 <li sec:authorize="!isAuthenticated()"><a href="/login"  ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 <li sec:authorize="!isAuthenticated()"><a href="/signup" ><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -126,7 +128,9 @@
                     <p th:text="'On '+${event.getDateTime()}"></p>
                     <p th:id="${event.getId()}"></p>
                     <p th:text="'Place: '+${event.getPlace()}"></p>
-                 <img th:src="${event.getPhoto().getUrl()}">
+                 <div class="imgcont">
+                 <img class="cardpic" th:src="${event.getPhoto().getUrl()}">
+                 </div>
 <!--                    <div th:each="userJoin:${event.getApplicationUserList()}">-->
 <!--                        <p th:text="${userJoin.getFirstName()}"></p>-->
 <!--                    </div>-->
@@ -152,7 +156,9 @@
                 <p th:text="'On '+${event.getDateTime()}"></p>
                 <p th:id="${event.getId()}"></p>
                 <p th:text="'Place: '+${event.getPlace()}"></p>
-                <img th:src="${event.getPhoto().getUrl()}">
+                <div class="imgcont">
+                    <img class="cardpic" th:src="${event.getPhoto().getUrl()}">
+                </div>
 <!--                <div th:each="userJoin:${event.getApplicationUserList()}">-->
 <!--                    <p th:text="${userJoin.getFirstName()}"></p>-->
 <!--                </div>-->
@@ -183,7 +189,9 @@
                         <p th:text="'On '+${event.getDateTime()}"></p>
                         <p th:id="${event.getId()}"></p>
                         <p th:text="'Place: '+${event.getPlace()}"></p>
-                    <img th:src="${event.getPhoto().getUrl()}">
+                    <div class="imgcont">
+                        <img class="cardpic" th:src="${event.getPhoto().getUrl()}">
+                    </div>
                         <!--                    <div th:each="userJoin:${event.getApplicationUserList()}">-->
                         <!--                        <p th:text="${userJoin.getFirstName()}"></p>-->
                         <!--                    </div>-->
@@ -212,7 +220,9 @@
                 <p th:text="'On '+${event.getDateTime()}"></p>
                 <p th:id="${event.getId()}"></p>
                 <p th:text="'Place: '+${event.getPlace()}"></p>
-                <img th:src="${event.getPhoto().getUrl()}">
+                <div class="imgcont">
+                    <img class="cardpic" th:src="${event.getPhoto().getUrl()}">
+                </div>
                 <!--                <div th:each="userJoin:${event.getApplicationUserList()}">-->
                 <!--                    <p th:text="${userJoin.getFirstName()}"></p>-->
                 <!--                </div>-->
