@@ -7,7 +7,7 @@
 
 * {
 box-sizing: border-box;
-
+font-weight: light;
 }
 
 
@@ -32,18 +32,18 @@ transition: 0.2s;
 }
 
 .navbar  a:hover{
-color: blue;
+color: grey;
 }
 
 
 .navbar-header {
 margin-top: -2rem;
-font-size: 3.5pc;
+font-size: 2pc;
 font-family: 'Staatliches', cursive;
 }
 
 .navbar-header img {
-width: 70px;
+width: 50px;
 filter: invert(1);
 
 }
@@ -78,9 +78,9 @@ margin-left: 1rem;
 
 position: absolute;
 right: 10rem;
-top: 1rem;
+top: 1.2rem;
 width: 55px;
-height: 55px;
+    height: 55px;
 border-radius: 50%;
 }
 
@@ -88,7 +88,7 @@ border-radius: 50%;
 .a {
 position: absolute;
 right: 5.5rem;
-top: 2.5rem;
+top: 2.8rem;
 }
 
 
@@ -105,25 +105,24 @@ top: 2.5rem;
 .dropdown {
   position: relative;
   display: inline-block;
-
 padding-top: 0.5rem;
 }
 
 .dropdown-content {
-  display: none;
+  display: ;
   position: absolute;
-  background-color: #f9f9f9;
+
   min-width: 160px;
   height: fit-content;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
   z-index: 1;
   border-radius:5px;
-  margin-left: 3.5rem;
+  margin-left: 10rem;
 }
 
 .dropdown-content a {
-  color: black;
-  padding: 12px 16px;
+  color: white;
+  padding: 1rem;
   text-decoration: none;
   display: block;
 }
@@ -151,8 +150,8 @@ background-position-y: 33rem;
 font-family: 'Roboto', sans-serif;
 background-color: white;
 position: relative;
-width: 85%;
-height: 25rem;
+width: 70%;
+height: 22rem;
 margin: -12rem auto;
 border-radius: 5px;
 box-shadow: 0px 5px 7px hsla(284, 0%, 0%, 0.31);
@@ -177,13 +176,13 @@ height: 250px;
 border-radius: 50%;
 box-shadow: 0px 5px 7px hsla(284, 0%, 0%, 0.31);
 position:absolute;
-top: 5rem;
+top: 3rem;
 left: 3rem;
 }
 
 #ps {
 position: absolute;
-top: 4rem;
+top: 3rem;
 left: 22rem;
 width: fit-content;
 
@@ -329,7 +328,7 @@ text-decoration: none;
 .rev {
 
 position: absolute;
-right: -25rem;
+right: -27rem;
 top: 0rem;
 }
 
@@ -402,9 +401,16 @@ margin-left: 1rem;
 .con {
     display: flex;
     justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     margin-top: 5px;
 }
+
+.oned {
+margin-left: 1rem;
+ margin-top: 1rem;
+}
+
 .kk {
     display: flex;
 }

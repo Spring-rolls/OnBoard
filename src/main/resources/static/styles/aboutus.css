@@ -371,12 +371,12 @@ color: blue;
 
 .navbar-header {
 margin-top: -2rem;
-font-size: 3.5pc;
+font-size: 2pc;
 font-family: 'Staatliches', cursive;
 }
 
 .navbar-header img {
-width: 70px;
+width: 50px;
 filter: invert(1);
 
 }
