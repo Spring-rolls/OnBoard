@@ -11,7 +11,7 @@ public class Event {
     private Integer id;
 
     private String gameName;
-    private int numberOfPlayer;
+    private Integer numberOfPlayer;
     private String dateTime;
     private String place;
     private String description;
@@ -26,7 +26,7 @@ public class Event {
 //    @JoinColumn(name = "photo_event", referencedColumnName = "id")
     private Photo photo;
 
-    public Event(String gameName, int numberOfPlayer, String dateTime, String place,ApplicationUser applicationUser) {
+    public Event(String gameName, Integer numberOfPlayer, String dateTime, String place,ApplicationUser applicationUser) {
         this.gameName = gameName;
         this.numberOfPlayer = numberOfPlayer;
         this.dateTime = dateTime;
@@ -74,11 +74,11 @@ public class Event {
         this.gameName = gameName;
     }
 
-    public int getNumberOfPlayer() {
+    public Integer getNumberOfPlayer() {
         return numberOfPlayer;
     }
 
-    public void setNumberOfPlayer(int numberOfPlayer) {
+    public void setNumberOfPlayer(Integer numberOfPlayer) {
         this.numberOfPlayer = numberOfPlayer;
     }
 
