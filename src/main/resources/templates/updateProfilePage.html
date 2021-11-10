@@ -6,14 +6,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <!--    <link rel="stylesheet" href="/styles/updateUser.css" />-->
     <link rel="stylesheet" href="/styles/reset.css" />
-    <link rel="stylesheet" href="/styles/updateUser.css" />
+    <link rel="stylesheet" href="/styles/update.css" />
     <script
             src="https://kit.fontawesome.com/eac52206dc.js"
             crossorigin="anonymous"
     ></script>
 
 </head>
-<body>
+<body >
 
 
 
@@ -63,7 +63,7 @@
                 <div class="formbg">
                     <div class="formbg-inner padding-horizontal--48">
                         <span class="padding-bottom--15">Update your account</span>
-                        <form th:if="${authUser.getUserType() == 'normal'}" action="/editProfileUsers" method="post">
+                        <form th:if="${authUser.getUserType() == 'normal'}" action="/editProfileUsers" method="post" style="margin-top: 2rem">
                             <div class="field padding-bottom--10">
                                 <label for="username">Username</label>
                                 <input type="text" class="form-control" name="username" id="username" th:value="${authUser.getUsername()}"></br>

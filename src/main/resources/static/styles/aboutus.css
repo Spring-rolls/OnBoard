@@ -379,7 +379,7 @@ main {
 }
 
 
-.navbar-header {
+
     margin-top: -2rem;
     font-size: 2pc;
     font-family: 'Staatliches', cursive;
@@ -388,6 +388,7 @@ main {
 .navbar-header img {
     width: 50px;
     filter: invert(1);
+
 
 }
 
