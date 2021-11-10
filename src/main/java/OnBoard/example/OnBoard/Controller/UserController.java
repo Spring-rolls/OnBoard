@@ -54,7 +54,10 @@ public class UserController {
         }
         return "aboutus";
     }
-
+    @GetMapping("/topten")
+    public String topTen(Model model,Principal principal){
+        return "topTen";
+    }
 
     @GetMapping("/login")
     public String getLoginPage() {

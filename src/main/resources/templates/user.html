@@ -101,8 +101,8 @@
                  <p>Reviews</p>
                  <hr>
              </div>
-             <div class="message" th:each="rate:${user.getRatings()}">
-                 <p th:text="${rate.getFeedBack()} +' '+ ${rate.getStarNumber()}"></p><i style="color: yellow; font-size: 2pc" class="fas fa-star"></i>
+             <div class="message" th:each="rate:${#numbers.sequence(user.getRatings().size()-1,0,-1)}">
+                 <p th:text="${user.getRatings()[rate].getFeedBack()} +' '+ ${user.getRatings()[rate].getStarNumber()}"></p><i style="color: yellow; font-size: 2pc" class="fas fa-star"></i>
              </div>
          </div>
     </div>
